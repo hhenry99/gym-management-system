@@ -16,7 +16,7 @@
     </div>
 
     <div class="info">
-        <button class = "btn-primary"><a href="<?php echo SITEURL;?>add-plan.php">Add Plan</a></button>
+    <a href="<?php echo SITEURL;?>add-plan.php"><button class = "btn-primary">Add Plan</button></a>
         <form action="" method = "POST">
             <table class="tbl-full txt-left">
                 <tr>
@@ -49,8 +49,8 @@
                                 <td><?php echo $duration;?></td>
                                 <td><?php echo $cost;?></td>
                                 <td>
-                                    Update
-                                    Delete
+                                    <a href="<?php echo SITEURL;?>update-plan.php?id=<?php echo $id;?>"><button class = "btn-secondary pad-1">Update</button></a>
+                                    <a href=""><button class = "btn-danger pad-1">Delete</button></a>
                                 </td>
                             </tr>
                             <?php

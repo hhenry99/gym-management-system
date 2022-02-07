@@ -29,6 +29,7 @@ body{
 th{
     border-bottom: 1px solid black;
 }
+
 .txt-center{
     text-align: center;
 }
@@ -43,42 +44,54 @@ th{
 
 .btn-primary{
     background-color: #e58e26;
-    padding: .2%;
+    padding: .5%;
     margin: 20px 0;
+    color: white;
+    font-weight: bold;
 }
 
-.pad-1{
-    padding: 1%;
-}
-.btn-primary a{
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #fff;
+.btn-primary:hover{
+    transition-duration: 0.5s;
+    background-color:#7953d1;
 }
 
 .btn-secondary{
     background-color: #388d4a;
     padding: .5%;
     margin: 20px 0;
+    color: white;
+    font-weight: bold;
 }
 
-.btn-secondary a{
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #fff;
+.btn-secondary:hover{
+    transition-duration: 0.5s;
+    background-color: #083612;
 }
 
 .btn-danger{
-    background-color: #963a2e;
+    background-color: #b84d3f;
+    color: white;
+    font-weight: bold;
     padding: .5%;
     margin: 20px 0;
 }
 
-.btn-danger a{
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #fff;
+.btn-danger:hover{
+    transition-duration: 0.5s;
+    background-color: #92210d;
 }
+
+.pad-1{
+    padding: 1%;
+}
+
+
+
+
+
+
+
+
 
 /*Side Navbar*/
 .wrapper .sidebar{

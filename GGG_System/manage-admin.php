@@ -7,7 +7,9 @@
     </div>
 
     <div class="info">
-        <button class = "btn-primary"><a href="add-admin.php">Add Admin</a></button>
+        <div class="">
+            <a href="add-admin.php"><button class = "btn-primary">Add Admin</button></a>
+        </div>
 
         <?php
         if(isset($_SESSION['add']))
@@ -73,8 +75,8 @@
                         <td><?php echo $admin_name;?></td>
                         <td><?php echo $username?></td>
                         <td>
-                            <button class="btn-secondary"><a href="<?php echo SITEURL;?>update-admin.php?id=<?php echo $id;?>">Update</a></button>
-                            <button class="btn-danger"><a href="<?php echo SITEURL;?>delete-admin.php?id=<?php echo $id;?>">Delete</a></button>
+                            <a href="<?php echo SITEURL;?>update-admin.php?id=<?php echo $id;?>"><button class="btn-secondary pad-1">Update</button></a>
+                            <a href="<?php echo SITEURL;?>delete-admin.php?id=<?php echo $id;?>"><button class="btn-danger pad-1">Delete</button></a>
                         </td>
                     </tr>   
                     <?php

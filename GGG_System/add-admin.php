@@ -36,7 +36,7 @@
 
                 <tr>
                     <td colspan = "3">
-                        <input type="submit" value="submit" name = "submit" class = "btn-primary pad-1">
+                        <input type="submit" value="Add Admin" name = "submit" class = "btn-primary pad-1">
                     </td>
                 </tr>
             </table>
