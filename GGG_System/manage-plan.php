@@ -17,56 +17,54 @@
 
     <div class="info">
     <a href="<?php echo SITEURL;?>add-plan.php"><button class = "btn-primary">Add Plan</button></a>
-        <form action="" method = "POST">
-            <table class="tbl-full txt-left">
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Duration</th>
-                    <th>Cost</th>
-                    <th>Actions</th>
-                </tr>
-                <?php
-                    $sql = "SELECT * FROM plan;";
+        <table class="tbl-full txt-left">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Duration</th>
+                <th>Cost</th>
+                <th>Actions</th>
+            </tr>
+            <?php
+                $sql = "SELECT * FROM plan;";
 
-                    $res = mysqli_query($conn,$sql);
+                $res = mysqli_query($conn,$sql);
 
-                    $count = mysqli_num_rows($res);
-                    
-                    if($count > 0)
+                $count = mysqli_num_rows($res);
+                
+                if($count > 0)
+                {
+                    while($row = mysqli_fetch_assoc($res))
                     {
-                        while($row = mysqli_fetch_assoc($res))
-                        {
-                            $id = $row['plan_id'];
-                            $name = $row['plan_name'];
-                            $des = $row['plan_description'];
-                            $duration = $row['plan_duration'];
-                            $cost = $row['plan_cost'];
-                            ?>
-                            <tr>
-                                <td><?php echo $name;?></td>
-                                <td><?php echo $des;?></td>
-                                <td><?php echo $duration;?></td>
-                                <td><?php echo $cost;?></td>
-                                <td>
-                                    <a href="<?php echo SITEURL;?>update-plan.php?id=<?php echo $id;?>"><button class = "btn-secondary pad-1">Update</button></a>
-                                    <a href=""><button class = "btn-danger pad-1">Delete</button></a>
-                                </td>
-                            </tr>
-                            <?php
-                        }
-                    }
-                    else
-                    {
+                        $id = $row['plan_id'];
+                        $name = $row['plan_name'];
+                        $des = $row['plan_description'];
+                        $duration = $row['plan_duration'];
+                        $cost = $row['plan_cost'];
                         ?>
                         <tr>
-                            <td colspan = "5">No Data Found</td>
+                            <td><?php echo $name;?></td>
+                            <td><?php echo $des;?></td>
+                            <td><?php echo $duration;?></td>
+                            <td><?php echo $cost;?></td>
+                            <td>
+                                <a href="<?php echo SITEURL;?>update-plan.php"><button class = "btn-secondary pad-1">Update</button></a>
+                                <a href="<?php echo SITEURL;?>delete-plan.php"><button class = "btn-danger pad-1">Delete</button></a>
+                            </td>
                         </tr>
                         <?php
                     }
-                ?>
-            </table>
-        </form>
+                }
+                else
+                {
+                    ?>
+                    <tr>
+                        <td colspan = "5">No Data Found</td>
+                    </tr>
+                    <?php
+                }
+            ?>
+        </table>
     </div>
 
     
