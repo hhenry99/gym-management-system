@@ -27,6 +27,11 @@
             echo $_SESSION['update'];
             unset($_SESSION['update']);
         }
+        if(isset($_SESSION['remove']))
+        {
+            echo $_SESSION['remove'];
+            unset($_SESSION['remove']);
+        }
         ?>
 
     <table class = "tbl-full txt-left">
@@ -50,8 +55,8 @@
                 while($row = mysqli_fetch_assoc($res))
                 {
                     $id = $row['admin_id'];
-                    $photo = $row['image_name'];
-                    $admin_name = $row['admin_name'];
+                    $image_name = $row['image_name'];
+                    $name = $row['name'];
                     $username = $row['username'];
                     $password = $row['password'];
 
@@ -60,23 +65,23 @@
                         <td><?php echo $id;?></td>
                         <td>
                             <?php
-                            if($photo == "")
+                            if($image_name == "")
                             {
                                 echo "No image available";
                             }
                             else
                             {
                                 ?>
-                                <img src="<?php echo SITEURL;?>images/admin/<?php echo $photo;?>" width = "100px">
+                                <img src="<?php echo SITEURL;?>images/admin/<?php echo $image_name;?>" width = "100px">
                                 <?php
                             }
                             ?>
                         </td>
-                        <td><?php echo $admin_name;?></td>
+                        <td><?php echo $name;?></td>
                         <td><?php echo $username?></td>
                         <td>
                             <a href="<?php echo SITEURL;?>update-admin.php?id=<?php echo $id;?>"><button class="btn-secondary pad-1">Update</button></a>
-                            <a href="<?php echo SITEURL;?>delete-admin.php?id=<?php echo $id;?>"><button class="btn-danger pad-1">Delete</button></a>
+                            <a href="<?php echo SITEURL;?>delete-admin.php?id=<?php echo $id;?>&image_name=<?php echo $image_name;?>"><button class="btn-danger pad-1">Delete</button></a>
                         </td>
                     </tr>   
                     <?php

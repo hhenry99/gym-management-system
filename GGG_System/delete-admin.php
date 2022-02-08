@@ -1,37 +1,35 @@
 <?php
 include('config/constant.php');
 
-if(isset($_GET['id']))
+if(isset($_GET['id']) AND isset($_GET['image_name']))
 {
     $id = $_GET['id'];
+    $image_name = $_GET['image_name'];
 
-    $sql = "SELECT admin_id FROM admin WHERE admin_id = $id;";
-
+    $sql = "DELETE FROM admin WHERE admin_id = $id;";
     $res = mysqli_query($conn,$sql);
 
-    $count = mysqli_num_rows($res);
-
-    if($count == 1)
+    if($res == true)
     {
-        $sql2 = "DELETE FROM admin WHERE admin_id = $id;";
-        $res2 = mysqli_query($conn,$sql2);
-
-        if($res2 == true)
+        if($image_name != "")
         {
-            $_SESSION['delete'] = "Admin successfully deleted!";
-            header('location:'.SITEURL.'manage-admin.php');
+            $path = "images/admin/".$image_name;
+            $remove = unlink($path);
+            if($remove == false)
+            {
+                $_SESSION['remove'] = "fail to remove image";
+                header('location:'.SITEURL.'manage-admin.php');
+                die();
+            }
         }
-        else
-        {
-            $_SESSION['delete'] = "Fail to delete admin";
-            header('location:'.SITEURL.'manage-admin.php');
-        }
-    }
-    else
-    {   
+        $_SESSION['delete'] = "Admin successfully deleted!";
         header('location:'.SITEURL.'manage-admin.php');
     }
-
+    else
+    {
+        $_SESSION['delete'] = "Fail to delete admin";
+        header('location:'.SITEURL.'manage-admin.php');
+    }
 }
 else
 {
