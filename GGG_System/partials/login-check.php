@@ -1,5 +1,4 @@
 <?php
-    //authorizaiton - access control
     //check wehtehr the user is logeed in or not
     if(!isset($_SESSION['user']))
     {

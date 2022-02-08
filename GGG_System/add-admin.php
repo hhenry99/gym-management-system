@@ -77,7 +77,7 @@
 
             $sql = "INSERT INTO admin SET
                     image_name = '$image_name',
-                    admin_name = '$full_name',
+                    name = '$full_name',
                     username = '$username',
                     password = '$password'
                     ";

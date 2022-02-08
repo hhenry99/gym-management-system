@@ -23,7 +23,7 @@
             {
                 $row = mysqli_fetch_assoc($res);
                 $current_img = $row['image_name'];
-                $name = $row['admin_name'];
+                $name = $row['name'];
                 $username = $row['username'];
                 $password = $row['password'];
             }
@@ -157,7 +157,7 @@
 
                 $sql2 = "UPDATE admin SET
                         image_name = '$image_name',
-                        admin_name = '$name',
+                        name = '$name',
                         username = '$username',
                         password = '$password'
                         WHERE admin_id = $id;
