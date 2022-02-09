@@ -37,10 +37,10 @@
                     while($row = mysqli_fetch_assoc($res))
                     {
                         $id = $row['plan_id'];
-                        $name = $row['plan_name'];
-                        $des = $row['plan_description'];
-                        $duration = $row['plan_duration'];
-                        $cost = $row['plan_cost'];
+                        $name = $row['name'];
+                        $des = $row['description'];
+                        $duration = $row['duration'];
+                        $cost = $row['cost'];
                         ?>
                         <tr>
                             <td><?php echo $name;?></td>
