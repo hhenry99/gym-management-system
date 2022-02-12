@@ -1,6 +1,5 @@
 <?php
 include('partials/header.php');
-
 ?>
 
 
@@ -63,7 +62,7 @@ include('partials/header.php');
                 $sql = "INSERT INTO plan SET
                         name = '$name',
                         description = '$description',
-                            duration = '$duration',
+                        duration = '$duration',
                         cost = $cost;
                         ";
 
