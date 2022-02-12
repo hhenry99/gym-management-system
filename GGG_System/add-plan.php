@@ -36,11 +36,9 @@ include('partials/header.php');
                     <td>Duration</td>
                     <td>
                         <select name="duration">
-                            <option value="1m">1 Mo</option>
-                            <option value="3mo">3 Mo</option>
-                            <option value="1y">1 Year</option>
-                            <option value="em">Every Month</option>
-                            <option value="ey">Every Year</option>
+                            <option value="1">1 Month</option>
+                            <option value="3">3 Month</option>
+                            <option value="12">1 Year</option>
                         </select>
                     </td>
                 </tr>
@@ -63,10 +61,10 @@ include('partials/header.php');
                 $cost = $_POST['cost'];
 
                 $sql = "INSERT INTO plan SET
-                        plan_name = '$name',
-                        plan_description = '$description',
-                        plan_duration = '$duration',
-                        plan_cost = $cost;
+                        name = '$name',
+                        description = '$description',
+                            duration = '$duration',
+                        cost = $cost;
                         ";
 
                 $res = mysqli_query($conn,$sql);

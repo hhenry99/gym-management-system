@@ -72,7 +72,7 @@
                             else
                             {
                                 ?>
-                                <img src="<?php echo SITEURL;?>images/admin/<?php echo $image_name;?>" width = "100px">
+                                <img src="<?php echo SITEURL;?>images/admin/<?php echo $image_name;?>" width = "100px" class = "round">
                                 <?php
                             }
                             ?>

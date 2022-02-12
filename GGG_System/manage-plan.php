@@ -11,6 +11,11 @@
                 echo $_SESSION['add'];
                 unset($_SESSION['add']);
             }
+            if(isset($_SESSION['delete']))
+            {
+                echo $_SESSION['delete'];
+                unset($_SESSION['delete']);
+            }
             ?>
         </p>
     </div>
@@ -45,11 +50,11 @@
                         <tr>
                             <td><?php echo $name;?></td>
                             <td><?php echo $des;?></td>
-                            <td><?php echo $duration;?></td>
-                            <td><?php echo $cost;?></td>
+                            <td><?php echo $duration;?> Month</td>
+                            <td>$<?php echo $cost;?></td>
                             <td>
-                                <a href="<?php echo SITEURL;?>update-plan.php"><button class = "btn-secondary pad-1">Update</button></a>
-                                <a href="<?php echo SITEURL;?>delete-plan.php"><button class = "btn-danger pad-1">Delete</button></a>
+                                <a href="<?php echo SITEURL;?>update-plan.php?id=<?php echo $id;?>"><button class = "btn-secondary pad-1">Update</button></a>
+                                <a href="<?php echo SITEURL;?>delete-plan.php?id=<?php echo $id;?>"><button class = "btn-danger pad-1">Delete</button></a>
                             </td>
                         </tr>
                         <?php

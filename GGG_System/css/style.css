@@ -30,6 +30,10 @@ th{
     border-bottom: 1px solid black;
 }
 
+.round{
+    border-radius: 50%;
+}
+
 .txt-center{
     text-align: center;
 }
@@ -85,7 +89,9 @@ th{
     padding: 1%;
 }
 
+
 /*Side Navbar*/
+
 .wrapper .sidebar{
     position: fixed;
     width: 200px; 
