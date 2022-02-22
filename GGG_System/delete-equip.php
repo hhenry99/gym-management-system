@@ -38,3 +38,5 @@ else
 {
     header('location:'.SITEURL.'manage-equipment.php');
 }
+
+include('config/close-connection.php');

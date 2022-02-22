@@ -35,3 +35,5 @@ else
 {
     header('location:'.SITEURL.'manage-admin.php');
 }
+
+include('config/close-connection.php');

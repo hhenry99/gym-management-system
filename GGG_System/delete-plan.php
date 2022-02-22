@@ -36,5 +36,5 @@
     {
         header('location:'.SITEURL.'manage-plan.php');
     }
-?>
 
+include('config/close-connection.php');

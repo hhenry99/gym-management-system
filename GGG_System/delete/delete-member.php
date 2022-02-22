@@ -39,4 +39,6 @@
         //redirect if id and image_name not pass
         header('location:'.SITEURL.'manage-member.php');
     }
-?>
+
+    include('config/close-connection.php');
+    
