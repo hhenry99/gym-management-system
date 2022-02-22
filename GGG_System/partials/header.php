@@ -27,7 +27,6 @@ include("login-check.php");
                 <li><a href="manage-equipment.php">Equipment</a></li>
                 <li><a href="manage-class.php">Class</a></li>
                 <li><a href="manage-invoice.php">Invoice</a></li>
-                <li><a href="manage-payment.php">Payment</a></li>
                 <li><a href="logout.php">Log Out</a></li>
             </ul>
         </div>

@@ -46,7 +46,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `GGG_DB`.`equipment` (
   `equipment_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
-  `condition` VARCHAR(10) NOT NULL,
+  `cond` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`equipment_id`))
 ENGINE = InnoDB;
 
@@ -94,8 +94,7 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`class` (
   `class_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `description` TEXT NOT NULL,
-  `time_start` DATETIME NOT NULL,
-  `time_end` DATETIME NOT NULL,
+  `start_end` TEXT NOT NULL,
   `cost` DECIMAL(9,2) NOT NULL,
   `trainer_trainer_id` INT NOT NULL,
   PRIMARY KEY (`class_id`),
@@ -137,6 +136,7 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`payment` (
   `payment_type` VARCHAR(20) NOT NULL,
   `card_number` VARCHAR(45) NOT NULL,
   `card_ccv` VARCHAR(45) NOT NULL,
+  `card_expired` DATE NOT NULL,
   `payment_amount` DECIMAL(9,2) NOT NULL,
   `payment_date` DATETIME NOT NULL,
   `invoice_invoice_id` INT NOT NULL,

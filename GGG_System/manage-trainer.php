@@ -1,9 +1,9 @@
-<?php include('header.php');?>
+<?php include('partials/header.php');?>
 
 
 <div class="main-content">
             <div class="header">
-                <h1>Manage Admin</h1>
+                <h1>Manage Trainer</h1>
             </div>
 
             <div class="info">
@@ -12,4 +12,4 @@
             </div>
         </div>
 
-<?php include("footer.php");?>
+<?php include("partials/footer.php");?>

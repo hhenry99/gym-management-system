@@ -10,7 +10,7 @@
             <div class="info">
                 <div class="btn-container">
                     <a href="<?php echo SITEURL;?>add-class.php"><button class = "btn-primary">Add Class</button></a>
-                    <a href="<?php echo SITEURL;?>view-class.php"><button class = "btn-primary">View Class</button></a>
+                    <a href="<?php echo SITEURL;?>manage-class-view.php"><button class = "btn-primary">View Class</button></a>
                     <a href=""><button class="btn-primary">Add Member</button></a>
                 </div>
                 <table class = "tbl-full txt-left">
@@ -20,7 +20,6 @@
                         <th>Location</th>
                         <th>Start/End</th>
                         <th>Cost</th>
-                        <th>Duration</th>
                         <th>Trainer</th>
                         <th>Actions</th>
                     </tr>
@@ -30,7 +29,6 @@
                         <td>Room101</td>
                         <td>Mon-Friday 8:00AM-12:00PM</td>
                         <td>$100</td>
-                        <td>1 Mo</td>
                         <td>Henry</td>
                         <td>
                             <a href="#"><button class="btn-secondary pad-1">Update</button></a>

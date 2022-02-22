@@ -57,7 +57,7 @@
             if($count == 1)
             {
                 // echo "Data found";
-                $_SESSION['login'] = "Login successful";
+                $_SESSION['login'] = "Login successful .... ";
 
                 $_SESSION['user'] = $username;
                 
