@@ -8,7 +8,7 @@
 
     <div class="info">
         <div class="">
-            <a href="add-admin.php"><button class = "btn-primary">Add Admin</button></a>
+            <a href="crud/add-admin.php"><button class = "btn-primary">Add Admin</button></a>
         </div>
 
         <?php
@@ -72,7 +72,7 @@
                             else
                             {
                                 ?>
-                                <img src="<?php echo SITEURL;?>images/admin/<?php echo $image_name;?>" width = "100px" class = "round">
+                                <img src="<?php echo SITEURL;?>images/admin/<?php echo $image_name;?>" width = "100px" height = "100px" class = "round">
                                 <?php
                             }
                             ?>
@@ -80,8 +80,8 @@
                         <td><?php echo $name;?></td>
                         <td><?php echo $username?></td>
                         <td>
-                            <a href="<?php echo SITEURL;?>update-admin.php?id=<?php echo $id;?>"><button class="btn-secondary pad-1">Update</button></a>
-                            <a href="<?php echo SITEURL;?>delete-admin.php?id=<?php echo $id;?>&image_name=<?php echo $image_name;?>"><button class="btn-danger pad-1">Delete</button></a>
+                            <a href="<?php echo SITEURL;?>crud/update-admin.php?id=<?php echo $id;?>"><button class="btn-secondary pad-1">Update</button></a>
+                            <a href="<?php echo SITEURL;?>crud/delete-admin.php?id=<?php echo $id;?>&image_name=<?php echo $image_name;?>"><button class="btn-danger pad-1">Delete</button></a>
                         </td>
                     </tr>   
                     <?php

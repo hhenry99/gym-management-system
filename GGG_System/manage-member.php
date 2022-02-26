@@ -1,6 +1,4 @@
-<?php include('partials/header.php');?>
-
-
+<?php require_once('partials/header.php');?>
 <div class="main-content">
     <div class="header">
         <h1 class ="txt-center">Manage Member</h1>
@@ -11,27 +9,22 @@
                     echo $_SESSION['add'];
                     unset($_SESSION['add']);
                 }
-                if(isset($_SESSION['update']))
-                {
-                    echo $_SESSION['update'];
-                    unset($_SESSION['update']);
-                }
                 if(isset($_SESSION['delete']))
                 {
                     echo $_SESSION['delete'];
                     unset($_SESSION['delete']);
                 }
-                if(isset($_SESSION['remove']))
+                if(isset($_SESSION['update']))
                 {
-                    echo $_SESSION['remove'];
-                    unset($_SESSION['remove']);
+                    echo $_SESSION['update'];
+                    unset($_SESSION['update']);
                 }
             ?>
         </p>
     </div>
 
     <div class="info">
-        <a href="<?php echo SITEURL?>add-member.php"><button class="btn-primary">Add Member</button></a>
+        <a href="<?php echo SITEURL?>crud/add-member.php"><button class="btn-primary">Add Member</button></a>
         <form action="">
             <input type="search" name="search">
             <input type="submit" value="submit">
@@ -77,7 +70,7 @@
                                         if($image != "")
                                         {
                                             ?>
-                                            <img src="<?php echo SITEURL?>images/member/<?php echo $image?>" width = "100px" class = "round">
+                                            <img src="<?php echo SITEURL?>images/member/<?php echo $image?>" width = "100px" height = "100px" class = "round">
                                             <?php
                                         }
                                         else
@@ -104,8 +97,8 @@
                                 </td>
                                 <td><?php echo $status?></td>
                                 <td>
-                                    <a href="<?php echo SITEURL?>update-member.php?id=<?php echo $id?>"><button class="btn-secondary">Update</button></a> 
-                                    <a href="<?php echo SITEURL?>delete/delete-member.php?id=<?php echo $id?>&image_name=<?php echo $image?>"><button class="btn-danger">Delete</button></a>
+                                    <a href="<?php echo SITEURL?>crud/update-member.php?id=<?php echo $id?>"><button class="btn-secondary">Update</button></a> 
+                                    <a href="<?php echo SITEURL?>crud/delete-member.php?id=<?php echo $id?>&image_name=<?php echo $image?>"><button class="btn-danger">Delete</button></a>
                                 </td>
                             </tr>
                         <?php
@@ -120,9 +113,8 @@
                     <?php
                 }
             ?>
-
         </table>
     </div>
 </div>
 
-<?php include("partials/footer.php");?>
+<?php require_once("partials/footer.php");?>

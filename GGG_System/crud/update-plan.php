@@ -1,4 +1,4 @@
-<?php include('partials/header.php');?>
+<?php include('../partials/crud-header.php');?>
 
 
 <div class="main-content">
@@ -125,4 +125,4 @@
 
 </div>
 
-<?php include('partials/footer.php');?>
+<?php include('../partials/crud-footer.php');?>

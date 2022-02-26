@@ -1,11 +1,10 @@
-<?php include('partials/header.php');?>
-
+<?php require_once('partials/header.php');?>
 
     <div class="main-content">
         <div class="header">
             <h1 class = "txt-center">Manage Equipment</h1>
             <p class = "txt-center">
-                <?php 
+                <?php
                 if(isset($_SESSION['add']))
                 {
                     echo $_SESSION['add'];
@@ -26,7 +25,7 @@
         </div>
 
         <div class="info">
-            <a href="<?php echo SITEURL;?>add-equip.php"><button class = "btn-primary">Add Equipment</button></a>
+            <a href="<?php echo SITEURL;?>crud/add-equip.php"><button class = "btn-primary">Add Equipment</button></a>
             <table class = "tbl-full txt-left">
                 <tr>
                     <th>ID</th>
@@ -55,8 +54,8 @@
                                     <td><?php echo $name;?></td>
                                     <td><?php echo $condition;?></td>
                                     <td>
-                                        <a href="<?php echo SITEURL?>update-equip.php?id=<?php echo $id?>"><button class = "btn-secondary">Update</button></a>
-                                        <a href="<?php echo SITEURL?>delete-equip.php?id=<?php echo $id?>"><button class = "btn-danger">Delete</button></a>
+                                        <a href="<?php echo SITEURL?>crud/update-equip.php?id=<?php echo $id?>"><button class = "btn-secondary">Update</button></a>
+                                        <a href="<?php echo SITEURL?>crud/delete-equip.php?id=<?php echo $id?>"><button class = "btn-danger">Delete</button></a>
                                     </td>
                                 </tr>
                             <?php
@@ -75,4 +74,4 @@
         </div>
     </div>
 
-<?php include("partials/footer.php");?>
+<?php require_once("partials/footer.php");?>

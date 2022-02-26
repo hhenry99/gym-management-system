@@ -40,5 +40,5 @@
         header('location:'.SITEURL.'manage-member.php');
     }
 
-    include('config/close-connection.php');
+    include('../config/close-connection.php');
     

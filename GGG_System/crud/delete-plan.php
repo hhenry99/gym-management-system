@@ -1,5 +1,5 @@
 <?php
-    include('config/constant.php');
+    include('../config/constant.php');
 
     if(isset($_GET['id']))
     {
@@ -37,4 +37,4 @@
         header('location:'.SITEURL.'manage-plan.php');
     }
 
-include('config/close-connection.php');
+include('../config/close-connection.php');

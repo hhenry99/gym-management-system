@@ -31,7 +31,7 @@
     </div>
 
     <div class="info">
-    <a href="<?php echo SITEURL;?>add-plan.php"><button class = "btn-primary">Add Plan</button></a>
+    <a href="<?php echo SITEURL;?>crud/add-plan.php"><button class = "btn-primary">Add Plan</button></a>
         <table class="tbl-full txt-left">
             <tr>
                 <th>Name</th>
@@ -63,8 +63,8 @@
                             <td><?php echo $duration;?> Month</td>
                             <td>$<?php echo $cost;?></td>
                             <td>
-                                <a href="<?php echo SITEURL;?>update-plan.php?id=<?php echo $id;?>"><button class = "btn-secondary pad-1">Update</button></a>
-                                <a href="<?php echo SITEURL;?>delete-plan.php?id=<?php echo $id;?>"><button class = "btn-danger pad-1">Delete</button></a>
+                                <a href="<?php echo SITEURL;?>crud/update-plan.php?id=<?php echo $id;?>"><button class = "btn-secondary pad-1">Update</button></a>
+                                <a href="<?php echo SITEURL;?>crud/delete-plan.php?id=<?php echo $id;?>"><button class = "btn-danger pad-1">Delete</button></a>
                             </td>
                         </tr>
                         <?php

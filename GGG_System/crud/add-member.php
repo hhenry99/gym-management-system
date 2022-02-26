@@ -1,4 +1,4 @@
-<?php include('partials/header.php');?>
+<?php include('../partials/crud-header.php');?>
 
 <div class="main-content">
     <div class="header">
@@ -110,7 +110,7 @@
                 {
                     $image_name = $_FILES['image']['name'];
                     $source_path = $_FILES['image']['tmp_name'];
-                    $destination_path = "images/member/".$image_name;
+                    $destination_path = "../images/member/".$image_name;
 
                     $upload = move_uploaded_file($source_path, $destination_path);
 
@@ -154,4 +154,4 @@
         ?>
     </div>
 </div>
-<?php include('partials/footer.php');?>
+<?php include('../partials/crud-footer.php');?>

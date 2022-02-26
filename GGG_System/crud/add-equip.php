@@ -1,4 +1,4 @@
-<?php include('partials/header.php');?>
+<?php require_once('../partials/crud-header.php');?>
 
 <div class="main-content">
     <div class="header">
@@ -61,11 +61,11 @@
                 else
                 {
                     $_SESSION['add'] = "fail to add equipment";
-                    header('location:'.SITEURL.'add-equip.php');
+                    header('location:'.SITEURL.'crud/add-equip.php');
                 }
             }
         ?>
     </div>
 
 </div>
-<?php include('partials/footer.php');?>
+<?php require_once('../partials/crud-footer.php');?>
