@@ -3,7 +3,7 @@
 
 <div class="main-content">
     <div class="header">
-        <h2 class = "txt-center">Manage Admin</h2>
+        <h1 class = "txt-center">Manage A</h1>
     </div>
 
     <div class="info">
@@ -96,9 +96,6 @@
                 <?php
             }
         ?>
-
-
-
     </table>
     </div>
    

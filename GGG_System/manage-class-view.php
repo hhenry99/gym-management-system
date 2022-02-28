@@ -1,25 +1,27 @@
 <?php include('partials/header.php');?>
 
+
 <div class="main-content">
     <div class="header">
         <h1>Class</h1>
     </div>
 
     <div class="info">
-        <table class = "tbl-full">
+        <a href="<?php echo SITEURL;?>crud/add-member-class.php"><button class="btn-primary">Add Member</button></a>
+        <table class = "tbl-full txt-left">
             <tr>
-                <th>Member ID</th>
-                <th>Member Name</th>
                 <th>Class Name</th>
+                <th>Instructor Name</th>
+                <th>Member Name</th>
                 <th>Actions</th>
             </tr>
 
             <tr>
-                <td>1</td>
-                <td>Henry Nguyen</td>
                 <td>Yoga</td>
+                <td>Henry Nguyen</td>
+                <td>Johnny</td>
                 <td>
-                    Delete
+                    Remove
                 </td>
             </tr>
         </table>

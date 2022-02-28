@@ -17,5 +17,32 @@
         unset($_SESSION['update-trainer']);
     }
 
+    //class
+    if(isset($_SESSION['add-class']))
+    {
+        echo $_SESSION['add-class'];
+        unset($_SESSION['add-class']);
+    }
+    if(isset($_SESSION['delete-class']))
+    {
+        echo $_SESSION['delete-class'];
+        unset($_SESSION['delete-class']);
+    }
+    if(isset($_SESSION['update-class']))
+    {
+        echo $_SESSION['update-class'];
+        unset($_SESSION['update-class']);
+    }
+    if(isset($_SESSION['member-added']))
+    {
+        echo $_SESSION['member-added'];
+        unset($_SESSION['member-added']);
+    }
+
+    // if(isset($_SESSION['member-not-found']))
+    // {
+    //     echo $_SESSION['member-not-found'];
+    //     unset($_SESSION['member-not-found']);
+    // }
 
 ?>
