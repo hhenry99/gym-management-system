@@ -85,17 +85,17 @@
 
                 <tr>
                     <td>Name: </td>
-                    <td><input type="text" name="name" value = "<?php echo $name;?>"></td>
+                    <td><input type="text" name="name" value = "<?php echo $name;?>" required></td>
                 </tr>
 
                 <tr>
                     <td>Username:</td>
-                    <td><input type="text" name = "username" value = "<?php echo $username;?>"></td>
+                    <td><input type="text" name = "username" value = "<?php echo $username;?>" required></td>
                 </tr>
 
                 <tr>
                     <td>Password:</td>
-                    <td><input type="password" name ="password" value = "<?php echo $password;?>"></td>
+                    <td><input type="password" name ="password" value = "<?php echo $password;?>" required></td>
                 </tr>
                 
                 <tr>

@@ -22,16 +22,16 @@
 
                 <tr>
                     <td>Full Name</td>
-                    <td><input type="text" name = "name"></td>
+                    <td><input type="text" name = "name" required></td>
                 </tr>
                 <tr>
                     <td>Username</td>
-                    <td><input type="text" name = "username"></td>
+                    <td><input type="text" name = "username" required></td>
                 </tr>
 
                 <tr>
                     <td>Password</td>
-                    <td><input type="password" name = "password"></td>
+                    <td><input type="password" name = "password" required></td>
                 </tr>
 
                 <tr>
@@ -76,14 +76,15 @@
             {
                 $image_name = "";
             }
-
-            $sql = "INSERT INTO admin SET
+            //SQL code to insert into the database
+            $sql = "INSERT INTO admin SET               
                     image_name = '$image_name',
                     name = '$full_name',
                     username = '$username',
                     password = '$password'
                     ";
 
+            //function that execute the sql query
             $res = mysqli_query($conn,$sql);
 
             if($res == true)

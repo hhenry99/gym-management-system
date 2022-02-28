@@ -22,7 +22,7 @@ include('../partials/crud-header.php');
             <table class="tbl-30">
                 <tr>
                     <td>Name</td>
-                    <td><input type="text" name="name"></td>
+                    <td><input type="text" name="name" required></td>
                 </tr>
                 <tr>
                     <td>Description</td>
@@ -43,7 +43,7 @@ include('../partials/crud-header.php');
                 </tr>
                 <tr>
                     <td>Cost</td>
-                    <td><input type="number" name="cost" step = "0.01"></td>
+                    <td><input type="number" name="cost" step = "0.01" required></td>
                 </tr>
 
                 <tr>

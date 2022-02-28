@@ -86,7 +86,7 @@ else
                 <tr>
                     <td>Member ID</td>
                     <td>
-                        <input type="number" name = "member_id" step = "1" placeholder = "Enter Member ID"required>
+                        <input type="number" name = "member_id" step = "1" placeholder = "Enter Member ID" required>
                     </td>
                 </tr>
                 <tr>

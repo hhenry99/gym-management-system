@@ -51,16 +51,16 @@ if(isset($_POST['submit']))
                 <tr>
                     <td>Name</td>
                     <td>
-                        <input type="text" name="name" >
+                        <input type="text" name="name" required>
                     </td>
                 </tr>
                 <tr>
                     <td>Email</td>
-                    <td><input type="email" name="email" ></td>
+                    <td><input type="email" name="email" required></td>
                 </tr>
                 <tr>
                     <td>Phone</td>
-                    <td><input type="phone" name="phone"></td>
+                    <td><input type="phone" name="phone" required></td>
                 </tr>
                 <tr>
                     <td colspan = "2">

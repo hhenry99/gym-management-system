@@ -29,3 +29,4 @@ require_once("login-check.php");
                 <li><a href="<?php echo SITEURL;?>logout.php">Log Out</a></li>
             </ul>
         </div>
+        

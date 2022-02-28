@@ -75,7 +75,7 @@
             <table class = "tbl-30">
                 <tr>
                     <td>Name</td>
-                    <td><input type="text" name = "name" value = "<?php echo $name;?>"></td>
+                    <td><input type="text" name = "name" value = "<?php echo $name;?>" required></td>
                 </tr>
                 <tr>
                     <td>Condition</td>

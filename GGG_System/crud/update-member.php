@@ -157,19 +157,19 @@
                 </tr>
                 <tr>
                     <td>Name</td>
-                    <td><input type="text" name = "name" value="<?php echo $name;?>"></td>
+                    <td><input type="text" name = "name" value="<?php echo $name;?>" required></td>
                 </tr>
                 <tr>
                     <td>Email</td>
-                    <td><input type="email" name = "email" value="<?php echo $email;?>"></td>
+                    <td><input type="email" name = "email" value="<?php echo $email;?>" required></td>
                 </tr>
                 <tr>
                     <td>Phone</td>
-                    <td><input type="number" name = "phone" value="<?php echo $phone;?>"></td>
+                    <td><input type="number" name = "phone" value="<?php echo $phone;?>" required></td>
                 </tr>
                 <tr>
                     <td>Emergency #</td>
-                    <td><input type="number" name="emergency" value="<?php echo $emergency;?>"></td>
+                    <td><input type="number" name="emergency" value="<?php echo $emergency;?>" required></td>
                 </tr>
                 <tr>
                     <td>Plan</td>

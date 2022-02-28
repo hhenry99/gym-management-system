@@ -9,6 +9,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="css/login.css">
 </head>
+
 <body>
     <div class="wrapper text-center">
         <h1>Login</h1>
@@ -68,7 +69,6 @@
                 $_SESSION['login'] = "Incorrect username or password";
                 header('location:'.SITEURL.'login.php');
             }
-            
         }
     ?>  
     </div>   

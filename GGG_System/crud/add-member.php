@@ -14,16 +14,6 @@
         </p>
     </div>
 
-    <!-- <th>ID</th>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Emergency Contact</th>
-                        <th>Join Date</th>
-                        <th>Plan</th>
-                        <th>Status</th>
-                        <th>Actions</th> -->
     <div class="info">
         <form action="" method="POST" enctype="multipart/form-data">
             <table class="tbl-30">
@@ -33,19 +23,19 @@
                 </tr>
                 <tr>
                     <td>Full Name</td>
-                    <td><input type="text" name = "name"></td>
+                    <td><input type="text" name = "name" required></td>
                 </tr>
                 <tr>
                     <td>Email</td>
-                    <td><input type="email" name="email"></td>
+                    <td><input type="email" name="email" required></td>
                 </tr>
                 <tr>
                     <td>Phone #</td>
-                    <td><input type="number" name = "phone"></td>
+                    <td><input type="number" name = "phone" required></td>
                 </tr>
                 <tr>
                     <td>Emergency #</td>
-                    <td><input type="number" name="emergency"></td>
+                    <td><input type="number" name="emergency" required></td>
                 </tr>
                 <tr>
                     <td>Plan</td>

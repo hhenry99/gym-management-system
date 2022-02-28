@@ -20,7 +20,7 @@
             <table class = "tbl-30">
                 <tr>
                     <td>Name</td>
-                    <td><input type="text" name = "name"></td>
+                    <td><input type="text" name = "name" required></td>
                 </tr>
                 <tr>
                     <td>Condition</td>

@@ -52,7 +52,7 @@
 
                 <tr>
                     <td>Name</td>
-                    <td><input type="text" name="name" value="<?php echo $name?>"></td>
+                    <td><input type="text" name="name" value="<?php echo $name?>" required></td>
                 </tr>
 
                 <tr>
@@ -77,7 +77,7 @@
 
                 <tr>
                     <td>Cost</td>
-                    <td><input type="number" name="cost" value="<?php echo $cost?>"></td>
+                    <td><input type="number" name="cost" value="<?php echo $cost?>" required></td>
                 </tr>
 
                 <tr>

@@ -1,8 +1,7 @@
 <?php
+    //starting the session
     session_start();
-    // die("die from constant.php");
-    // var_dump($_SESSION);
-    
+
     //Create constants to store non repeating values
     define('LOCALHOST', 'localhost');
     define('USERNAME', 'root');

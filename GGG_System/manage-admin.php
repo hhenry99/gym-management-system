@@ -3,7 +3,7 @@
 
 <div class="main-content">
     <div class="header">
-        <h1 class = "txt-center">Manage A</h1>
+        <h1 class = "txt-center">Manage Admin</h1>
     </div>
 
     <div class="info">
