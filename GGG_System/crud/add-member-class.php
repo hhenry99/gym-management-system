@@ -17,10 +17,7 @@ else
         <h1>Add Member To Class</h1>
         <p>
             <?php 
-            if(isset($_SESSION['member-not-found'])){
-                echo $_SESSION['member-not-found'];
-                unset($_SESSION['member-not-found']);
-            }
+                include('../partials/session_check.php');
             ?>
 
             <?php 
@@ -37,7 +34,7 @@ else
                 try{
                     $res2 = mysqli_query($conn, $sql2);
                     $_SESSION['member-added'] = "Member Added Success!";
-                    header('location:'.SITEURL.'manage-class.php');
+                    header("location:".SITEURL."crud/class-roster.php?id={$class}");
                 }
                 catch (Exception $exception){
                     $_SESSION['member-not-found'] = "Member not found or already in the class, please try again";

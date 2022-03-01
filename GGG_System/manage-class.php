@@ -11,7 +11,7 @@
             <div class="info">
                 <div class="btn-container">
                     <a href="<?php echo SITEURL;?>crud/add-class.php"><button class = "btn-primary">Add Class</button></a>
-                    <a href="<?php echo SITEURL;?>manage-class-view.php"><button class = "btn-primary">View Class</button></a>
+                    <!-- <a href="<?php echo SITEURL;?>manage-class-view.php"><button class = "btn-primary">View Class</button></a> -->
                 </div>
                 <table class = "tbl-full txt-left">
                     <tr>
