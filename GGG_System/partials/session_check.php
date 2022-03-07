@@ -1,5 +1,12 @@
 <?php
            
+    //global 
+    if(isset($_SESSION['no-id-found']))
+    {
+        echo $_SESSION['no-id-found'];
+        unset($_SESSION['no-id-found']);
+    }
+
     //trainer
     if(isset($_SESSION['add-trainer']))
     {
@@ -57,10 +64,33 @@
         unset($_SESSION['clear-roster']);
     }
 
-    if(isset($_SESSION['no-id-found']))
+    //invoice
+    if(isset($_SESSION['add-invoice']))
     {
-        echo $_SESSION['no-id-found'];
-        unset($_SESSION['no-id-found']);
+        echo $_SESSION['add-invoice'];
+        unset($_SESSION['add-invoice']);
+    }
+    if(isset($_SESSION['delete-invoice']))
+    {
+        echo $_SESSION['delete-invoice'];
+        unset($_SESSION['delete-invoice']);
+    }
+    
+    if(isset($_SESSION['update-invoice']))
+    {
+        echo $_SESSION['update-invoice'];
+        unset($_SESSION['update-invoice']);
     }
 
+    //pay
+    if(isset($_SESSION['add-pay']))
+    {
+        echo $_SESSION['add-pay'];
+        unset($_SESSION['add-pay']);
+    }   
+    if(isset($_SESSION['delete-pay']))
+    {
+        echo $_SESSION['delete-pay'];
+        unset($_SESSION['delete-pay']);
+    }
 ?>
