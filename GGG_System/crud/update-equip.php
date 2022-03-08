@@ -13,6 +13,7 @@
         if($count == 1)
         {
             $row = mysqli_fetch_assoc($res);
+            $num = $row['num'];
             $name = $row['name'];
             $cond = $row['cond'];
         }
@@ -43,10 +44,12 @@
             <?php
                 if(isset($_POST['submit']))
                 {
+                    $number = $_POST['number'];
                     $name = $_POST['name'];
                     $condition = $_POST['cond'];
 
                     $sql2 = "UPDATE equipment SET
+                            num = $number,
                             name = '$name',
                             cond = '$condition'
                             WHERE equipment_id = $id;
@@ -74,6 +77,10 @@
         <form action="" method = "POST">
             <table class = "tbl-30">
                 <tr>
+                    <td>Number</td>
+                    <td><input type="number" name="number" value="<?php echo $num;?>" required></td>
+                </tr>
+                <tr>
                     <td>Name</td>
                     <td><input type="text" name = "name" value = "<?php echo $name;?>" required></td>
                 </tr>
@@ -83,14 +90,13 @@
                         <!-- <input type="text" name = "cond"> -->
                         <select name="cond">
                             <option value="good" <?php if($cond == "good"){echo "selected";}?>>Good</option>
-                            <option value="dirty"<?php if($cond == "dirty"){echo "selected";}?>>Dirty</option>
                             <option value="broken" <?php if($cond == "broken"){echo "selected";}?>>Broken</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td colspan = "2">
-                        <input type="submit" value="Add Equip." class = "btn-primary" name = "submit">
+                        <input type="submit" value="Update" class = "btn-primary pad-1" name = "submit">
                     </td>
                 </tr>
             </table>

@@ -1,9 +1,13 @@
 <?php include('partials/header.php');?>
 
+<?php
+$adminusername = $_SESSION['user'];
+?>
 
 <div class="main-content">
     <div class="header">
         <h1 class = "txt-center">Manage Admin</h1>
+        <p><?php echo $adminusername;?></p>
     </div>
 
     <div class="info">
@@ -80,8 +84,21 @@
                         <td><?php echo $name;?></td>
                         <td><?php echo $username?></td>
                         <td>
-                            <a href="<?php echo SITEURL;?>crud/update-admin.php?id=<?php echo $id;?>"><button class="btn-secondary pad-1">Update</button></a>
-                            <a href="<?php echo SITEURL;?>crud/delete-admin.php?id=<?php echo $id;?>&image_name=<?php echo $image_name;?>"><button class="btn-danger pad-1">Delete</button></a>
+                            <?php
+                                if($username == $adminusername)
+                                {
+                                    ?>
+                                    <a href="<?php echo SITEURL;?>crud/update-admin.php?id=<?php echo $id;?>"><button class="btn-secondary pad-1">Update</button></a>
+                                    <?php
+                                }
+                                else
+                                {
+                                    ?>
+                                    <a href="<?php echo SITEURL;?>crud/update-admin.php?id=<?php echo $id;?>"><button class="btn-secondary pad-1">Update</button></a>
+                                    <a href="<?php echo SITEURL;?>crud/delete-admin.php?id=<?php echo $id;?>&image_name=<?php echo $image_name;?>"><button class="btn-danger pad-1">Delete</button></a>
+                                    <?php
+                                }
+                            ?>
                         </td>
                     </tr>   
                     <?php

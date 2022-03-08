@@ -36,7 +36,6 @@
                     $amount = $row['amount'];
                     $date_created = $row['date_created'];
                     $duedate = $row['due_date'];
-                    $status = $row['invoice_status'];
                     $member_id = $row['member_member_id'];
                     $amount_paid = $row['amount_paid'];
 
@@ -51,11 +50,11 @@
                         <td><?php echo $duedate;?></td>
                         <td>
                             <?php 
-                                if($amount == 0)
+                                if($amount_paid == '0.00')
                                 {
-                                    echo "Not paid";
+                                    echo "Not Paid";
                                 }
-                                elseif($amount > 0)
+                                else if($amount_paid > 0)
                                 {
                                     if($amount == $amount_paid){
                                         echo "Paid";

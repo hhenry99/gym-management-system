@@ -28,13 +28,13 @@
             <a href="<?php echo SITEURL;?>crud/add-equip.php"><button class = "btn-primary">Add Equipment</button></a>
             <table class = "tbl-full txt-left">
                 <tr>
-                    <th>ID</th>
+                    <th>#</th>
                     <th>Name</th>
                     <th>Condition</th>
                     <th>Actions</th>
                 </tr>
                 <?php
-                    $sql = "SELECT * FROM equipment;";
+                    $sql = "SELECT * FROM equipment ORDER BY num, name;";
                     
                     $res = mysqli_query($conn,$sql);
                     
@@ -44,13 +44,14 @@
                     {
                         while($row = mysqli_fetch_assoc($res))
                         {
+                            $num = $row['num'];
                             $id = $row['equipment_id'];
                             $name = $row['name'];
                             $condition = $row['cond'];
                             
                             ?>
                                 <tr>
-                                    <td><?php echo $id;?></td>
+                                    <td><?php echo $num;?></td>
                                     <td><?php echo $name;?></td>
                                     <td><?php echo $condition;?></td>
                                     <td>

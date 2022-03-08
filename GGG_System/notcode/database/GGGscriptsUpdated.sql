@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`member` (
   `member_status` VARCHAR(20) NOT NULL,
   `plan_plan_id` INT NOT NULL,
   PRIMARY KEY (`member_id`),
-  INDEX `fk_member_plan1_idx` (`plan_plan_id` ASC),
+  INDEX `fk_member_plan1_idx` (`plan_plan_id` ASC) ,
   CONSTRAINT `fk_member_plan1`
     FOREIGN KEY (`plan_plan_id`)
     REFERENCES `GGG_DB`.`plan` (`plan_id`)
@@ -94,6 +94,7 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`class` (
   `class_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `description` TEXT NOT NULL,
+  `location` VARCHAR(200) NOT NULL,
   `start_end` TEXT NOT NULL,
   `cost` DECIMAL(9,2) NOT NULL,
   `trainer_trainer_id` INT NOT NULL,
@@ -116,8 +117,8 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`invoice` (
   `amount` DECIMAL(9,2) NOT NULL,
   `date` DATETIME NOT NULL,
   `due_date` DATETIME NOT NULL,
-  `invoice_status` VARCHAR(45) NOT NULL,
   `member_member_id` INT NOT NULL,
+  `amount_paid` DECIMAL(9,2) NOT NULL,
   PRIMARY KEY (`invoice_id`),
   INDEX `fk_invoice_member1_idx` (`member_member_id` ASC),
   CONSTRAINT `fk_invoice_member1`
@@ -133,10 +134,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GGG_DB`.`payment` (
   `payment_id` INT NOT NULL AUTO_INCREMENT,
-  `payment_type` VARCHAR(20) NOT NULL,
   `card_number` VARCHAR(45) NOT NULL,
   `card_ccv` VARCHAR(45) NOT NULL,
-  `card_expired` DATE NOT NULL,
+  `card_expired` VARCHAR(5) NOT NULL,
   `payment_amount` DECIMAL(9,2) NOT NULL,
   `payment_date` DATETIME NOT NULL,
   `invoice_invoice_id` INT NOT NULL,

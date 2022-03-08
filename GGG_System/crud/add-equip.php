@@ -12,12 +12,15 @@
                 }
             ?>
         </p>
-
     </div>
 
     <div class="info">
         <form action="" method = "POST">
             <table class = "tbl-30">
+                <tr>
+                    <td>Number</td>
+                    <td><input type="number" name="number" required></td>
+                </tr>
                 <tr>
                     <td>Name</td>
                     <td><input type="text" name = "name" required></td>
@@ -28,7 +31,6 @@
                         <!-- <input type="text" name = "cond"> -->
                         <select name="cond">
                             <option value="good">Good</option>
-                            <option value="dirty">Dirty</option>
                             <option value="broken">Broken</option>
                         </select>
                     </td>
@@ -46,8 +48,10 @@
             {
                 $name = $_POST['name'];
                 $cond = $_POST['cond'];
+                $number = $_POST['number'];
 
                 $sql = "INSERT INTO equipment SET
+                        num = $number,
                         name = '$name',
                         cond = '$cond';";
 

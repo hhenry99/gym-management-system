@@ -34,6 +34,15 @@ else
                 try{
                     $res2 = mysqli_query($conn, $sql2);
                     $_SESSION['member-added'] = "Member Added Success!";
+
+                    // $sql3 = "INSERT INTO invoice SET
+                    // name = 'Invoice for $name Class',
+                    // amount = $cost,
+                    // date_created = NOW(),
+                    // due_date = DATE_ADD(NOW(), INTERVAL 1 MONTH);
+                    // ";
+                    // $res3 = mysqli_query($conn, $sql3);
+                    
                     header("location:".SITEURL."crud/class-roster.php?id={$class}");
                 }
                 catch (Exception $exception){
