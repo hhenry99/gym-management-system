@@ -20,6 +20,14 @@
                     unset($_SESSION['update']);
                 }
             ?>
+
+            <?php
+                $sql3 = "SELECT NOW();";
+                $res3 = mysqli_query($conn, $sql3);
+                $row3 = mysqli_fetch_assoc($res3);
+                $time = $row3['NOW()'];
+                echo $time;
+            ?>
         </p>
     </div>
 
@@ -39,6 +47,7 @@
                 <th>Phone</th>
                 <th>Emergency Contact</th>
                 <th>Join Date</th>
+                <th>Expired</th>
                 <th>Plan</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -60,8 +69,16 @@
                         $phone = $row['phone'];
                         $emergency = $row['emergency_contact'];
                         $join = $row['date_join'];
+                        $expired = $row['date_expired'];
                         $status = $row['member_status'];
                         $plan_id = $row['plan_plan_id'];
+                        
+                        if($time >= $expired){
+                            $sql2 = "UPDATE member set member_status = 'Inactive' where member_id = $id;";
+                            $res2 = mysqli_query($conn, $sql2);
+                            $status = 'Inactive';
+                        }
+
                         ?>
                             <tr>
                                 <td><?php echo $id?></td>
@@ -84,6 +101,7 @@
                                 <td><?php echo $phone?></td>
                                 <td><?php echo $emergency?></td>
                                 <td><?php echo $join?></td>
+                                <td><?php echo $expired;?></td>
                                 <td>
                                     <?php
                                     $sql2 = "SELECT name from plan WHERE plan_id = $plan_id";

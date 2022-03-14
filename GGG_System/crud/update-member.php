@@ -20,9 +20,21 @@
             $name = $row['name'];
             $email = $row['email'];
             $phone = $row['phone'];
+            $date_join = $row['date_join'];
             $emergency = $row['emergency_contact'];
             $member_status = $row['member_status'];
             $plan_id = $row['plan_plan_id'];
+
+            //Check to see if the member status is inactive, if the admin presses the submit btn and the status is now active we can update the expired date.
+            if($member_status == 'Inactive'){
+                $inactive = "Yes";
+            }
+            else{
+                $inactive = "No";
+            }
+
+            
+
         }
         else
         {
@@ -106,17 +118,67 @@
                         $image_name = $current_image;
                     }
 
-                    $sql3 = "UPDATE member SET
-                            image_name = '$image_name',
-                            name = '$name',
-                            email = '$email',
-                            phone = '$phone',
-                            emergency_contact = '$emergency',
-                            member_status = '$status',
-                            plan_plan_id = '$plan'
-                            WHERE member_id = $id";
+                    
+                    //Get data from member plan
+                    $sql2 = "SELECT name, duration, cost FROM plan WHERE plan_id = $plan";
+                    $res2 = mysqli_query($conn, $sql2);
+                    $row2 = mysqli_fetch_assoc($res2);
+                    $plan_name = $row2['name'];
+                    $plan_cost = $row2['cost'];
+                    $plan_duration = $row2['duration'];
+                    
+                    //if the new status is active and it was inactive b4
+                    if($status == 'Active' && $inactive == 'Yes'){
+                        //SQL to update member
+                        $sql3 = "UPDATE member SET
+                                image_name = '$image_name',
+                                name = '$name',
+                                email = '$email',
+                                phone = '$phone',
+                                emergency_contact = '$emergency',
+                                date_expired = DATE_ADD(NOW(), INTERVAL $plan_duration MONTH),
+                                member_status = '$status',
+                                plan_plan_id = '$plan'
+                                WHERE member_id = $id";
+                        $res3 = mysqli_query($conn,$sql3);
 
-                    $res3 = mysqli_query($conn,$sql3);
+                        //SQL to insert invoice new invoice for new plan
+                        $sql2 = "INSERT INTO invoice SET
+                                name = 'Invoice for $plan_name Plan',
+                                amount = $plan_cost,
+                                date_created = NOW(),
+                                due_date = DATE_ADD(NOW(), INTERVAL 1 MONTH),
+                                member_member_id = $id;
+                                ";
+                        $res2 = mysqli_query($conn, $sql2);
+                    }
+                    else if($plan_id != $plan){
+                        //Check to see if the plan has been switch, therefore if the previous plan id does not match up with the new plan then the plan has been switch
+                        $sql3 = "UPDATE member SET
+                                image_name = '$image_name',
+                                name = '$name',
+                                email = '$email',
+                                phone = '$phone',
+                                emergency_contact = '$emergency',
+                                date_expired = DATE_ADD(NOW(), INTERVAL $plan_duration MONTH),
+                                member_status = '$status',
+                                plan_plan_id = '$plan'
+                                WHERE member_id = $id";
+                        $res3 = mysqli_query($conn,$sql3);
+                    }
+                    else{
+                        //The plan hasn't been change
+                        $sql3 = "UPDATE member SET
+                                image_name = '$image_name',
+                                name = '$name',
+                                email = '$email',
+                                phone = '$phone',
+                                emergency_contact = '$emergency',
+                                member_status = '$status',
+                                plan_plan_id = '$plan'
+                                WHERE member_id = $id";
+                        $res3 = mysqli_query($conn,$sql3);
+                    }
 
                     if($res3 == true){
                         $_SESSION['update'] = "Member Updated";

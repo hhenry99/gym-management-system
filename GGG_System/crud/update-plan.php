@@ -65,13 +65,9 @@
                 </tr>
 
                 <tr>
-                    <td>duration</td>
+                    <td>Duration (Month)</td>
                     <td>
-                        <select name="duration">
-                            <option value="1" <?php if($duration == 1){echo "selected";}?>>1 Month</option>
-                            <option value="3" <?php if($duration == 3){echo "selected";}?>>3 Month</option>
-                            <option value="12"<?php if($duration == 12){echo "selected";}?>>1 Year</option>
-                        </select>
+                        <input type="number" name = "duration" value = "<?php echo $duration;?>" min = "1">
                     </td>
                 </tr>
 

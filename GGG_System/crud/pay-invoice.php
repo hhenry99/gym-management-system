@@ -84,7 +84,7 @@ else
                 </tr>
                 <tr>
                     <td>Payment Amount</td>
-                    <td><input type="number" step=".01" name ="amount" placeholder = "Enter Amount" required></td>
+                    <td><input type="number" step=".01" name ="amount" placeholder = "Enter Amount" max = "<?php echo $invoice_amount-$amount_paid;?>"required></td>
                 </tr>
                 <tr>
                     <td colspan = "2"><input type="submit" name="submit" class ="btn-primary pad-1"></td>

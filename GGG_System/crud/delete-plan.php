@@ -1,6 +1,7 @@
 <?php
     include('../config/constant.php');
-
+    include('../partials/login-check.php');
+    
     if(isset($_GET['id']))
     {
         $id = $_GET['id'];

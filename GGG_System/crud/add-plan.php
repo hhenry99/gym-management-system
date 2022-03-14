@@ -22,28 +22,24 @@ include('../partials/crud-header.php');
             <table class="tbl-30">
                 <tr>
                     <td>Name</td>
-                    <td><input type="text" name="name" required></td>
+                    <td><input type="text" name="name" placeholder = "Enter Plan Name" required></td>
                 </tr>
                 <tr>
                     <td>Description</td>
                     <td>
-                        <textarea name="description"></textarea>
+                        <textarea name="description" placeholder = "Enter Plan Description"></textarea>
                     </td>
                 </tr>
 
                 <tr>
-                    <td>Duration</td>
+                    <td>Duration (Month)</td>
                     <td>
-                        <select name="duration">
-                            <option value="1">1 Month</option>
-                            <option value="3">3 Month</option>
-                            <option value="12">1 Year</option>
-                        </select>
+                        <input type="number" name = "duration" min="0" placeholder = "Enter # of months" required>
                     </td>
                 </tr>
                 <tr>
                     <td>Cost</td>
-                    <td><input type="number" name="cost" step = "0.01" required></td>
+                    <td><input type="number" name="cost" step = "0.01" placeholder = "Enter Plan Cost" required></td>
                 </tr>
 
                 <tr>
