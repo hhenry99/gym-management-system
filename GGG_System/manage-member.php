@@ -33,9 +33,9 @@
 
     <div class="info">
         <a href="<?php echo SITEURL?>crud/add-member.php"><button class="btn-primary">Add Member</button></a>
-        <form action="">
-            <input type="search" name="search">
-            <input type="submit" value="submit">
+        <form action="<?php echo SITEURL?>crud/search-member.php" method="POST">
+            <input type="text" name="search" placeholder="Enter NAME or ID">
+            <input type="submit" value="search" name = "submit-search">
         </form>
 
         <table class="tbl-full txt-left">
@@ -74,7 +74,7 @@
                         $plan_id = $row['plan_plan_id'];
                         
                         if($time >= $expired){
-                            $sql2 = "UPDATE member set member_status = 'Inactive' where member_id = $id;";
+                            $sql2 = "UPDATE member set member_status = 'Inactive', date_expired = NULL where member_id = $id;";
                             $res2 = mysqli_query($conn, $sql2);
                             $status = 'Inactive';
                         }
@@ -104,13 +104,18 @@
                                 <td><?php echo $expired;?></td>
                                 <td>
                                     <?php
-                                    $sql2 = "SELECT name from plan WHERE plan_id = $plan_id";
+                                    if($plan_id != ""){
+                                        $sql2 = "SELECT name from plan WHERE plan_id = $plan_id";
 
-                                    $res2 = mysqli_query($conn, $sql2);
-
-                                    $row2 = mysqli_fetch_assoc($res2);
-
-                                    echo $row2['name'];                                    
+                                        $res2 = mysqli_query($conn, $sql2);
+    
+                                        $row2 = mysqli_fetch_assoc($res2);
+    
+                                        echo $row2['name'];    
+                                    }
+                                    else {
+                                        echo "NONE";
+                                    }
                                     ?>
                                 </td>
                                 <td><?php echo $status?></td>

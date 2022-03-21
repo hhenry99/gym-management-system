@@ -1,6 +1,6 @@
 <?php 
-require_once("config/constant.php");
-require_once("login-check.php");
+include("config/constant.php");
+include("login-check.php");
 ?>
 
 <!DOCTYPE html>

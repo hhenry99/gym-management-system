@@ -32,9 +32,6 @@
             else{
                 $inactive = "No";
             }
-
-            
-
         }
         else
         {
@@ -120,15 +117,17 @@
 
                     
                     //Get data from member plan
-                    $sql2 = "SELECT name, duration, cost FROM plan WHERE plan_id = $plan";
-                    $res2 = mysqli_query($conn, $sql2);
-                    $row2 = mysqli_fetch_assoc($res2);
-                    $plan_name = $row2['name'];
-                    $plan_cost = $row2['cost'];
-                    $plan_duration = $row2['duration'];
+                    if($plan != "1"){
+                        $sql2 = "SELECT name, duration, cost FROM plan WHERE plan_id = $plan";
+                        $res2 = mysqli_query($conn, $sql2);
+                        $row2 = mysqli_fetch_assoc($res2);
+                        $plan_name = $row2['name'];
+                        $plan_cost = $row2['cost'];
+                        $plan_duration = $row2['duration'];
+                    }
                     
                     //if the new status is active and it was inactive b4
-                    if($status == 'Active' && $inactive == 'Yes'){
+                    if($status == 'Active' && $inactive == 'Yes' && $plan != "1"){
                         //SQL to update member
                         $sql3 = "UPDATE member SET
                                 image_name = '$image_name',
@@ -152,28 +151,15 @@
                                 ";
                         $res2 = mysqli_query($conn, $sql2);
                     }
-                    else if($plan_id != $plan){
-                        //Check to see if the plan has been switch, therefore if the previous plan id does not match up with the new plan then the plan has been switch
-                        $sql3 = "UPDATE member SET
-                                image_name = '$image_name',
-                                name = '$name',
-                                email = '$email',
-                                phone = '$phone',
-                                emergency_contact = '$emergency',
-                                date_expired = DATE_ADD(NOW(), INTERVAL $plan_duration MONTH),
-                                member_status = '$status',
-                                plan_plan_id = '$plan'
-                                WHERE member_id = $id";
-                        $res3 = mysqli_query($conn,$sql3);
-                    }
                     else{
-                        //The plan hasn't been change
+                        //The plan is inactive or "None"
                         $sql3 = "UPDATE member SET
                                 image_name = '$image_name',
                                 name = '$name',
                                 email = '$email',
                                 phone = '$phone',
                                 emergency_contact = '$emergency',
+                                date_expired = NULL,
                                 member_status = '$status',
                                 plan_plan_id = '$plan'
                                 WHERE member_id = $id";
@@ -257,12 +243,6 @@
                                             </option>
                                         <?php
                                     }
-                                }
-                                else
-                                {
-                                    ?>
-                                    <option value="0">No plans available</option>
-                                    <?php
                                 }
                             ?>
                         </select>

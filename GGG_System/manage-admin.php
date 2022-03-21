@@ -5,16 +5,9 @@ $adminusername = $_SESSION['user'];
 ?>
 
 <div class="main-content">
-    <div class="header">
-        <h1 class = "txt-center">Manage Admin</h1>
-        <p><?php echo $adminusername;?></p>
-    </div>
-
-    <div class="info">
-        <div class="">
-            <a href="crud/add-admin.php"><button class = "btn-primary">Add Admin</button></a>
-        </div>
-
+    <div class="header txt-center">
+        <h1>Manage Admin</h1>
+        <br>
         <?php
         if(isset($_SESSION['add']))
         {
@@ -37,7 +30,12 @@ $adminusername = $_SESSION['user'];
             unset($_SESSION['remove']);
         }
         ?>
+    </div>
 
+    <div class="info">
+        <div class="">
+            <a href="crud/add-admin.php"><button class = "btn-primary">Add Admin</button></a>
+        </div>
     <table class = "tbl-full txt-left">
         <tr>
             <th>AdminID</th>

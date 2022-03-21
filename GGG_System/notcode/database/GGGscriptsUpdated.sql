@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`equipment` (
   `equipment_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
   `cond` VARCHAR(10) NOT NULL,
+  `num` INT NOT NULL,
   PRIMARY KEY (`equipment_id`))
 ENGINE = InnoDB;
 
@@ -64,8 +65,9 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`member` (
   `date_join` DATETIME NOT NULL,
   `member_status` VARCHAR(20) NOT NULL,
   `plan_plan_id` INT NOT NULL,
+  `date_expired` DATETIME NULL,
   PRIMARY KEY (`member_id`),
-  INDEX `fk_member_plan1_idx` (`plan_plan_id` ASC) ,
+  INDEX `fk_member_plan1_idx` (`plan_plan_id` ASC),
   CONSTRAINT `fk_member_plan1`
     FOREIGN KEY (`plan_plan_id`)
     REFERENCES `GGG_DB`.`plan` (`plan_id`)
@@ -115,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`invoice` (
   `invoice_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
   `amount` DECIMAL(9,2) NOT NULL,
-  `date` DATETIME NOT NULL,
+  `date_created` DATETIME NOT NULL,
   `due_date` DATETIME NOT NULL,
   `member_member_id` INT NOT NULL,
   `amount_paid` DECIMAL(9,2) NOT NULL,
@@ -171,7 +173,10 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`member_has_class` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+INSERT INTO admin VALUES (DEFAULT, '', 'admin', 'admin', 'admin');
+INSERT INTO plan VALUES(DEFAULT,'None', 'No Plan Selected', 0, 0.00);

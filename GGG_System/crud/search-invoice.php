@@ -1,39 +1,40 @@
-<?php include('partials/header.php'); ?>
+<?php include('../partials/crud-header.php');?>
+
+<script>
+    if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+    }
+</script>
 
 <div class="main-content">
     <div class="header">
         <h1>Manage Invoice</h1>
-        <p><?php include('partials/session_check.php');?></p>
     </div>
 
     <div class="info">
-    <a href="<?php echo SITEURL;?>crud/add-invoice.php"><button class="btn-primary">Create Invoice</button></a>
-    <a href="<?php echo SITEURL;?>pay-history.php"><button class="btn-primary">Pay History</button></a>
-    <form action="<?php echo SITEURL;?>crud/search-invoice.php" method = "POST">
-        <input type="number" name="search" placeholder = "Enter Invoice / Member ID">
-        <input type="submit" value="search" name = "submit-search">
-    </form>
-
-        <table class="tbl-full txt-left">
-            <tr>
-                <th>Invoice ID</th>
-                <th>Member ID</th>  
-                <th>Name</th>
-                <th>Amount</th>
-                <th>Amount_Paid</th>
-                <th>Date Created</th>
-                <th>Due_Date</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-
-            <?php
-            $sql = "SELECT * FROM invoice";
+        <?php
+        if(isset($_POST['submit-search'])){
+            $search = mysqli_real_escape_string($conn, $_POST['search']);
+            $sql = "SELECT * FROM invoice where invoice_id LIKE '$search' OR member_member_id LIKE '$search';";
             $res = mysqli_query($conn, $sql);
-            $count = mysqli_num_rows($res);
+            $count  = mysqli_num_rows($res);
 
-            if($count > 0)
-            {
+            if($count > 0){
+                echo $count." Invoice Found!";
+                ?>
+                <table class="tbl-full txt-left">
+                    <tr>
+                        <th>Invoice ID</th>
+                        <th>Member ID</th>  
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Amount_Paid</th>
+                        <th>Date Created</th>
+                        <th>Due_Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                <?php
                 while($row = mysqli_fetch_assoc($res)){
                     $invoice_id = $row['invoice_id'];
                     $name = $row['name'];
@@ -42,8 +43,7 @@
                     $duedate = $row['due_date'];
                     $member_id = $row['member_member_id'];
                     $amount_paid = $row['amount_paid'];
-
-                    ?>
+                ?>
                     <tr>
                         <td><?php echo $invoice_id;?></td>
                         <td><?php echo $member_id;?></td>
@@ -75,24 +75,22 @@
                             <a href="<?php echo SITEURL;?>crud/delete-invoice.php?id=<?php echo $invoice_id;?>"><button class="btn-danger pad-1">Delete</button></a>
                         </td>
                     </tr>
-                    <?php
-                }
-            }
-            else
-            {
-                ?>
-                <tr>
-                    <td colspan="8">No Invoice Found</td>
-                </tr>
                 <?php
+                }
+                ?>
+                </table>
+                <?php
+            }else{
+                echo "No Invoice Found :C <a href = ".SITEURL."manage-invoice.php>Go Back?</a>";
             }
-            ?>
-        </table>
-        
+
+        }
+        else{
+            header('location:'.SITEURL.'manage-invoice.php');
+        }
+        ?>
     </div>
 </div>
 
-<?php include('partials/footer.php'); ?>
-
-
+<?php include('../partials/crud-footer.php');?>
 

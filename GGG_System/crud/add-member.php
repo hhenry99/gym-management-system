@@ -59,13 +59,6 @@
                                     <?php
                                 }
                             }
-                            else
-                            {
-                                ?>
-                                    <option value="1">None</option>
-                                <?php
-                            }
-
                             ?>
                         </select>
                     </td>
@@ -119,53 +112,61 @@
                     $image_name = "";
                 }
 
+                if($plan_id != "1"){
+                    //Get data from member plan if plan is not "None"
+                    $sql = "SELECT name, duration, cost FROM plan WHERE plan_id = $plan_id";
+                    $res = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($res);
+                    $plan_name = $row['name'];
+                    $plan_cost = $row['cost'];
+                    $plan_duration = $row['duration'];
 
-                //Get data from member plan
-                $sql2 = "SELECT name, duration, cost FROM plan WHERE plan_id = $plan_id";
-                $res2 = mysqli_query($conn, $sql2);
-                $row2 = mysqli_fetch_assoc($res2);
-                $plan_name = $row2['name'];
-                $plan_cost = $row2['cost'];
-                $plan_duration = $row2['duration'];
+                    //SQL to insert into member
+                    $sql = "INSERT INTO member SET
+                    image_name = '$image_name',
+                    name = '$name',
+                    email = '$email',
+                    phone = '$phone',
+                    emergency_contact = '$emergency',
+                    date_join = NOW(),
+                    date_expired = DATE_ADD(NOW(), INTERVAL $plan_duration MONTH),
+                    member_status = '$status',
+                    plan_plan_id = $plan_id
+                    ";
 
-                //SQL to insert into member
-                $sql3 = "INSERT INTO member SET
-                        image_name = '$image_name',
-                        name = '$name',
-                        email = '$email',
-                        phone = '$phone',
-                        emergency_contact = '$emergency',
-                        date_join = NOW(),
-                        date_expired = DATE_ADD(NOW(), INTERVAL $plan_duration MONTH),
-                        member_status = '$status',
-                        plan_plan_id = $plan_id
-                        ";
+                    $res = mysqli_query($conn, $sql);
 
-                $res3 = mysqli_query($conn, $sql3);
-
-                //Insert invoice for new member
-                $sql2 = "INSERT INTO invoice SET
-                        name = 'Invoice for $plan_name Plan',
-                        amount = $plan_cost,
-                        date_created = NOW(),
-                        due_date = DATE_ADD(NOW(), INTERVAL 1 MONTH),
-                        member_member_id = 
-                        (SELECT member_id FROM member
-                        order by 1 desc
-                        limit 1);
-                        ";
-                
-                $res2 = mysqli_query($conn, $sql2);
+                    //Insert invoice for new member
+                    $sql = "INSERT INTO invoice SET
+                    name = 'Invoice for $plan_name Plan',
+                    amount = $plan_cost,
+                    date_created = NOW(),
+                    due_date = DATE_ADD(NOW(), INTERVAL 1 MONTH),
+                    member_member_id = 
+                    (SELECT member_id FROM member
+                    order by 1 desc
+                    limit 1);
+                    ";
+                    $res = mysqli_query($conn, $sql);
+                } else{
+                    //SQL to insert into member
+                    $sql = "INSERT INTO member SET
+                    image_name = '$image_name',
+                    name = '$name',
+                    email = '$email',
+                    phone = '$phone',
+                    emergency_contact = '$emergency',
+                    date_join = NOW(),
+                    member_status = '$status',
+                    plan_plan_id = $plan_id
+                    ";
+                    $res = mysqli_query($conn, $sql);
+                }
 
                 if($res == true)
                 {
                     $_SESSION['add'] = "Member added";
                     header('location:'.SITEURL.'manage-member.php');
-                }
-                else
-                {
-                    $_SESSION['add'] = "Fail to add member";
-                    header('location:'.SITEURL.'add-member.php');
                 }
                     
             }

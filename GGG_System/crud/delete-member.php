@@ -1,5 +1,6 @@
 <?php
     include('../config/constant.php');
+    include('../partials/login-check.php');
 
     //Get method to get the id and image_name
     if(isset($_GET['id']) AND isset($_GET['image_name']))

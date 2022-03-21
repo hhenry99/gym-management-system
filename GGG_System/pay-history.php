@@ -9,8 +9,11 @@
 
     <div class="info">
         <div class="search">
-            <input type="search" name="" id="">
+            <form action="" method="get">
+                <input type="text" name="search">
+            </form>
         </div>
+
         <table class="tbl-full txt-left">
             <tr>
                 <th>Pay No.</th>

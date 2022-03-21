@@ -1,8 +1,22 @@
-<?php include("../partials/crud-header.php"); ?>
+<?php 
+include("../partials/crud-header.php"); 
+include("../functions.php");
+
+
+if(isset($_GET['fn']) AND isset($_GET['password'])){
+    $full_name = $_GET['fn'];
+    $password = $_GET['password'];
+}
+else{
+    $full_name = "";
+    $password = "";
+}
+?>
+
 
 <div class="main-content">
-    <div class="header">
-        <h1 class = "txt-center">Add Admin</h1>
+    <div class="header txt-center">
+        <h1>Add Admin</h1>
     </div>
 
     <?php
@@ -13,34 +27,43 @@
         }
     ?>
     <div class="info">
-        <form action="" method="POST" enctype="multipart/form-data">
-            <table class = "tbl-30">
-                <tr>
-                    <td>Select photo</td>
-                    <td><input type="file" name="img"></td>
-                </tr>
+        <div class="table-center">
+            <form action="" method="POST" enctype="multipart/form-data">
+                <table class = "tbl-30">
+                    <tr>
+                        <td>Select photo</td>
+                        <td><input type="file" name="img"></td>
+                    </tr>
 
-                <tr>
-                    <td>Full Name</td>
-                    <td><input type="text" name = "name" required></td>
-                </tr>
-                <tr>
-                    <td>Username</td>
-                    <td><input type="text" name = "username" required></td>
-                </tr>
+                    <tr>
+                        <td>Full Name</td>
+                        <td><input type="text" name = "name" value = "<?php echo $full_name;?>" required></td>
+                    </tr>
+                    <tr>
+                        <td>Username</td>
+                        <td><input type="text" name = "username" required></td>
+                    </tr>
 
-                <tr>
-                    <td>Password</td>
-                    <td><input type="password" name = "password" required></td>
-                </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" name = "password" value = "<?php echo $password;?>" required></td>
+                    </tr>
 
-                <tr>
-                    <td colspan = "3">
-                        <input type="submit" value="Add Admin" name = "submit" class = "btn-primary pad-1">
-                    </td>
-                </tr>
-            </table>
-        </form>
+                    <tr>
+                        <td colspan = "3">
+                            <input type="submit" value="Add Admin" name = "submit" class = "btn-primary pad-1">
+                        </td>
+                    </tr>
+                </table>
+                <?php
+                    if(isset($_SESSION['username']))
+                    {
+                        echo $_SESSION['username'];
+                        unset($_SESSION['username']);
+                    }
+                ?>
+            </form>
+        </div>
     </div>
    
     <?php
@@ -50,8 +73,13 @@
             $username = $_POST['username'];
             $password = $_POST['password'];
 
+            if(checkusername($username, $conn) == false){
+                $_SESSION['username'] = "Sorry ... Username Taken!";
+                header("location:".SITEURL."crud/add-admin.php?fn=$full_name&password=$password");
+                die();
+            }
+
             // echo print_r($_FILES['img']);
-            
             if(!empty($_FILES['img']['name']))
             {
                 $image_name = $_FILES['img']['name'];

@@ -2,9 +2,9 @@
 
 
 <div class="main-content">
-    <div class="header">
-        <h1 class = "txt-center">Manage Plan</h1>
-        <p class = "txt-center">
+    <div class="header txt-center">
+        <h1>Manage Plan</h1>
+        <p>
             <?php  
             if(isset($_SESSION['add']))
             {
@@ -42,11 +42,8 @@
             </tr>
             <?php
                 $sql = "SELECT * FROM plan;";
-
                 $res = mysqli_query($conn,$sql);
-
                 $count = mysqli_num_rows($res);
-                
                 if($count > 0)
                 {
                     while($row = mysqli_fetch_assoc($res))
@@ -63,26 +60,23 @@
                             <td><?php echo $duration;?> Month</td>
                             <td>$<?php echo $cost;?></td>
                             <td>
+                            <?php if ($id != 1) { ?>
                                 <a href="<?php echo SITEURL;?>crud/update-plan.php?id=<?php echo $id;?>"><button class = "btn-secondary pad-1">Update</button></a>
                                 <a href="<?php echo SITEURL;?>crud/delete-plan.php?id=<?php echo $id;?>"><button class = "btn-danger pad-1">Delete</button></a>
+                            <?php
+                            }
+                            else{
+                                echo "No Actions";
+                            }
+                            ?>
                             </td>
                         </tr>
                         <?php
                     }
                 }
-                else
-                {
-                    ?>
-                    <tr>
-                        <td colspan = "5">No Data Found</td>
-                    </tr>
-                    <?php
-                }
             ?>
         </table>
     </div>
-
-    
 </div>
 
 <?php include("partials/footer.php");?>
