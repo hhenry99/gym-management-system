@@ -1,18 +1,18 @@
 <?php 
 
-function checkusername($username, $conn){
-    $sql = "SELECT * from admin WHERE username = '$username';";
+//Check username if its already used 
+function checkusername($username, $conn, $role){
+    $sql = "SELECT user_id from user WHERE username = '$username' AND role = $role;";
     $res = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($res);
 
     if($count != 0){
-        //the user name exist
+        //the username exist
         return false; 
     }else{
-        //the username does not exist
+        //the username is available
         return true;
     }
-
 }
 
 

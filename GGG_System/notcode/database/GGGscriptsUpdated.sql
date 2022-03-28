@@ -15,15 +15,32 @@ CREATE SCHEMA IF NOT EXISTS `GGG_DB` DEFAULT CHARACTER SET utf8 ;
 USE `GGG_DB` ;
 
 -- -----------------------------------------------------
+-- Table `GGG_DB`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `GGG_DB`.`user` (
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `role` INT NOT NULL,
+  PRIMARY KEY (`user_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `GGG_DB`.`admin`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GGG_DB`.`admin` (
   `admin_id` INT NOT NULL AUTO_INCREMENT,
   `image_name` VARCHAR(300) NULL,
-  `name` VARCHAR(100) NOT NULL,
-  `username` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`admin_id`))
+  `name` VARCHAR(300) NOT NULL,
+  `user_user_id` INT NOT NULL,
+  PRIMARY KEY (`admin_id`, `user_user_id`),
+  INDEX `fk_admin_user1_idx` (`user_user_id` ASC),
+  CONSTRAINT `fk_admin_user1`
+    FOREIGN KEY (`user_user_id`)
+    REFERENCES `GGG_DB`.`user` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -173,10 +190,10 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`member_has_class` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-
-INSERT INTO admin VALUES (DEFAULT, '', 'admin', 'admin', 'admin');
-INSERT INTO plan VALUES(DEFAULT,'None', 'No Plan Selected', 0, 0.00);
+INSERT INTO user VALUES (DEFAULT, "admin", "admin", 4);
+INSERT INTO admin (name, user_user_id) VALUES ("admin",1);

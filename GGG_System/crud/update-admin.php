@@ -2,60 +2,61 @@
     include('../partials/crud-header.php');
 ?>
 
-<div class="main-content">
-    <div class="header">
-        <h2 class ="txt-center">Update Admin</h2>
-    </div>
+<?php
+    if(isset($_GET['aid']) AND isset($_GET['uid']))
+    {
+        $aid = $_GET['aid'];
+        $uid = $_GET['uid'];
 
-    <?php
+        $sql = "SELECT * FROM admin WHERE admin_id = $aid";
+        $sql2 = "SELECT * FROM user WHERE user_id = $uid";
 
-        if(isset($_GET['id']))
+        $res = mysqli_query($conn,$sql);
+
+        if(mysqli_num_rows($res) == 1)
         {
-            $id = $_GET['id'];
-
-            $sql = "SELECT * FROM admin WHERE admin_id = $id";
-
-            $res = mysqli_query($conn,$sql);
-            
-            $count = mysqli_num_rows($res);
-
-            if($count == 1)
-            {
-                $row = mysqli_fetch_assoc($res);
-                $current_img = $row['image_name'];
-                $name = $row['name'];
-                $username = $row['username'];
-                $password = $row['password'];
-            }
-            else
-            {
-                header('location:'.SITEURL.'manage-admin.php');
-            }
+            $row = mysqli_fetch_assoc($res);
+            $current_img = $row['image_name'];
+            $name = $row['name'];
         }
         else
         {
+            $_SESSION['no-id-found'] = "Error 404 User Not Found";
             header('location:'.SITEURL.'manage-admin.php');
         }
 
-    ?>
-    <div class="info">
-        <?php 
-            if(isset($_SESSION['upload']))
-            {
-                echo $_SESSION['upload'];
-                unset($_SESSION['upload']);
-            }
-            if(isset($_SESSION['remove']))
-            {
-                echo $_SESSION['remove'];
-                unset($_SESSION['remove']);
-            }
-            if(isset($_SESSION['update']))
-            {
-                echo $_SESSION['update'];
-                unset($_SESSION['update']);
-            }
+        $res = mysqli_query($conn,$sql2);
+
+        if(mysqli_num_rows($res) == 1)
+        {
+            $row = mysqli_fetch_assoc($res);
+            $username = $row['username'];
+            $password = $row['password'];
+            $role = $row['role'];
+        }
+        else
+        {
+            $_SESSION['no-id-found'] = "Error 404 User Not Found";
+            header('location:'.SITEURL.'manage-admin.php');
+        }
+
+    }
+    else
+    {
+        $_SESSION['no-id-found'] = "Error 404 User Not Found";
+        header('location:'.SITEURL.'manage-admin.php');
+    }
+?>
+
+<div class="main-content">
+    <div class="header txt-center">
+        <h1>Update Admin</h1>
+        <?php
+            include('../partials/session_check.php');
         ?>
+    </div>
+
+    <div class="info">
         <form action="" method = "POST" enctype="multipart/form-data">
             <table class="tbl-30">
                 <tr>
@@ -74,8 +75,8 @@
                         }
                         ?>
                     </td>
-                    <input type="hidden" name="current_img" value = "<?php echo $current_img;?>">
-                    <input type="hidden" name="id" value = "<?php echo $id;?>">
+                    <input type="hidden" name="current_img" value = "<?php //echo $current_img;?>">
+                    <input type="hidden" name="id" value = "<?php //echo $id;?>">
                 </tr>
 
                 <tr>
@@ -99,6 +100,16 @@
                 </tr>
                 
                 <tr>
+                    <td>Role:</td>
+                    <td>
+                        <select name="role">
+                            <option value="3">Admin</option>
+                            <option value="4">HAdmin</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
                     <td colspan="2">
                         <input type="submit" name = "submit" value="Update Admin" class = "btn-primary pad-1">
                     </td>
@@ -109,11 +120,13 @@
         <?php
             if(isset($_POST['submit']))
             {
-                $id = $_POST['id'];
-                $current_img = $_POST['current_img'];
+                // $aid = $_GET['aid'];
+                // $uid = $_GET['uid'];
+
                 $name = $_POST['name'];
                 $username = $_POST['username'];
                 $password=  $_POST['password'];
+                $role = $_POST['role'];
 
                 if(!empty($_FILES['img']['name']))
                 {
@@ -129,9 +142,7 @@
                     if($upload==false)
                     {
                         $_SESSION['upload'] = "Failed to upload image";
-                        //redirect to add-food
-                        header('location:'.SITEURL.'update-admin.php');
-                        //stop 
+                        header('location:'.SITEURL.'crud/update-admin.php');
                         die();
                     }
 
@@ -143,8 +154,7 @@
                         if($remove == false)
                         {
                             $_SESSION['remove'] = "Fail to remove image";
-                            header('location:'.SITEURL.'update-admin.php');
-    
+                            header('location:'.SITEURL.'crud/update-admin.php');
                             die();
                         }
                     }
@@ -154,28 +164,24 @@
                     $image_name = $current_img;
                 }
 
+                $sql = "UPDATE admin SET
+                image_name = '$image_name',
+                name = '$name'
+                WHERE admin_id = $aid;
+                ";
+        
+                $sql2 = "UPDATE user SET
+                username = '$username',
+                password = '$password',
+                role = $role
+                WHERE user_id = $uid;
+                ";
 
-                $sql2 = "UPDATE admin SET
-                        image_name = '$image_name',
-                        name = '$name',
-                        username = '$username',
-                        password = '$password'
-                        WHERE admin_id = $id;
-                        ";
-
+                $res = mysqli_query($conn,$sql);
                 $res2 = mysqli_query($conn,$sql2);
 
-                if($res2 == true)
-                {
-                    $_SESSION['update'] = "Admin Updated!";
-                    header('location:'.SITEURL.'manage-admin.php');
-                }
-                else
-                {
-                    $_SESSION['update'] = "Fail to update admin";
-                    header('location:'.SITEURL.'update-admin.php');
-                }
-                
+                $_SESSION['update'] = "Admin Updated!";
+                header('location:'.SITEURL.'manage-admin.php');
             }
         ?>
     </div>

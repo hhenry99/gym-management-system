@@ -3,6 +3,16 @@ include("config/constant.php");
 include("login-check.php");
 ?>
 
+<?php
+$suid = $_SESSION['user'];
+$sql = "SELECT role from user WHERE user_id = $suid;";
+$res = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($res);
+$urole = $row['role'];
+
+$site = SITEURL;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +29,11 @@ include("login-check.php");
             <h2>GoGoGym</h2>
             <ul>
                 <li><a href="<?php echo SITEURL;?>index.php">Dashboard</a></li>
-                <li><a href="<?php echo SITEURL;?>manage-admin.php">Admin</a></li>
+                <?php 
+                    if($urole == 4){
+                        echo "<li><a href='{$site}manage-admin.php'>Admin</a></li>";
+                    }
+                ?>
                 <li><a href="<?php echo SITEURL;?>manage-plan.php">Plan</a></li>
                 <li><a href="<?php echo SITEURL;?>manage-member.php">Member</a></li>
                 <li><a href="<?php echo SITEURL;?>manage-trainer.php">Trainer</a></li>

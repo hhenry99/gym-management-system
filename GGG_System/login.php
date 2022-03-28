@@ -13,16 +13,17 @@
 <body>
     <div class="wrapper text-center">
         <h1>Login</h1>
+        <p>Don't Have an Account? <a href="signup.php">Sign Up</a></p>
         <div class="input-wrapper">
         <?php
         if(isset($_SESSION['login']))
         {
-            echo $_SESSION['login'];
+            echo "<br>".$_SESSION['login'];
             unset($_SESSION['login']);
         }
         if(isset($_SESSION['no-login-message']))
         {
-            echo $_SESSION['no-login-message'];
+            echo "<br>".$_SESSION['no-login-message'];
             unset($_SESSION['no-login-message']);
         }
         ?>
@@ -40,6 +41,13 @@
             <input type="password" name = "password" required>
             <br>
             <br>
+            <br>
+            <select name="role">
+                <option value="1">Member</option>
+                <option value="2">Trainer</option>
+                <option value="3">Admin</option>
+                <option value="4">HAdmin</option>
+            </select>
             <input type="submit" value="Log In" name = "submit" class = "btn-primary">
         </form>
 
@@ -48,26 +56,67 @@
         {
             $username = $_POST['username'];
             $password=  $_POST['password'];
+            $role = $_POST['role'];
 
-            $sql = "SELECT * FROM admin WHERE username = '$username' AND password = '$password';";
-            
-            $res = mysqli_query($conn, $sql);
-
-            $count = mysqli_num_rows($res);
-
-            if($count == 1)
-            {
-                // echo "Data found";
-                $_SESSION['login'] = "Login successful .... ";
-
-                $_SESSION['user'] = $username;
-                
-                header('location:'.SITEURL.'index.php');
+            if($role == 1){
+                $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password' and role = $role";
+                $res = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($res) == 1){
+                    $_SESSION['login'] = "Login successful .... ";
+                    $_SESSION['user'] = $username;
+                    header('location:'.SITEURL.'index.php');
+                }
+                else
+                {
+                    $_SESSION['login'] = "Incorrect username or password";
+                    header('location:'.SITEURL.'login.php');
+                }
             }
-            else
-            {
-                $_SESSION['login'] = "Incorrect username or password";
-                header('location:'.SITEURL.'login.php');
+            if($role == 2){
+                $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password' and role = $role";
+                $res = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($res) == 1){
+                    $_SESSION['login'] = "Login successful .... ";
+                    $_SESSION['user'] = $username;
+                    header('location:'.SITEURL.'index.php');
+                }
+                else
+                {
+                    $_SESSION['login'] = "Incorrect username or password";
+                    header('location:'.SITEURL.'login.php');
+                }
+            }
+            else if($role == 3){
+                $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password' and role = $role";
+                $res = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($res) == 1){
+                    $row = mysqli_fetch_assoc($res);
+                    $id = $row['user_id'];
+                    $_SESSION['login'] = "Login successful .... ";
+                    $_SESSION['user'] = $id;
+                    header('location:'.SITEURL.'index.php');
+                }
+                else
+                {
+                    $_SESSION['login'] = "Incorrect username or password";
+                    header('location:'.SITEURL.'login.php');
+                }
+            }
+            else if($role == 4){
+                $sql = "SELECT user_id FROM user WHERE username = '$username' AND password = '$password' and role = $role";
+                $res = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($res) == 1){
+                    $row = mysqli_fetch_assoc($res);
+                    $id = $row['user_id'];
+                    $_SESSION['login'] = "Login successful .... ";
+                    $_SESSION['user'] = $id;
+                    header('location:'.SITEURL.'index.php');
+                }
+                else
+                {
+                    $_SESSION['login'] = "Incorrect username or password";
+                    header('location:'.SITEURL.'login.php');
+                }
             }
         }
     ?>  

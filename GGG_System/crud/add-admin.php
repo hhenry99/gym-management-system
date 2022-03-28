@@ -20,12 +20,13 @@ else{
     </div>
 
     <?php
-        if(isset($_SESSION['add']))
+        if(isset($_SESSION['upload']))
         {
-            echo $_SESSION['add'];
-            unset($_SESSION['add']);
+            echo $_SESSION['upload'];
+            unset($_SESSION['upload']);
         }
     ?>
+    
     <div class="info">
         <div class="table-center">
             <form action="" method="POST" enctype="multipart/form-data">
@@ -39,6 +40,7 @@ else{
                         <td>Full Name</td>
                         <td><input type="text" name = "name" value = "<?php echo $full_name;?>" required></td>
                     </tr>
+
                     <tr>
                         <td>Username</td>
                         <td><input type="text" name = "username" required></td>
@@ -47,6 +49,16 @@ else{
                     <tr>
                         <td>Password</td>
                         <td><input type="password" name = "password" value = "<?php echo $password;?>" required></td>
+                    </tr>
+
+                    <tr>
+                        <td>Role</td>
+                        <td>
+                            <select name="role" id="">
+                                <option value="3">Admin</option>
+                                <option value="4">HAdmin</option>
+                            </select>
+                        </td>
                     </tr>
 
                     <tr>
@@ -61,19 +73,26 @@ else{
                         echo $_SESSION['username'];
                         unset($_SESSION['username']);
                     }
+                    if(isset($_SESSION['upload']))
+                    {
+                        echo $_SESSION['upload'];
+                        unset($_SESSION['upload']);
+                    }
                 ?>
             </form>
         </div>
     </div>
    
     <?php
+
         if(isset($_POST['submit']))
         {
             $full_name = $_POST['name'];
             $username = $_POST['username'];
             $password = $_POST['password'];
-
-            if(checkusername($username, $conn) == false){
+            $role = $_POST['role'];
+            
+            if(checkusername($username, $conn, $role) == false){
                 $_SESSION['username'] = "Sorry ... Username Taken!";
                 header("location:".SITEURL."crud/add-admin.php?fn=$full_name&password=$password");
                 die();
@@ -94,9 +113,7 @@ else{
                 if($upload==false)
                 {
                     $_SESSION['upload'] = "Failed to upload image";
-                    //redirect to add-food
-                    header('location:'.SITEURL.'add-admin.php');
-                    //stop 
+                    header('location:'.SITEURL.'crud/add-admin.php');
                     die();
                 }
             }
@@ -104,28 +121,15 @@ else{
             {
                 $image_name = "";
             }
-            //SQL code to insert into the database
-            $sql = "INSERT INTO admin SET               
-                    image_name = '$image_name',
-                    name = '$full_name',
-                    username = '$username',
-                    password = '$password'
-                    ";
 
-            //function that execute the sql query
-            $res = mysqli_query($conn,$sql);
+            $sql = "INSERT INTO user (username, password, role) VALUES ('test','test',$role);";
+            $sql2 = "INSERT INTO admin (image_name, name, user_user_id) VALUES ('$image_name', '$full_name', LAST_INSERT_ID());";
 
-            if($res == true)
-            {
-                $_SESSION['add'] = "Admin added successfully";
-                header('location:'.SITEURL.'manage-admin.php');
-            }
-            else
-            {
-                $_SESSION['add'] = "Fail to add Admin";
-                header('location:'.SITEURL.'add-admin.php');
-            }
+            $res = mysqli_query($conn, $sql) or die("Error");
+            $res = mysqli_query($conn, $sql2) or die("Error");
 
+            $_SESSION['add'] = "Admin added successfully";
+            header('location:'.SITEURL.'manage-admin.php');
         }
     ?>
 

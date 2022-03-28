@@ -1,7 +1,15 @@
 <?php include('partials/header.php');?>
 
 <?php
-$adminusername = $_SESSION['user'];
+$suid = $_SESSION['user'];
+$sql = "SELECT role from user WHERE user_id = $suid;";
+$res = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($res);
+$urole = $row['role'];
+
+if($urole == 3){
+    header('location:'.SITEURL.'index.php');
+}
 ?>
 
 <div class="main-content">
@@ -9,62 +17,39 @@ $adminusername = $_SESSION['user'];
         <h1>Manage Admin</h1>
         <br>
         <?php
-        if(isset($_SESSION['add']))
-        {
-            echo $_SESSION['add'];
-            unset($_SESSION['add']);
-        }
-        if(isset($_SESSION['delete']))
-        {
-            echo $_SESSION['delete'];
-            unset($_SESSION['delete']);
-        }
-        if(isset($_SESSION['update']))
-        {
-            echo $_SESSION['update'];
-            unset($_SESSION['update']);
-        }
-        if(isset($_SESSION['remove']))
-        {
-            echo $_SESSION['remove'];
-            unset($_SESSION['remove']);
-        }
+        include("partials/session_check.php");
         ?>
     </div>
 
     <div class="info">
-        <div class="">
-            <a href="crud/add-admin.php"><button class = "btn-primary">Add Admin</button></a>
-        </div>
+    <a href="crud/add-admin.php"><button class = "btn-primary">Add Admin</button></a>
     <table class = "tbl-full txt-left">
         <tr>
             <th>AdminID</th>
             <th>Photo</th>
             <th>Name</th>
-            <th>Username</th>
+            <th>Role</th>
             <th>Actions</th>
         </tr>
-        <?php
-
-            $sql = "SELECT * FROM admin";
-
+        <?php 
+            $sql = "SELECT * FROM user JOIN admin ON user_id = user_user_id;";
             $res = mysqli_query($conn,$sql);
-
             $count = mysqli_num_rows($res);
 
             if($count > 0)
             {
                 while($row = mysqli_fetch_assoc($res))
                 {
-                    $id = $row['admin_id'];
+                    $aid = $row['admin_id'];
                     $image_name = $row['image_name'];
                     $name = $row['name'];
                     $username = $row['username'];
                     $password = $row['password'];
-
+                    $role = $row['role'];
+                    $uid = $row['user_user_id'];
                     ?>
                     <tr>
-                        <td><?php echo $id;?></td>
+                        <td><?php echo $aid;?></td>
                         <td>
                             <?php
                             if($image_name == "")
@@ -80,22 +65,23 @@ $adminusername = $_SESSION['user'];
                             ?>
                         </td>
                         <td><?php echo $name;?></td>
-                        <td><?php echo $username?></td>
                         <td>
+                            <?php 
+                            if($role == 3){
+                                echo "Admin";
+                            } else{
+                                echo "Head Admin";
+                            }
+                            ?>
+                        </td>
+                        <td>    
+                            <a href="<?php echo SITEURL;?>crud/update-admin.php?aid=<?php echo $aid;?>&uid=<?php echo $uid;?>"><button class="btn-secondary pad-1">Update</button></a>
                             <?php
-                                if($username == $adminusername)
-                                {
-                                    ?>
-                                    <a href="<?php echo SITEURL;?>crud/update-admin.php?id=<?php echo $id;?>"><button class="btn-secondary pad-1">Update</button></a>
-                                    <?php
-                                }
-                                else
-                                {
-                                    ?>
-                                    <a href="<?php echo SITEURL;?>crud/update-admin.php?id=<?php echo $id;?>"><button class="btn-secondary pad-1">Update</button></a>
-                                    <a href="<?php echo SITEURL;?>crud/delete-admin.php?id=<?php echo $id;?>&image_name=<?php echo $image_name;?>"><button class="btn-danger pad-1">Delete</button></a>
-                                    <?php
-                                }
+                            //Prevents current admin from deleting itself.
+                            if($suid != $uid){
+                                $site = SITEURL;
+                                echo "<a href='{$site}crud/delete-admin.php?aid={$aid}&uid={$uid}&image_name={$image_name}'><button class='btn-danger pad-1'>Delete</button></a>";
+                            }
                             ?>
                         </td>
                     </tr>   
@@ -109,7 +95,7 @@ $adminusername = $_SESSION['user'];
                         <td colspan="5">No admin found</td>
                     </tr>
                 <?php
-            }
+            } 
         ?>
     </table>
     </div>

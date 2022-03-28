@@ -12,8 +12,8 @@
                 }
                 if(isset($_SESSION['user'])) //display name
                 {
-                    $username = $_SESSION['user'];
-                    $sql = "SELECT name from admin WHERE username = '$username';";
+                    $uid = $_SESSION['user'];
+                    $sql = "SELECT name from admin WHERE user_user_id = $uid;";
                     $res = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_assoc($res);
                     echo "Welcome Back ".$row['name']."!";
