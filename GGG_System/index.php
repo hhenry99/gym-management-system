@@ -2,7 +2,7 @@
 
 <div class="main-content">
     <div class="header txt-center">
-        <h1>--DashBoard--</h1>
+        <h1>--DashBoard--</h1> 
         <p>
             <?php
                 if(isset($_SESSION['login'])) //login message
@@ -12,11 +12,11 @@
                 }
                 if(isset($_SESSION['user'])) //display name
                 {
-                    $uid = $_SESSION['user'];
-                    $sql = "SELECT name from admin WHERE user_user_id = $uid;";
-                    $res = mysqli_query($conn, $sql);
-                    $row = mysqli_fetch_assoc($res);
-                    echo "Welcome Back ".$row['name']."!";
+                    // $uid = $_SESSION['user'];
+                    // $sql = "SELECT name from admin WHERE user_user_id = $uid;";
+                    // $res = mysqli_query($conn, $sql);
+                    // $row = mysqli_fetch_assoc($res);
+                    echo "Welcome Back ".NAME."!";
                 }
             ?>
         </p>
@@ -40,9 +40,9 @@
         $notpaid = $revenue-$paid;
 
         //admin
-        $sql = "SELECT admin_id from admin";
-        $res = mysqli_query($conn, $sql);
-        $admin_count = mysqli_num_rows($res);
+        // $sql = "SELECT admin_id from admin";
+        // $res = mysqli_query($conn, $sql);
+        // $admin_count = mysqli_num_rows($res);
 
         //trainer
         $sql = "SELECT trainer_id from trainer";
@@ -82,7 +82,7 @@
             </a>
             <a href="<?php echo SITEURL;?>manage-admin.php">
                 <div class="box color-3">
-                    <h3>Total Admin: <?php echo $admin_count;?></h3>
+                    <h3>Total Admin: <?php //echo $admin_count;?></h3>
                 </div>
             </a>
             <a href="<?php echo SITEURL;?>manage-trainer.php">

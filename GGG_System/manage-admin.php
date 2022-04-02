@@ -1,20 +1,16 @@
-<?php include('partials/header.php');?>
-
 <?php
-$suid = $_SESSION['user'];
-$sql = "SELECT role from user WHERE user_id = $suid;";
-$res = mysqli_query($conn, $sql);
-$row = mysqli_fetch_assoc($res);
-$urole = $row['role'];
 
-if($urole == 3){
+include('partials/header.php');
+
+if(ROLE != 4){
     header('location:'.SITEURL.'index.php');
 }
+
 ?>
 
 <div class="main-content">
     <div class="header txt-center">
-        <h1>Manage Admin</h1>
+        <h1>Admin</h1>
         <br>
         <?php
         include("partials/session_check.php");
@@ -23,16 +19,18 @@ if($urole == 3){
 
     <div class="info">
     <a href="crud/add-admin.php"><button class = "btn-primary">Add Admin</button></a>
-    <table class = "tbl-full txt-left">
-        <tr>
-            <th>AdminID</th>
-            <th>Photo</th>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Actions</th>
-        </tr>
+    <table class = "content-table">
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
         <?php 
-            $sql = "SELECT * FROM user JOIN admin ON user_id = user_user_id;";
+            $sql = "SELECT * FROM user WHERE role = 3 OR role = 4";
             $res = mysqli_query($conn,$sql);
             $count = mysqli_num_rows($res);
 
@@ -40,26 +38,24 @@ if($urole == 3){
             {
                 while($row = mysqli_fetch_assoc($res))
                 {
-                    $aid = $row['admin_id'];
+                    $uid = $row['user_id'];
                     $image_name = $row['image_name'];
                     $name = $row['name'];
-                    $username = $row['username'];
-                    $password = $row['password'];
+                    // $username = $row['username'];
+                    // $password = $row['password'];
                     $role = $row['role'];
-                    $uid = $row['user_user_id'];
                     ?>
                     <tr>
-                        <td><?php echo $aid;?></td>
                         <td>
                             <?php
                             if($image_name == "")
                             {
-                                echo "No image available";
+                                echo "<p class = 'txt-red'>No image available</p>";
                             }
                             else
                             {
                                 ?>
-                                <img src="<?php echo SITEURL;?>images/admin/<?php echo $image_name;?>" width = "100px" height = "100px" class = "round">
+                                <img src="<?php echo SITEURL;?>images/admin/<?php echo $image_name;?>" width = "75px" height = "75px">
                                 <?php
                             }
                             ?>
@@ -75,12 +71,12 @@ if($urole == 3){
                             ?>
                         </td>
                         <td>    
-                            <a href="<?php echo SITEURL;?>crud/update-admin.php?aid=<?php echo $aid;?>&uid=<?php echo $uid;?>"><button class="btn-secondary pad-1">Update</button></a>
+                            <a href="<?php echo SITEURL;?>crud/update-admin.php?uid=<?php echo $uid;?>"><button class="btn-secondary"><i class="fa-solid fa-pen-to-square"></i></button></a>
                             <?php
                             //Prevents current admin from deleting itself.
-                            if($suid != $uid){
+                            if(ID != $uid){
                                 $site = SITEURL;
-                                echo "<a href='{$site}crud/delete-admin.php?aid={$aid}&uid={$uid}&image_name={$image_name}'><button class='btn-danger pad-1'>Delete</button></a>";
+                                echo "<a href='{$site}crud/delete-admin.php?uid={$uid}&image_name={$image_name}'><button class='btn-danger'><i class='fa-solid fa-x'></i></button></a>";
                             }
                             ?>
                         </td>
@@ -97,6 +93,7 @@ if($urole == 3){
                 <?php
             } 
         ?>
+        </tbody>
     </table>
     </div>
    

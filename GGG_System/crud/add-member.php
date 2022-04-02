@@ -1,7 +1,7 @@
 <?php include('../partials/crud-header.php');?>
 
 <div class="main-content">
-    <div class="header">
+    <div class="header txt-center">
         <h1>Add Member</h1>
         <p>
             <?php
@@ -16,7 +16,7 @@
 
     <div class="info">
         <form action="" method="POST" enctype="multipart/form-data">
-            <table class="tbl-30">
+            <table class="tbl-wrapper">
                 <tr>
                     <td>Image</td>
                     <td><input type="file" name="image"></td>

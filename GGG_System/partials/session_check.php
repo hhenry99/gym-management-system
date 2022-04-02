@@ -1,19 +1,20 @@
 <?php
     //File to display all of the session messages
     
-    //global 
-    if(isset($_SESSION['no-id-found']))
-    {
-        echo $_SESSION['no-id-found'];
-        unset($_SESSION['no-id-found']);
-    }
+    // -----------------global---------------
+
     if(isset($_SESSION['upload']))
     {
         echo $_SESSION['upload'];
         unset($_SESSION['upload']);
     }
 
-    //Admin
+    if(isset($_SESSION['username']))
+    {
+        echo $_SESSION['username'];
+        unset($_SESSION['username']);
+    }
+    
     if(isset($_SESSION['add']))
     {
         echo $_SESSION['add'];
@@ -33,23 +34,6 @@
     {
         echo $_SESSION['remove'];
         unset($_SESSION['remove']);
-    }
-
-    //trainer
-    if(isset($_SESSION['add-trainer']))
-    {
-        echo $_SESSION['add-trainer'];
-        unset($_SESSION['add-trainer']);
-    }
-    if(isset($_SESSION['delete-trainer']))
-    {
-        echo $_SESSION['delete-trainer'];
-        unset($_SESSION['delete-trainer']);
-    }
-    if(isset($_SESSION['update-trainer']))
-    {
-        echo $_SESSION['update-trainer'];
-        unset($_SESSION['update-trainer']);
     }
 
     //class
@@ -74,11 +58,11 @@
         unset($_SESSION['member-added']);
     }
 
-    if(isset($_SESSION['member-not-found']))
-    {
-        echo $_SESSION['member-not-found'];
-        unset($_SESSION['member-not-found']);
-    }
+    // if(isset($_SESSION['member-not-found']))
+    // {
+    //     echo $_SESSION['member-not-found'];
+    //     unset($_SESSION['member-not-found']);
+    // }
 
     if(isset($_SESSION['delete_member_class']))
     {

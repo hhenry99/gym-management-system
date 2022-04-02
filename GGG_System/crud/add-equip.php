@@ -1,32 +1,23 @@
 <?php require_once('../partials/crud-header.php');?>
 
 <div class="main-content">
-    <div class="header">
-        <h1 class = "txt-center">Equipment</h1>
-        <p class = "txt-center">
-            <?php 
-                if(isset($_SESSION['add']))
-                {
-                    echo $_SESSION['add'];
-                    unset($_SESSION['add']);
-                }
-            ?>
-        </p>
+    <div class="header txt-center">
+        <h1>Equipment</h1>
     </div>
 
     <div class="info">
         <form action="" method = "POST">
-            <table class = "tbl-30">
+            <table class = "tbl-wrapper">
                 <tr>
-                    <td>Number</td>
+                    <td>Number*</td>
                     <td><input type="number" name="number" required></td>
                 </tr>
                 <tr>
-                    <td>Name</td>
+                    <td>Name*</td>
                     <td><input type="text" name = "name" required></td>
                 </tr>
                 <tr>
-                    <td>Condition</td>
+                    <td>Condition*</td>
                     <td>
                         <!-- <input type="text" name = "cond"> -->
                         <select name="cond">
@@ -37,15 +28,14 @@
                 </tr>
                 <tr>
                     <td colspan = "2">
+                        <br>
                         <input type="submit" value="Add Equip." class = "btn-primary" name = "submit">
                     </td>
                 </tr>
             </table>
         </form>
-
         <?php
-            if(isset($_POST['submit']))
-            {
+            if(isset($_POST['submit'])){
                 $name = $_POST['name'];
                 $cond = $_POST['cond'];
                 $number = $_POST['number'];
@@ -57,16 +47,8 @@
 
                 $res = mysqli_query($conn,$sql);
 
-                if($res == true)
-                {
-                    $_SESSION['add'] = "Equipment added successfully";
-                    header('location:'.SITEURL.'manage-equipment.php');
-                }
-                else
-                {
-                    $_SESSION['add'] = "fail to add equipment";
-                    header('location:'.SITEURL.'crud/add-equip.php');
-                }
+                $_SESSION['add'] = "<br><span class = 'txt-green'>Equipment added successfully</span>";
+                header('location:'.SITEURL.'manage-equipment.php');
             }
         ?>
     </div>

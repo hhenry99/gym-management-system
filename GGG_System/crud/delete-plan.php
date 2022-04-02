@@ -1,7 +1,7 @@
 <?php
     include('../config/constant.php');
     include('../partials/login-check.php');
-    
+
     if(isset($_GET['id']))
     {
         $id = $_GET['id'];
@@ -15,17 +15,8 @@
             $sql2 = "DELETE FROM plan WHERE plan_id = $id;";
             $res2 = mysqli_query($conn, $sql2);
 
-            if($res2==true)
-            {
-                $_SESSION['delete'] = "Plan deleted success";
-                header('location:'.SITEURL.'manage-plan.php');
-
-            }
-            else
-            {
-                $_SESSION['delete'] = "Fail to delete plan";
-                header('location:'.SITEURL.'manage-plan.php');
-            }
+            $_SESSION['delete'] = "<br><span style ='color: red; font-weight:bold;'>Plan Deleted!</span>";
+            header('location:'.SITEURL.'manage-plan.php');
         }
         else
         {

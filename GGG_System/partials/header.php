@@ -3,16 +3,6 @@ include("config/constant.php");
 include("login-check.php");
 ?>
 
-<?php
-$suid = $_SESSION['user'];
-$sql = "SELECT role from user WHERE user_id = $suid;";
-$res = mysqli_query($conn, $sql);
-$row = mysqli_fetch_assoc($res);
-$urole = $row['role'];
-
-$site = SITEURL;
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +11,7 @@ $site = SITEURL;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GGG Management System</title>
     <link rel="stylesheet" href="<?php echo SITEURL;?>css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
 
@@ -30,7 +21,8 @@ $site = SITEURL;
             <ul>
                 <li><a href="<?php echo SITEURL;?>index.php">Dashboard</a></li>
                 <?php 
-                    if($urole == 4){
+                    $site = SITEURL;
+                    if(ROLE == 4){
                         echo "<li><a href='{$site}manage-admin.php'>Admin</a></li>";
                     }
                 ?>

@@ -4,21 +4,7 @@
         <h1 class ="txt-center">Manage Member</h1>
         <p>
             <?php
-                if(isset($_SESSION['add']))
-                {
-                    echo $_SESSION['add'];
-                    unset($_SESSION['add']);
-                }
-                if(isset($_SESSION['delete']))
-                {
-                    echo $_SESSION['delete'];
-                    unset($_SESSION['delete']);
-                }
-                if(isset($_SESSION['update']))
-                {
-                    echo $_SESSION['update'];
-                    unset($_SESSION['update']);
-                }
+                include('partials/session_check.php');
             ?>
 
             <?php
@@ -38,22 +24,21 @@
             <input type="submit" value="search" name = "submit-search">
         </form>
 
-        <table class="tbl-full txt-left">
-            <tr>
-                <th>ID</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Emergency Contact</th>
-                <th>Join Date</th>
-                <th>Expired</th>
-                <th>Plan</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Expired</th>
+                    <th>Plan</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
             <?php
-                $sql = "SELECT * FROM member";
+               /* $sql = "SELECT * FROM member";
                 $res = mysqli_query($conn, $sql);
 
                 $count = mysqli_num_rows($res);
@@ -134,7 +119,7 @@
                             <td colspan = "10" class = "txt-center">no members found</td>
                         </tr>
                     <?php
-                }
+                }*/
             ?>
         </table>
     </div>

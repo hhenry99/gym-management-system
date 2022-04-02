@@ -1,81 +1,61 @@
 <?php require_once('../partials/crud-header.php');?>
 
 <?php 
-    if(isset($_GET['id']))
+if(isset($_GET['id']))
+{
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM equipment WHERE equipment_id = $id";
+
+    $res = mysqli_query($conn, $sql);
+
+    $count = mysqli_num_rows($res);
+
+    if($count == 1)
     {
-        $id = $_GET['id'];
-        $sql = "SELECT * FROM equipment WHERE equipment_id = $id";
-
-        $res = mysqli_query($conn, $sql);
-
-        $count = mysqli_num_rows($res);
-
-        if($count == 1)
-        {
-            $row = mysqli_fetch_assoc($res);
-            $num = $row['num'];
-            $name = $row['name'];
-            $cond = $row['cond'];
-        }
-        else
-        {
-            header('location:'.SITEURL.'manage-equipment.php');
-        }
+        $row = mysqli_fetch_assoc($res);
+        $num = $row['num'];
+        $name = $row['name'];
+        $cond = $row['cond'];
     }
     else
     {
         header('location:'.SITEURL.'manage-equipment.php');
     }
+}
+else
+{
+    header('location:'.SITEURL.'manage-equipment.php');
+}
 ?>
 
+<?php
+if(isset($_POST['submit']))
+{
+    $number = $_POST['number'];
+    $name = $_POST['name'];
+    $condition = $_POST['cond'];
+
+    $sql2 = "UPDATE equipment SET
+            num = $number,
+            name = '$name',
+            cond = '$condition'
+            WHERE equipment_id = $id;
+            ";
+    
+    $res2 = mysqli_query($conn, $sql2);
+
+    $_SESSION['update'] = "<br><span class='txt-green'>Equipment Updated!</span>";
+    header('location:'.SITEURL.'manage-equipment.php');
+}
+?>
 
 <div class="main-content">
     <div class="header">
         <h1 class ="txt-center">Update Equipment</h1>
-        <p>
-            <?php
-                if(isset($_SESSION['update']))
-                {
-                    echo $_SESSION['update'];
-                    unset($_SESSION['update']);
-                }
-            ?>
-
-            <?php
-                if(isset($_POST['submit']))
-                {
-                    $number = $_POST['number'];
-                    $name = $_POST['name'];
-                    $condition = $_POST['cond'];
-
-                    $sql2 = "UPDATE equipment SET
-                            num = $number,
-                            name = '$name',
-                            cond = '$condition'
-                            WHERE equipment_id = $id;
-                            ";
-                    
-                    $res2 = mysqli_query($conn, $sql2);
-
-                    if($res2 == true)
-                    {
-                        $_SESSION['update'] = "Equipment updated";
-                        header('location:'.SITEURL.'manage-equipment.php');
-                    }
-                    else
-                    {
-                        $_SESSION['update'] = "Fail to update";
-                        header('location:'.SITEURL.'update-equip.php');
-                    }
-                    
-                }
-            ?>
-            
-        </p>
     </div>
     <div class="info">
         <form action="" method = "POST">
-            <table class = "tbl-30">
+            <table class = "tbl-wrapper">
                 <tr>
                     <td>Number</td>
                     <td><input type="number" name="number" value="<?php echo $num;?>" required></td>
@@ -96,7 +76,8 @@
                 </tr>
                 <tr>
                     <td colspan = "2">
-                        <input type="submit" value="Update" class = "btn-primary pad-1" name = "submit">
+                        <br>
+                        <input type="submit" value="Save" class = "btn-primary pad-1" name = "submit">
                     </td>
                 </tr>
             </table>

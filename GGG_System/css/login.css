@@ -22,6 +22,14 @@ body
     text-align: center;
 }
 
+.txt-red{
+    color: red;
+    font-weight: bold;
+}
+
+.txt-green{
+    color: green;
+}
 
 /*Log In*/
 .wrapper{

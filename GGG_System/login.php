@@ -18,12 +18,12 @@
         <?php
         if(isset($_SESSION['login']))
         {
-            echo "<br>".$_SESSION['login'];
+            echo "<br><p class ='txt-red'>".$_SESSION['login']."</p>";
             unset($_SESSION['login']);
         }
         if(isset($_SESSION['no-login-message']))
         {
-            echo "<br>".$_SESSION['no-login-message'];
+            echo "<br><p class = 'txt-red'>".$_SESSION['no-login-message']."</p>";
             unset($_SESSION['no-login-message']);
         }
         ?>

@@ -2,54 +2,45 @@
 include('../partials/crud-header.php');
 ?>
 
-
 <div class="main-content">
     <div class="header">
         <h1 class = "txt-center">Add Plan</h1>
-        <p class = "txt-center">
-            <?php  
-            if(isset($_SESSION['add']))
-            {
-                echo $_SESSION['add'];
-                unset($_SESSION['add']);
-            }
-            ?>
-        </p>
     </div>
 
     <div class="info">
         <form action="" method = "POST">
-            <table class="tbl-30">
+            <table class="tbl-wrapper">
                 <tr>
-                    <td>Name</td>
+                    <td>Plan Name:</td>
                     <td><input type="text" name="name" placeholder = "Enter Plan Name" required></td>
                 </tr>
                 <tr>
-                    <td>Description</td>
+                    <td>Description:</td>
                     <td>
                         <textarea name="description" placeholder = "Enter Plan Description"></textarea>
                     </td>
                 </tr>
 
                 <tr>
-                    <td>Duration (Month)</td>
+                    <td>Duration (Month):</td>
                     <td>
                         <input type="number" name = "duration" min="0" placeholder = "Enter # of months" required>
                     </td>
                 </tr>
                 <tr>
-                    <td>Cost</td>
+                    <td>Cost:</td>
                     <td><input type="number" name="cost" step = "0.01" placeholder = "Enter Plan Cost" required></td>
                 </tr>
 
                 <tr>
-                    <td colspan="2"><input type="submit" value="Add Plan" name = "submit"></td>
+                    <td colspan="2"><br><input type="submit" value="Add Plan" name = "submit" class="btn-primary"></td>
                 </tr>
+
             </table>
         </form>
+
         <?php
-            if(isset($_POST['submit']))
-            {
+            if(isset($_POST['submit'])){
                 $name = $_POST['name'];
                 $description = $_POST['description'];
                 $duration = $_POST['duration'];
@@ -64,24 +55,14 @@ include('../partials/crud-header.php');
 
                 $res = mysqli_query($conn,$sql);
 
-                if($res == true)
-                {
-                    $_SESSION['add'] = "Plan successfully updated";
-                    header('location:'.SITEURL.'manage-plan.php');
-                }
-                else 
-                {
-                    $_SESSION['add'] = "Fail to insert data";
-                    header('location:'.SITEURL.'add-plan.php');
-                }
+                $_SESSION['add'] = "<br><span class = 'txt-green'>Plan Added!</span>";
+                header('location:'.SITEURL.'manage-plan.php');
             }
         ?>
     </div>
 </div>
 
-
 <?php
 include('../partials/crud-footer.php');
-
 ?>
 

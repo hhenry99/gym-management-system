@@ -1,75 +1,102 @@
-<?php include('../partials/crud-header.php');?>
-
-<?php
-if(isset($_POST['submit']))
-{
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-
-    if(!empty($_FILES['img']['name']))
-    {
-        $image = $_FILES['img']['name'];
-        $source = $_FILES['img']['tmp_name'];
-        $destination = "../images/trainer/".$image;
-        
-        $upload = move_uploaded_file($source, $destination);
-    }
-    else{
-        $image = "";
-    }
-
-    $sql = "INSERT INTO trainer SET
-            image_name = '$image',
-            name = '$name',
-            email = '$email',
-            phone = '$phone';
-            ";
-
-    $res = mysqli_query($conn,$sql);
-
-    if($res == true)
-    {
-        $_SESSION['add-trainer'] = "Trainer added";
-        header('location:'.SITEURL.'manage-trainer.php');
-    }
-}
+<?php 
+include('../partials/crud-header.php');
+include('../functions.php');
 ?>
 
 <div class="main-content">
-    <div class="header">
+    <div class="header txt-center">
         <h1>Add Trainer</h1>
+        <p><?php include('../partials/session_check.php')?></p>
     </div>
+
+    <?php
+    if(isset($_POST['submit']))
+    {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $ephone = $_POST['ephone'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        if(!checkusername($username, $conn, 2)){
+            $_SESSION['username'] = "Username taken!";
+            header('location:'.SITEURL.'crud/add-trainer.php');
+            die();
+        }
+
+        if(!empty($_FILES['img']['name']))
+        {
+            $image = $_FILES['img']['name'];
+            $source = $_FILES['img']['tmp_name'];
+            $destination = "../images/trainer/".$image;
+            
+            $upload = move_uploaded_file($source, $destination);
+        }
+        else{
+            $image = "";
+        }
+
+        $sql = "INSERT INTO user SET
+                username = '$username',
+                password = '$password',
+                role = 2,
+                image_name = '$image',
+                name = '$name',
+                email = '$email',
+                phone = '$phone',
+                emergency_contact = '$ephone',
+                account_date_created = NOW()
+                ";
+
+        $res = mysqli_query($conn,$sql);
+
+        $_SESSION['add'] = "<br><span class = 'txt-green'>Trainer added</span>";
+        header('location:'.SITEURL.'manage-trainer.php');
+    }
+    ?>
 
     <div class="info">
         <form action="" method="POST" enctype="multipart/form-data">
-            <table class="tbl-30 txt-left">
+            <table class="tbl-wrapper">
                 <tr>
-                    <td>Image</td>
+                    <td>Upload Image</td>
                     <td><input type="file" name="img"></td>
                 </tr>
                 <tr>
-                    <td>Name</td>
+                    <td>Name*</td>
                     <td>
                         <input type="text" name="name" required>
                     </td>
                 </tr>
                 <tr>
-                    <td>Email</td>
+                    <td>Email*</td>
                     <td><input type="email" name="email" required></td>
                 </tr>
                 <tr>
-                    <td>Phone</td>
-                    <td><input type="phone" name="phone" required></td>
+                    <td>Phone*</td>
+                    <td><input type="number" name="phone" required></td>
+                </tr>
+                <tr>
+                    <td>Emergency #</td>
+                    <td><input type="number" name="ephone"></td>
+                </tr>
+                <tr>
+                    <td>Username*</td>
+                    <td><input type="text" name = "username" required></td>
+                </tr>
+                <tr>
+                    <td>Password*</td>
+                    <td><input type="password" name = "password" required></td>
                 </tr>
                 <tr>
                     <td colspan = "2">
-                        <input type="submit" value="Submit" name="submit" class = "btn-primary">
+                        <br>
+                        <input type="submit" value="+Trainer" name="submit" class = "btn-primary">
                     </td>
                 </tr>
             </table>
         </form>
-
     </div>
 </div>
 

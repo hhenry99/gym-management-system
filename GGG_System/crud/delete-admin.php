@@ -1,31 +1,30 @@
 <?php
 include('../config/constant.php');
+include('../partials/login-check.php');
 
-if(isset($_GET['uid']) AND isset($_GET['aid']) AND isset($_GET['image_name']))
+if(isset($_GET['uid']) AND isset($_GET['image_name']))
 {
     $uid = $_GET['uid'];
-    $aid = $_GET['aid'];
     $image_name = $_GET['image_name'];
 
-    $sql = "DELETE FROM admin WHERE admin_id = $aid;";
-    $sql2 = "DELETE FROM user WHERE user_id = $uid;";
+    $sql = "DELETE FROM user WHERE user_id = $uid;";
 
-    $res = mysqli_query($conn,$sql);
-    $res = mysqli_query($conn,$sql2);
+    $res = mysqli_query($conn, $sql);
 
     if($image_name != "")
     {
+        //removing image
         $path = "../images/admin/".$image_name;
         $remove = unlink($path);
         if($remove == false)
         {
-            $_SESSION['remove'] = "fail to remove image";
+            $_SESSION['remove'] = "Fail to remove image";
             header('location:'.SITEURL.'manage-admin.php');
             die();
         }
     }
     
-    $_SESSION['delete'] = "Admin successfully deleted!";
+    $_SESSION['delete'] = "<p class = 'txt-green'>Admin successfully deleted!</p>";
     header('location:'.SITEURL.'manage-admin.php');
 
 }

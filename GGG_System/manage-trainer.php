@@ -1,29 +1,29 @@
 <?php include('partials/header.php');?>
 
-
-
 <div class="main-content">
-    <div class="header">
-        <h1>Manage Trainer</h1>
+    <div class="header txt-center">
+        <h1>Trainer</h1>
         <p>
-            <?php require_once('partials/session_check.php');?>
+            <?php include('partials/session_check.php');?>
         </p>
-    </div>
-
+    </div>  
     <div class="info">
         <a href="crud/add-trainer.php"><button class="btn-primary">Add Trainer</button></a>
-        <table class = "tbl-full txt-left">
-            <tr>
-                <th>ID</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Actions</th>
-            </tr>
-            <tr>
-                <?php
-                    $sql = "SELECT * FROM trainer";
+        <table class = "content-table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+ 
+            <tbody>
+                <tr>
+                    <?php
+                    $sql = "SELECT * FROM user WHERE role = 2";
                     $res = mysqli_query($conn, $sql);
                     
                     $count = mysqli_num_rows($res);
@@ -31,7 +31,7 @@
                     {
                         while($row = mysqli_fetch_assoc($res))
                         {
-                            $id = $row['trainer_id'];
+                            $id = $row['user_id'];
                             $image = $row['image_name'];
                             $name = $row['name'];
                             $email = $row['email'];
@@ -39,7 +39,6 @@
 
                             ?>
                             <tr>
-                                <td><?php echo $id;?></td>
                                 <td>
                                     <?php 
                                     if($image == "")
@@ -49,7 +48,7 @@
                                     else
                                     {
                                         ?>
-                                        <img src="images/trainer/<?php echo $image;?>" width = "100px" height = "100px" class = "round">
+                                        <img src="images/trainer/<?php echo $image;?>" width = "75px" height = "75px">
                                         <?php
                                     }
                                     ?>
@@ -58,23 +57,24 @@
                                 <td><?php echo $email;?></td>
                                 <td><?php echo $phone;?></td>
                                 <td>
-                                    <a href="<?php echo SITEURL;?>crud/update-trainer.php?id=<?php echo $id;?>"><button class="btn-secondary pad-1">Update</button></a>
-                                    <a href="<?php echo SITEURL;?>crud/delete-trainer.php?id=<?php echo $id;?>&image=<?php echo $image;?>"><button class="btn-danger pad-1">Delete</button></a>
+                                    <a href="<?php echo SITEURL;?>crud/update-trainer.php?id=<?php echo $id;?>"><button class="btn-secondary pad-1"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                                    <a href="<?php echo SITEURL;?>crud/delete-trainer.php?id=<?php echo $id;?>&image=<?php echo $image;?>"><button class="btn-danger pad-1"><i class='fa-solid fa-x'></i></button></a>
                                 </td>
                             </tr>
-                           <?php
+                        <?php
                         }
                     }
                     else
                     {
                         ?>
                         <tr>
-                            <td colspan="6">No Trainer Available</td>
+                            <td colspan="5">No Trainer Available</td>
                         </tr>
                         <?php
                     }
                     ?>
-            </tr>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
