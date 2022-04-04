@@ -1,4 +1,4 @@
-<?php require_once('../partials/crud-header.php');?>
+<?php include('../partials/crud-header.php');?>
 
 <?php
     //ID must be pass 
@@ -6,13 +6,10 @@
     {
         $id = $_GET['id'];
         
-        $sql = "SELECT * FROM member WHERE member_id = $id";
+        $sql = "SELECT * FROM user WHERE user_id = $id";
         $res = mysqli_query($conn,$sql);
 
-        $count = mysqli_num_rows($res);
-
-        //if the id is in the database
-        if($count == 1)
+        if(mysqli_num_rows($res) == 1)
         {
             //get data
             $row = mysqli_fetch_assoc($res);
@@ -20,18 +17,9 @@
             $name = $row['name'];
             $email = $row['email'];
             $phone = $row['phone'];
-            $date_join = $row['date_join'];
             $emergency = $row['emergency_contact'];
-            $member_status = $row['member_status'];
-            $plan_id = $row['plan_plan_id'];
-
-            //Check to see if the member status is inactive, if the admin presses the submit btn and the status is now active we can update the expired date.
-            if($member_status == 'Inactive'){
-                $inactive = "Yes";
-            }
-            else{
-                $inactive = "No";
-            }
+            $username = $row['username'];
+            $password = $row['password'];
         }
         else
         {
@@ -47,15 +35,10 @@
 ?>
 
 <div class="main-content">
-    <div class="header">
+    <div class="header txt-center">
         <h1>Update Member</h1>
         <p>
             <?php
-                if(isset($_SESSION['update']))
-                {
-                    echo $_SESSION['update'];
-                    unset($_SESSION['update']);
-                }
                 if(isset($_SESSION['remove']))
                 {
                     echo $_SESSION['remove'];
@@ -70,14 +53,13 @@
 
             <?php
                 //pressing the submit btn
-                if(isset($_POST['submit']))
-                {
+                if(isset($_POST['submit'])){
                     $name = $_POST['name'];
                     $email = $_POST['email'];
                     $phone = $_POST['phone'];
                     $emergency = $_POST['emergency'];
-                    $plan = $_POST['plan'];
-                    $status = $_POST['status'];
+                    $username = $_POST['username'];
+                    $password = $_POST['password'];
 
                     //if the new image is selected
                     if(!empty($_FILES["image"]["name"]))
@@ -115,64 +97,22 @@
                         $image_name = $current_image;
                     }
 
-                    
-                    //Get data from member plan
-                    if($plan != "1"){
-                        $sql2 = "SELECT name, duration, cost FROM plan WHERE plan_id = $plan";
-                        $res2 = mysqli_query($conn, $sql2);
-                        $row2 = mysqli_fetch_assoc($res2);
-                        $plan_name = $row2['name'];
-                        $plan_cost = $row2['cost'];
-                        $plan_duration = $row2['duration'];
-                    }
-                    
-                    //if the new status is active and it was inactive b4
-                    if($status == 'Active' && $inactive == 'Yes' && $plan != "1"){
-                        //SQL to update member
-                        $sql3 = "UPDATE member SET
-                                image_name = '$image_name',
-                                name = '$name',
-                                email = '$email',
-                                phone = '$phone',
-                                emergency_contact = '$emergency',
-                                date_expired = DATE_ADD(NOW(), INTERVAL $plan_duration MONTH),
-                                member_status = '$status',
-                                plan_plan_id = '$plan'
-                                WHERE member_id = $id";
-                        $res3 = mysqli_query($conn,$sql3);
+                    $sql = "UPDATE user SET
+                            username = '$username',
+                            password = '$password',
+                            image_name = '$image_name',
+                            name = '$name',
+                            phone = '$phone',
+                            emergency_contact = '$emergency',
+                            email = '$email'
+                            WHERE user_id = $id;
+                            ";
 
-                        //SQL to insert invoice new invoice for new plan
-                        $sql2 = "INSERT INTO invoice SET
-                                name = 'Invoice for $plan_name Plan',
-                                amount = $plan_cost,
-                                date_created = NOW(),
-                                due_date = DATE_ADD(NOW(), INTERVAL 1 MONTH),
-                                member_member_id = $id;
-                                ";
-                        $res2 = mysqli_query($conn, $sql2);
-                    }
-                    else{
-                        //The plan is inactive or "None"
-                        $sql3 = "UPDATE member SET
-                                image_name = '$image_name',
-                                name = '$name',
-                                email = '$email',
-                                phone = '$phone',
-                                emergency_contact = '$emergency',
-                                date_expired = NULL,
-                                member_status = '$status',
-                                plan_plan_id = '$plan'
-                                WHERE member_id = $id";
-                        $res3 = mysqli_query($conn,$sql3);
-                    }
-
-                    if($res3 == true){
-                        $_SESSION['update'] = "Member Updated";
+                    if(!mysqli_query($conn, $sql)){
+                        echo "Oops something went wrong.";
+                    } else {
+                        $_SESSION['update'] = "<br><span class = 'txt-green'>Member Updated</span>";
                         header('location:'.SITEURL.'manage-member.php');
-                    }
-                    else{
-                        $_SESSION['update'] = "Fail to update";
-                        header('location:'.SITEURL.'crud/update-member.php');
                     }
                 }
             ?>
@@ -181,7 +121,7 @@
 
     <div class="info">
         <form action="" method = "POST" enctype="multipart/form-data">
-            <table class="tbl-30 txt-left">
+            <table class="tbl-wrapper">
                 <tr>
                     <td>Current Image</td>
                     <td>
@@ -200,66 +140,37 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>New Image</td>
+                    <td>Upload Image</td>
                     <td><input type="file" name="image"></td>
                 </tr>
                 <tr>
-                    <td>Name</td>
+                    <td>Name*</td>
                     <td><input type="text" name = "name" value="<?php echo $name;?>" required></td>
                 </tr>
                 <tr>
-                    <td>Email</td>
+                    <td>Email*</td>
                     <td><input type="email" name = "email" value="<?php echo $email;?>" required></td>
                 </tr>
                 <tr>
-                    <td>Phone</td>
+                    <td>Phone*</td>
                     <td><input type="number" name = "phone" value="<?php echo $phone;?>" required></td>
                 </tr>
                 <tr>
                     <td>Emergency #</td>
-                    <td><input type="number" name="emergency" value="<?php echo $emergency;?>" required></td>
+                    <td><input type="number" name="emergency" value="<?php echo $emergency;?>"></td>
                 </tr>
                 <tr>
-                    <td>Plan</td>
-                    <td>
-                        <select name="plan">
-                            <?php
-                                $sql2 = "SELECT * FROM plan";
-                                
-                                $res2 = mysqli_query($conn,$sql2);
-
-                                $count = mysqli_num_rows($res2);
-
-                                if($count > 0)
-                                {
-                                    while($row2 = mysqli_fetch_assoc($res2))
-                                    {
-                                        $plan_id_2 = $row2['plan_id'];
-                                        $plan_name = $row2['name'];
-                                        ?>
-                                            <!-- so if the current plan id matches the plan id from the plan table, it would be selected-->
-                                            <option value="<?php echo $plan_id_2?>" <?php if($plan_id == $plan_id_2){echo "SELECTED";}?>>
-                                                <?php echo $plan_name?>
-                                            </option>
-                                        <?php
-                                    }
-                                }
-                            ?>
-                        </select>
-                    </td>
+                    <td>Username*</td>
+                    <td><input type="text" name="username" value="<?php echo $username;?>" required></td>
                 </tr>
                 <tr>
-                    <td>Status</td>
-                    <td>
-                        <select name="status">
-                            <option value="Active" <?php if($member_status=="Active"){echo "SELECTED";}?>>Active</option>
-                            <option value="Inactive" <?php if($member_status=="Inactive"){echo "SELECTED";}?>>Inactive</option>
-                        </select>
-                    </td>
+                    <td>Password*</td>
+                    <td><input type="password" name="password" value="<?php echo $password;?>" required></td>
                 </tr>
                 <tr>
                     <td colspan = "2">
-                        <input type="submit" value="Update" class="btn-primary" name = "submit">
+                        <br>
+                        <input type="submit" value="Save" class="btn-primary" name = "submit">
                     </td>
                 </tr>
             </table>

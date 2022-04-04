@@ -22,6 +22,7 @@ if(ROLE != 4){
     <table class = "content-table">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Photo</th>
                 <th>Name</th>
                 <th>Role</th>
@@ -46,6 +47,7 @@ if(ROLE != 4){
                     $role = $row['role'];
                     ?>
                     <tr>
+                        <td><?php echo $uid;?>.</td>
                         <td>
                             <?php
                             if($image_name == "")

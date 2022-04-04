@@ -8,8 +8,7 @@
         $id = $_GET['id'];
         $image_name = $_GET['image_name'];
 
-        $sql = "DELETE FROM member WHERE member_id = $id";
-
+        $sql = "DELETE FROM user WHERE user_id = $id";
         $res = mysqli_query($conn,$sql);
 
         if($res==true)
@@ -26,7 +25,7 @@
                     die();
                 }
             }
-            $_SESSION['delete'] = "Member successfully deleted";
+            $_SESSION['delete'] = "<span style = 'font-weight: bold; color: green;'>Member Deleted!</span>";
             header('location:'.SITEURL.'manage-member.php');
         }
         else

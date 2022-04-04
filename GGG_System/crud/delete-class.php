@@ -11,7 +11,7 @@ if(isset($_GET['id']))
 
     if($res == true)
     {
-        $_SESSION['delete-class'] = "Class Deleted Success!";
+        $_SESSION['delete-class'] = "<br>Class Deleted Success!";
         header('location:'.SITEURL.'manage-class.php');
     }
 }

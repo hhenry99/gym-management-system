@@ -15,6 +15,10 @@ function checkusername($username, $conn, $role){
     }
 }
 
+function checkClass(){
+    return 0;
+}
+
 //Return a font awesome
 function i($code){
     $icon = '<i class ="fa fa-'.$code.'"></i>';

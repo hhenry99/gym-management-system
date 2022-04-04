@@ -4,16 +4,14 @@
 if(isset($_GET['id']))
 {
     $class_id = $_GET['id'];
-    $sql = "SELECT * FROM class where class_id = $class_id";
+    $sql = "SELECT name, user_user_id FROM class where class_id = $class_id";
     $res = mysqli_query($conn,$sql);
 
-    $count = mysqli_num_rows($res);
-
-    if($count == 1)
+    if( mysqli_num_rows($res) == 1)
     {
         $row = mysqli_fetch_assoc($res);
         $name = $row['name'];
-        $trainer_id = $row['trainer_trainer_id'];
+        $trainer_id = $row['user_user_id'];
     }
     else
     {
@@ -27,12 +25,11 @@ else
 ?>
 
 <?php
-    $sql2 = "SELECT name from trainer where trainer_id = $trainer_id";
+    $sql2 = "SELECT name from user where user_id = $trainer_id";
     $res2 = mysqli_query($conn, $sql2);
 
     $row = mysqli_fetch_assoc($res2);
     $trainer_name = $row['name'];
-
 ?>
 
 
@@ -48,15 +45,18 @@ else
     <div class="info">
         <a href="<?php echo SITEURL;?>crud/add-member-class.php?id=<?php echo $class_id;?>"><button class="btn-primary">Add Member</button></a>
         <a href="<?php echo SITEURL;?>crud/clear-roster.php?id=<?php echo $class_id;?>"><button class="btn-primary">Clear Roster</button></a>
-        <table class = "tbl-full txt-left">
-            <tr>
-                <th>Member Name</th>
-                <th>Member Email</th>
-                <th>Member Phone</th>
-                <th>Actions</th>
-            </tr>
+        <table class = "content-table">
+            <thead>
+                <tr>
+                    <th>Member Name</th>
+                    <th>Member Email</th>
+                    <th>Member Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
 
-            <?php
+            <tbody>
+            <?php /*
                 $sql3 = "SELECT member_id, name, email, phone
                         FROM member JOIN member_has_class
                             ON member_member_id = member_id
@@ -81,7 +81,7 @@ else
                             </td>
                         </tr>
                         <?php
-                    }
+                    } 
                 }
                 else
                 {
@@ -90,8 +90,9 @@ else
                             <td colspan = "4">No Data Found</td>
                         </tr>
                     <?php
-                }
+                } */
             ?>
+            </tbody>
         </table>
     </div>
 </div>

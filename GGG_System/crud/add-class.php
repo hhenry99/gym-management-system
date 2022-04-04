@@ -16,59 +16,59 @@
                 location = '$location',
                 start_end = '$start',
                 cost = $cost,
-                trainer_trainer_id = $trainer_id;
+                user_user_id = $trainer_id;
                 ";
         
         $res2 = mysqli_query($conn, $sql2);
 
         if($res2 == true)
         {
-            $_SESSION['add-class'] = "Class Added Success!";
+            $_SESSION['add-class'] = "<span class = 'txt-green'>Class Added Success!</span>";
             header('location:'.SITEURL.'manage-class.php');
         }
     }
 ?>
 
 <div class="main-content">
-    <div class="header">
+    <div class="header txt-center">
         <h1>Add Class</h1>
     </div>
 
     <div class="info">
         <form action="" method = "POST">
-            <table class="tbl-30">
+            <table class="tbl-wrapper">
                 <tr>
-                    <td>Name</td>
+                    <td>Name*</td>
                     <td><input type="text" name="name" required></td>
                 </tr>
                 <tr>
-                    <td>Description</td>
+                    <td>Description*</td>
                     <td>
                         <textarea name="description" required></textarea>
                     </td>
                 </tr>
                 <tr>
-                    <td>Location</td>
+                    <td>Location*</td>
                     <td>
                         <input type="text" name = "location" required>
                     </td>
                 </tr>
                 <tr>
-                    <td>Start/End</td>
+                    <td>Start/End*</td>
                     <td>
                         <textarea name="startend" required></textarea>
                     </td>
                 </tr>
                 <tr>
-                    <td>Cost</td>
+                    <td>Cost*</td>
                     <td><input type="number" name="cost" step = "0.01" required></td>
                 </tr>
                 <tr>
-                    <td>Trainer</td>
+                    <td>Trainer*</td>
                     <td>
                         <select name="trainer">
                            <?php
-                                $sql = "SELECT * FROM trainer";
+                                $sql = "SELECT * FROM user where role = 2";
                                 $res = mysqli_query($conn, $sql);
 
                                 $count = mysqli_num_rows($res);
@@ -76,7 +76,7 @@
                                 {
                                     while($row = mysqli_fetch_assoc($res))
                                     {
-                                        $id = $row['trainer_id'];
+                                        $id = $row['user_id'];
                                         $name = $row['name'];
                                         ?>
                                             <option value="<?php echo $id;?>"><?php echo $name;?></option>
@@ -86,7 +86,7 @@
                                 else
                                 {
                                 ?>
-                                <option value="0">No Trainer Available</option>
+                                <option value="0">No Trainer</option>
                                 <?php
                                 }
                             ?> 
@@ -96,7 +96,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="submit" value="Submit" name ="submit" class = "btn-primary pad-1">
+                        <input type="submit" value="+Class" name ="submit" class = "btn-primary">
                     </td>
                 </tr>
             </table>

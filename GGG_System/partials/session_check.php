@@ -57,13 +57,7 @@
         echo $_SESSION['member-added'];
         unset($_SESSION['member-added']);
     }
-
-    // if(isset($_SESSION['member-not-found']))
-    // {
-    //     echo $_SESSION['member-not-found'];
-    //     unset($_SESSION['member-not-found']);
-    // }
-
+ 
     if(isset($_SESSION['delete_member_class']))
     {
         echo $_SESSION['delete_member_class'];

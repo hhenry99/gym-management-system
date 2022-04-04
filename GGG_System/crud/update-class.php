@@ -6,9 +6,8 @@
         $id = $_GET['id'];
         $sql = "SELECT * FROM class where class_id = $id";
         $res = mysqli_query($conn, $sql);
-        $count = mysqli_num_rows($res);
 
-        if($count == 1)
+        if(mysqli_num_rows($res) == 1)
         {
             $row = mysqli_fetch_assoc($res);
             $name = $row['name'];
@@ -16,7 +15,7 @@
             $loc = $row['location'];
             $start_end = $row['start_end'];
             $cost = $row['cost'];
-            $trainer_id = $row['trainer_trainer_id'];
+            $trainer_id = $row['user_user_id'];
         }
         else
         {
@@ -30,7 +29,6 @@
 ?>
 
 <?php
-
     if(isset($_POST['submit']))
     {
         $name = $_POST['name'];
@@ -46,27 +44,27 @@
                 location = '$loc',
                 start_end = '$startend',
                 cost = $cost,
-                trainer_trainer_id = $trainer_id
+                user_user_id = $trainer_id
                 WHERE class_id = $id;
                 ";
         $res3 = mysqli_query($conn, $sql3);
 
         if($res3 == true)
         {
-            $_SESSION['update-class'] = "Class updated success!";
+            $_SESSION['update-class'] = "<br><span class = 'txt-green'>Class updated success!</span>";
             header('location:'.SITEURL.'manage-class.php');
         }
     }
 
 ?>
 <div class="main-content">
-    <div class="header">
+    <div class="header txt-center">
         <h1>Add Class</h1>
     </div>
 
     <div class="info">
         <form action="" method = "POST">
-            <table class="tbl-30">
+            <table class="tbl-wrapper">
                 <tr>
                     <td>Name</td>
                     <td><input type="text" name="name" value = "<?php echo $name;?>"required></td>
@@ -102,15 +100,14 @@
                     <td>
                         <select name="trainer">
                            <?php
-                                $sql2 = "SELECT * FROM trainer";
+                                $sql2 = "SELECT user_id, name FROM user WHERE role = 2";
                                 $res2 = mysqli_query($conn, $sql2);
 
-                                $count = mysqli_num_rows($res2);
-                                if($count > 0)
+                                if(mysqli_num_rows($res2) > 0)
                                 {
                                     while($row = mysqli_fetch_assoc($res2))
                                     {
-                                        $t_id = $row['trainer_id'];
+                                        $t_id = $row['user_id'];
                                         $name = $row['name'];
                                         ?>
                                             <option value="<?php echo $t_id;?>" <?php if($trainer_id == $t_id){echo "SELECTED";}?>><?php echo $name;?></option>
@@ -130,7 +127,8 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="submit" value="Update" name ="submit" class = "btn-primary pad-1">
+                        <br>
+                        <input type="submit" value="Save" name ="submit" class = "btn-primary">
                     </td>
                 </tr>
             </table>
