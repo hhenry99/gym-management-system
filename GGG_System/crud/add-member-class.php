@@ -1,4 +1,9 @@
-<?php include('../partials/crud-header.php');?>
+<?php 
+
+include('../partials/crud-header.php');
+include('../functions.php');
+
+?>
 
 <?php 
 if(isset($_GET['id']))
@@ -13,11 +18,18 @@ else
 
 
 <div class="main-content">
-    <div class="header">
-        <h1>Add Member To Class</h1>
+    <div class="header txt-center">
+        <h1>Add Member to Class</h1>
         <p>
             <?php 
-                include('../partials/session_check.php');
+                if(isset($_SESSION['member-not-found'])){
+                    echo $_SESSION['member-not-found'];
+                    unset($_SESSION['member-not-found']);
+                }
+                if(isset($_SESSION['mac'])){
+                    echo $_SESSION['mac'];
+                    unset($_SESSION['mac']);
+                }
             ?>
 
             <?php 
@@ -34,9 +46,17 @@ else
 
                 $memberid = $_POST['member_id'];
 
+                if(checkClass($conn, $classid, $memberid) == true){
+                    // echo "Member is already in the class";
+                    $_SESSION['mac'] = "Member already in class";
+                    header('location:'.SITEURL.'crud/add-member-class.php');
+                    die();
+
+                }
+
                 //SQL to insert into member has class table
-                $sql3 = "INSERT INTO member_has_class SET
-                        member_member_id = $memberid,
+                $sql3 = "INSERT INTO registration SET
+                        user_user_id = $memberid,
                         class_class_id =  $classid;
                         ";
                 
@@ -46,19 +66,20 @@ else
                 amount = $cost,
                 date_created = NOW(),
                 due_date = DATE_ADD(NOW(), INTERVAL 1 MONTH),
-                member_member_id = $memberid;
+                user_user_id = $memberid;
                 ";
+
                 try{
                     $res3 = mysqli_query($conn, $sql3);
-                    
                     $res4 = mysqli_query($conn, $sql4);
                     
-                    $_SESSION['member-added'] = "Member Added Success!";
+                    $_SESSION['add'] = "<br><span class = 'txt-green'>Member Added Success!</span>";
                     header("location:".SITEURL."crud/class-roster.php?id={$classid}");
                 }
                 catch (Exception $exception){
-                    $_SESSION['member-not-found'] = "Member not found or already in the class, please try again";
+                    $_SESSION['member-not-found'] = "<br><span class = 'txt-red'>Member Not Found</span>";
                     header('location:'.SITEURL.'crud/add-member-class.php');
+                    die();
                 }
             }
             ?>
@@ -67,7 +88,7 @@ else
 
     <div class="info">
         <form action="" method = "POST">
-            <table class="tbl-30">
+            <table class="tbl-wrapper">
                 <tr>
                     <td>Class</td>
                     <td>

@@ -34,9 +34,9 @@ else
 
 
 <div class="main-content">
-    <div class="header">
-        <h1 class = "txt-center"><?php echo $name;?> Class</h1>
-        <h2 class = "txt-center">Trainer: <?php echo $trainer_name;?></h2>
+    <div class="header txt-center">
+        <h1><?php echo $name;?> Class</h1>
+        <h2>Trainer: <?php echo $trainer_name;?></h2>
         <p>
             <?php include('../partials/session_check.php');?>
         </p>
@@ -48,18 +48,18 @@ else
         <table class = "content-table">
             <thead>
                 <tr>
-                    <th>Member Name</th>
-                    <th>Member Email</th>
-                    <th>Member Phone</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
                     <th>Actions</th>
                 </tr>
             </thead>
 
             <tbody>
-            <?php /*
-                $sql3 = "SELECT member_id, name, email, phone
-                        FROM member JOIN member_has_class
-                            ON member_member_id = member_id
+            <?php 
+                $sql3 = "SELECT user_id, name, email, phone
+                        FROM user JOIN registration
+                            ON user_user_id = user_id
                         WHERE class_class_id = $class_id";
                 $res3 = mysqli_query($conn, $sql3);
                 $count = mysqli_num_rows($res3);
@@ -67,7 +67,7 @@ else
                 if($count > 0){
                     while($row = mysqli_fetch_assoc($res3))
                     {
-                        $member_id = $row['member_id'];
+                        $member_id = $row['user_id'];
                         $name = $row['name'];
                         $email = $row['email'];
                         $phone = $row['phone'];
@@ -77,7 +77,7 @@ else
                             <td><?php echo $email;?></td>
                             <td><?php echo $phone;?></td>
                             <td>
-                                <a href="<?php echo SITEURL;?>crud/delete-member-class.php?memberid=<?php echo $member_id;?>&classid=<?php echo $class_id;?>"><button class="btn-danger pad-1">Remove</button></a>
+                                <a href="<?php echo SITEURL;?>crud/delete-member-class.php?memberid=<?php echo $member_id;?>&classid=<?php echo $class_id;?>"><button class="btn-danger"><i class='fa-solid fa-x'></i></button></a>
                             </td>
                         </tr>
                         <?php
@@ -90,7 +90,7 @@ else
                             <td colspan = "4">No Data Found</td>
                         </tr>
                     <?php
-                } */
+                } 
             ?>
             </tbody>
         </table>

@@ -36,58 +36,6 @@
         unset($_SESSION['remove']);
     }
 
-    //class
-    if(isset($_SESSION['add-class']))
-    {
-        echo $_SESSION['add-class'];
-        unset($_SESSION['add-class']);
-    }
-    if(isset($_SESSION['delete-class']))
-    {
-        echo $_SESSION['delete-class'];
-        unset($_SESSION['delete-class']);
-    }
-    if(isset($_SESSION['update-class']))
-    {
-        echo $_SESSION['update-class'];
-        unset($_SESSION['update-class']);
-    }
-    if(isset($_SESSION['member-added']))
-    {
-        echo $_SESSION['member-added'];
-        unset($_SESSION['member-added']);
-    }
- 
-    if(isset($_SESSION['delete_member_class']))
-    {
-        echo $_SESSION['delete_member_class'];
-        unset($_SESSION['delete_member_class']);
-    }
-
-    if(isset($_SESSION['clear-roster']))
-    {
-        echo $_SESSION['clear-roster'];
-        unset($_SESSION['clear-roster']);
-    }
-
-    //invoice
-    if(isset($_SESSION['add-invoice']))
-    {
-        echo $_SESSION['add-invoice'];
-        unset($_SESSION['add-invoice']);
-    }
-    if(isset($_SESSION['delete-invoice']))
-    {
-        echo $_SESSION['delete-invoice'];
-        unset($_SESSION['delete-invoice']);
-    }
-    
-    if(isset($_SESSION['update-invoice']))
-    {
-        echo $_SESSION['update-invoice'];
-        unset($_SESSION['update-invoice']);
-    }
-
     //pay
     if(isset($_SESSION['add-pay']))
     {

@@ -1,8 +1,8 @@
 <?php include('partials/header.php'); ?>
 
 <div class="main-content">
-    <div class="header">
-        <h1>Manage Invoice</h1>
+    <div class="header txt-center">
+        <h1>Invoice</h1>
         <p><?php include('partials/session_check.php');?></p>
     </div>
 
@@ -14,19 +14,22 @@
         <input type="submit" value="search" name = "submit-search">
     </form>
 
-        <table class="tbl-full txt-left">
-            <tr>
-                <th>Invoice ID</th>
-                <th>Member ID</th>  
-                <th>Name</th>
-                <th>Amount</th>
-                <th>Amount_Paid</th>
-                <th>Date Created</th>
-                <th>Due_Date</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Invoice ID</th>
+                    <th>Member ID</th>  
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Amount_Paid</th>
+                    <th>Date Created</th>
+                    <th>Due_Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
 
+            <tbody>
             <?php
             $sql = "SELECT * FROM invoice";
             $res = mysqli_query($conn, $sql);
@@ -40,7 +43,7 @@
                     $amount = $row['amount'];
                     $date_created = $row['date_created'];
                     $duedate = $row['due_date'];
-                    $member_id = $row['member_member_id'];
+                    $member_id = $row['user_user_id'];
                     $amount_paid = $row['amount_paid'];
 
                     ?>
@@ -71,8 +74,8 @@
                         </td>
                         <td> <!-- So what happens here is to display the "pay now" only if its not paid-->
                             <?php if($amount_paid != $amount){$siteurl = SITEURL; echo "<a href='{$siteurl}crud/pay-invoice.php?id={$invoice_id}'><button class='btn-primary pad-1'>Pay Now</button></a>"; }?>
-                            <a href="<?php echo SITEURL;?>crud/update-invoice.php?id=<?php echo $invoice_id;?>"><button class="btn-secondary pad-1">Update</button></a>
-                            <a href="<?php echo SITEURL;?>crud/delete-invoice.php?id=<?php echo $invoice_id;?>"><button class="btn-danger pad-1">Delete</button></a>
+                            <a href="<?php echo SITEURL;?>crud/update-invoice.php?id=<?php echo $invoice_id;?>"><button class="btn-secondary pad-1"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                            <a href="<?php echo SITEURL;?>crud/delete-invoice.php?id=<?php echo $invoice_id;?>"><button class="btn-danger pad-1"><i class='fa-solid fa-x'></i></button></a>
                         </td>
                     </tr>
                     <?php
@@ -87,6 +90,8 @@
                 <?php
             }
             ?>
+            </tbody>
+
         </table>
         
     </div>

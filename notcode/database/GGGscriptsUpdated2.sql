@@ -120,7 +120,6 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`payment` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `GGG_DB`.`registration`
 -- -----------------------------------------------------

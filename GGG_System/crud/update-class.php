@@ -51,7 +51,7 @@
 
         if($res3 == true)
         {
-            $_SESSION['update-class'] = "<br><span class = 'txt-green'>Class updated success!</span>";
+            $_SESSION['update'] = "<br><span class = 'txt-green'>Class updated success!</span>";
             header('location:'.SITEURL.'manage-class.php');
         }
     }

@@ -23,7 +23,7 @@
 
         if($res2 == true)
         {
-            $_SESSION['add-class'] = "<span class = 'txt-green'>Class Added Success!</span>";
+            $_SESSION['add'] = "<span class = 'txt-green'>Class Added Success!</span>";
             header('location:'.SITEURL.'manage-class.php');
         }
     }

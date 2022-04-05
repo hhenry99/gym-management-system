@@ -15,12 +15,19 @@ function checkusername($username, $conn, $role){
     }
 }
 
-function checkClass(){
-    return 0;
+//check to see if the member is already in the class
+function checkClass($conn, $classid, $memberid){
+    $error = false;
+    $sql = "SELECT * FROM registration where class_class_id = $classid AND user_user_id = $memberid";
+    $res = mysqli_query($conn, $sql);
+
+    if(mysqli_num_rows($res) > 0){
+        $error = true;
+    } 
+    return $error;
 }
 
-//Return a font awesome
-function i($code){
-    $icon = '<i class ="fa fa-'.$code.'"></i>';
-    return $icon;
+//check to see if there are members in the class, if there is unable to delete class
+function checkMemberClass(){
+
 }

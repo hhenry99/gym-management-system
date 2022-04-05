@@ -7,12 +7,12 @@ if(isset($_GET['memberid']) AND isset($_GET['classid']))
     $memberid = $_GET['memberid'];
     $classid = $_GET['classid'];
 
-    $sql = "DELETE FROM member_has_class WHERE member_member_id = $memberid AND class_class_id = $classid;";
+    $sql = "DELETE FROM registration WHERE user_user_id = $memberid AND class_class_id = $classid;";
     
     
     try{
         $res = mysqli_query($conn, $sql);
-        $_SESSION['delete_member_class'] = "Member successfully remove from class";
+        $_SESSION['delete'] = "<br><span style = 'color: red; font-weight: bold'>Member Removed!</span>";
         header("location:".SITEURL."crud/class-roster.php?id={$classid}");
 
     }

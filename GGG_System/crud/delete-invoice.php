@@ -15,19 +15,16 @@ if(isset($_GET['id']))
         $sql2 = "DELETE FROM invoice WHERE invoice_id = $id";
         
         $res2 = mysqli_query($conn, $sql2);
-        $_SESSION['delete-invoice'] = "Invoice deleted Success!";
+        $_SESSION['delete'] = "<br><span style = 'color: red; font-weight: bold'>Invoice deleted Success!</span>";
         header('location:'.SITEURL.'manage-invoice.php');
     }
-    else
-    {
-        $_SESSION['no-id-found'] = "Error ... Invoice ID Not Found";
+    else{
         header('location:'.SITEURL.'manage-invoice.php');
     }
 
 }
 else
 {
-    $_SESSION['no-id-found'] = "Error ... Invoice ID Not Found";
     header('location:'.SITEURL.'manage-invoice.php');
 }
 

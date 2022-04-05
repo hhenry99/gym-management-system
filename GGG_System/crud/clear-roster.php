@@ -1,5 +1,6 @@
 <?php
 include('../config/constant.php');
+include('../partials/login-check.php');
 
 if(isset($_GET['id']))
 {
@@ -13,21 +14,19 @@ if(isset($_GET['id']))
 
     if($count == 1)
     {
-        $sql2 = "DELETE FROM member_has_class WHERE class_class_id = $id";
+        $sql2 = "DELETE FROM registration WHERE class_class_id = $id";
         $re2 = mysqli_query($conn, $sql2);
-        $_SESSION['clear-roster'] = "Class Roster Cleared!";
+        $_SESSION['delete'] = "<br><span style = 'color: red; font-weight: bold'>Class Roster Cleared!</span>";
         header("location:".SITEURL."crud/class-roster.php?id={$id}");
     }
     else
     {
-        $_SESSION['no-id-found'] = "Error ... ID Not Found!";
         header('location:'.SITEURL.'manage-class.php');
     }
     
 }
 else
 {
-    $_SESSION['no-id-found'] = "Error ... ID Not Found!";
     header('location:'.SITEURL.'manage-class.php');
 }
 

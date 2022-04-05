@@ -14,7 +14,7 @@ if(isset($_GET['id']))
         $name = $row['name'];
         $amount = $row['amount'];
         $duedate = $row['due_date'];
-        $member_id = $row['member_member_id'];
+        $member_id = $row['user_user_id'];
 
         //DATE TIME VALUE
         $t = $row['due_date'];
@@ -22,13 +22,11 @@ if(isset($_GET['id']))
     }
     else
     {
-        $_SESSION['no-id-found'] = "Invoice ID Not Found";
         header('location:'.SITEURL.'manage-invoice.php');
     }
 }
 else
 {
-    $_SESSION['no-id-found'] = "Invoice ID Not Found";
     header('location:'.SITEURL.'manage-invoice.php');
 }
  ?>
@@ -44,29 +42,43 @@ if(isset($_POST['submit']))
     $status = $_POST['status'];
 
     $sql2 = "UPDATE invoice SET
-            member_member_id = $member_id,
+            user_user_id = $member_id,
             name = '$name',
             amount = $amount,
             due_date = '$duedate'
             WHERE invoice_id = $invoice_id;
             ";
 
-    $res2 = mysqli_query($conn, $sql2);
+    try{
+        $res2 = mysqli_query($conn, $sql2);
+        $_SESSION['update'] = "<br><span class = 'txt-green'>Invoice Updated!</span>";
+        header('location:'.SITEURL.'manage-invoice.php');
+    } catch (Exception $e){
+        $_SESSION['member-not-found'] =  "<br><span class ='txt-red'>Error ... Member does not exist!</span>";
+        header('location:'.SITEURL.'crud/add-invoice.php');
+    }
 
-    $_SESSION['update-invoice'] = "Invoice Updated!";
-    header('location:'.SITEURL.'manage-invoice.php');
+
 }
 
 ?>
 
 <div class="main-content">
-    <div class="header">
+    <div class="header txt-center">
         <h1>Update Invoice</h1>
+        <p>
+            <?php 
+            if(isset($_SESSION['member-not-found'])){
+                echo $_SESSION['member-not-found'];
+                unset($_SESSION['member-not-found']);
+            }
+            ?>
+        </p>
     </div>
 
     <div class="info">
         <form action="" method ="POST">
-            <table class="tbl-30">
+            <table class="tbl-wrapper">
                 <tr>
                     <td>Member ID:</td>
                     <td><input type="text" name = "memberid" placeholder="Enter Member ID" value="<?php echo $member_id;?>"></td>
@@ -85,7 +97,8 @@ if(isset($_POST['submit']))
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="submit" value="submit" name = "submit" class = "btn-primary pad-1">
+                        <br>
+                        <input type="submit" value="SAVE" name = "submit" class = "btn-primary">
                     </td>
                 </tr>
             </table>
