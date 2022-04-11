@@ -53,33 +53,8 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`user` (
   `emergency_contact` VARCHAR(20) NULL,
   `email` VARCHAR(255) NULL,
   `account_date_created` DATETIME NULL,
+  `status` INT NULL,
   PRIMARY KEY (`user_id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `GGG_DB`.`member`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `GGG_DB`.`member` (
-  `member_id` INT NOT NULL AUTO_INCREMENT,
-  `status` VARCHAR(20) NOT NULL,
-  `plan_start` DATETIME NOT NULL,
-  `plan_expired` DATETIME NULL,
-  `plan_plan_id` INT NULL,
-  `user_user_id` INT NOT NULL,
-  PRIMARY KEY (`member_id`),
-  INDEX `fk_member_plan1_idx` (`plan_plan_id` ASC),
-  INDEX `fk_member_user1_idx` (`user_user_id` ASC),
-  CONSTRAINT `fk_member_plan1`
-    FOREIGN KEY (`plan_plan_id`)
-    REFERENCES `GGG_DB`.`plan` (`plan_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_member_user1`
-    FOREIGN KEY (`user_user_id`)
-    REFERENCES `GGG_DB`.`user` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -93,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`class` (
   `location` VARCHAR(200) NOT NULL,
   `start_end` TEXT NOT NULL,
   `cost` DECIMAL(9,2) NOT NULL,
-  `user_user_id` INT NOT NULL,
+  `user_user_id` INT NULL,
   PRIMARY KEY (`class_id`),
   INDEX `fk_class_user1_idx` (`user_user_id` ASC),
   CONSTRAINT `fk_class_user1`
@@ -113,13 +88,13 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`invoice` (
   `amount` DECIMAL(9,2) NOT NULL,
   `date_created` DATETIME NOT NULL,
   `due_date` DATETIME NOT NULL,
-  `member_member_id` INT NOT NULL,
   `amount_paid` DECIMAL(9,2) NOT NULL,
+  `user_user_id` INT NOT NULL,
   PRIMARY KEY (`invoice_id`),
-  INDEX `fk_invoice_member1_idx` (`member_member_id` ASC),
-  CONSTRAINT `fk_invoice_member1`
-    FOREIGN KEY (`member_member_id`)
-    REFERENCES `GGG_DB`.`member` (`member_id`)
+  INDEX `fk_invoice_user1_idx` (`user_user_id` ASC),
+  CONSTRAINT `fk_invoice_user1`
+    FOREIGN KEY (`user_user_id`)
+    REFERENCES `GGG_DB`.`user` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -136,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `GGG_DB`.`payment` (
   `payment_amount` DECIMAL(9,2) NOT NULL,
   `payment_date` DATETIME NOT NULL,
   `invoice_invoice_id` INT NOT NULL,
-  PRIMARY KEY (`payment_id`),
+  PRIMARY KEY (`payment_id`, `invoice_invoice_id`),
   INDEX `fk_payment_invoice1_idx` (`invoice_invoice_id` ASC),
   CONSTRAINT `fk_payment_invoice1`
     FOREIGN KEY (`invoice_invoice_id`)
@@ -147,20 +122,31 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `GGG_DB`.`member_has_class`
+-- Table `GGG_DB`.`registration`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `GGG_DB`.`member_has_class` (
-  `member_member_id` INT NOT NULL,
-  `class_class_id` INT NOT NULL,
-  PRIMARY KEY (`member_member_id`, `class_class_id`),
-  INDEX `fk_member_has_class_class1_idx` (`class_class_id` ASC),
-  INDEX `fk_member_has_class_member1_idx` (`member_member_id` ASC),
-  CONSTRAINT `fk_member_has_class_member1`
-    FOREIGN KEY (`member_member_id`)
-    REFERENCES `GGG_DB`.`member` (`member_id`)
+CREATE TABLE IF NOT EXISTS `GGG_DB`.`registration` (
+  `regist_id` INT NOT NULL AUTO_INCREMENT,
+  `plan_expired` DATETIME NULL,
+  `plan_start` DATETIME NULL,
+  `plan_plan_id` INT NULL,
+  `user_user_id` INT NOT NULL,
+  `class_class_id` INT NULL,
+  `class_status` INT NULL,
+  PRIMARY KEY (`regist_id`),
+  INDEX `fk_registration_plan1_idx` (`plan_plan_id` ASC),
+  INDEX `fk_registration_user1_idx` (`user_user_id` ASC),
+  INDEX `fk_registration_class1_idx` (`class_class_id` ASC),
+  CONSTRAINT `fk_registration_plan1`
+    FOREIGN KEY (`plan_plan_id`)
+    REFERENCES `GGG_DB`.`plan` (`plan_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_member_has_class_class1`
+  CONSTRAINT `fk_registration_user1`
+    FOREIGN KEY (`user_user_id`)
+    REFERENCES `GGG_DB`.`user` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_registration_class1`
     FOREIGN KEY (`class_class_id`)
     REFERENCES `GGG_DB`.`class` (`class_id`)
     ON DELETE NO ACTION

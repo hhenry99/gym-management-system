@@ -31,6 +31,7 @@ include("login-check.php");
                 <li><a href="<?php echo SITEURL;?>manage-trainer.php">Trainer</a></li>
                 <li><a href="<?php echo SITEURL;?>manage-equipment.php">Equipment</a></li>
                 <li><a href="<?php echo SITEURL;?>manage-class.php">Class</a></li>
+                <li><a href="<?php echo SITEURL;?>registration.php">Registration</a></li>
                 <li><a href="<?php echo SITEURL;?>manage-invoice.php">Invoice</a></li>
                 <li><a href="<?php echo SITEURL;?>logout.php">Log Out</a></li>
             </ul>

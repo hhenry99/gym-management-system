@@ -7,8 +7,9 @@ if(isset($_GET['memberid']) AND isset($_GET['classid']))
     $memberid = $_GET['memberid'];
     $classid = $_GET['classid'];
 
-    $sql = "DELETE FROM registration WHERE user_user_id = $memberid AND class_class_id = $classid;";
-    
+    $sql = "UPDATE registration SET
+            class_status = 0
+            WHERE user_user_id = $memberid AND class_class_id = $classid;";
     
     try{
         $res = mysqli_query($conn, $sql);

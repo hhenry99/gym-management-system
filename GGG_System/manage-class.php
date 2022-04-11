@@ -52,6 +52,7 @@
                             <td>$<?php echo $cost;?></td>
                             <td>
                                 <?php
+                                if($trainer_id != 0){
                                     $sql2 = "SELECT name FROM user where user_id = $trainer_id";
                                     $res2 = mysqli_query($conn,$sql2);
                                     
@@ -59,11 +60,15 @@
                                     $trainer_name = $row['name'];
                                     
                                     echo $trainer_name;
+                                } else {
+                                    echo "No Trainer";
+                                }
+       
                                 ?>
                             </td>
                             <td>
                                 <?php 
-                                $sql3 = "SELECT regist_id FROM registration WHERE class_class_id = $id";
+                                $sql3 = "SELECT regist_id FROM registration WHERE class_class_id = $id AND class_status = 1";
                                 $res3 = mysqli_query($conn, $sql3);
                                 
                                 echo mysqli_num_rows($res3);

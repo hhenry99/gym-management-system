@@ -36,6 +36,7 @@ else
             if(isset($_POST['submit']))
             {
                 $classid = $_POST['class_id'];
+                $duedate = $_POST['duedate'];
 
                 //getting data from class
                 $sql2 = "SELECT name, cost FROM class where class_id = $classid";
@@ -51,13 +52,13 @@ else
                     $_SESSION['mac'] = "Member already in class";
                     header('location:'.SITEURL.'crud/add-member-class.php');
                     die();
-
                 }
 
                 //SQL to insert into member has class table
                 $sql3 = "INSERT INTO registration SET
                         user_user_id = $memberid,
-                        class_class_id =  $classid;
+                        class_class_id =  $classid,
+                        class_status = 1;
                         ";
                 
                 //SQL to insert into invoice
@@ -65,14 +66,19 @@ else
                 name = 'Invoice for $name Class',
                 amount = $cost,
                 date_created = NOW(),
-                due_date = DATE_ADD(NOW(), INTERVAL 1 MONTH),
+                due_date = '$duedate',
                 user_user_id = $memberid;
                 ";
+
+                $sql5 = "UPDATE user SET 
+                        status = 1 
+                        WHERE user_id = $memberid;";
 
                 try{
                     $res3 = mysqli_query($conn, $sql3);
                     $res4 = mysqli_query($conn, $sql4);
-                    
+                    $res5 = mysqli_query($conn, $sql5);
+
                     $_SESSION['add'] = "<br><span class = 'txt-green'>Member Added Success!</span>";
                     header("location:".SITEURL."crud/class-roster.php?id={$classid}");
                 }
@@ -92,6 +98,7 @@ else
                 <tr>
                     <td>Class</td>
                     <td>
+                        
                         <select name="class_id">
                             <?php
                                 //select from class table and display the results in a select list
@@ -125,11 +132,32 @@ else
                 <tr>
                     <td>Member ID</td>
                     <td>
-                        <input type="number" name = "member_id" step = "1" placeholder = "Enter Member ID" required>
+                        <input list = 'member' type = 'text' name = 'member_id' placeholder = 'ENTER ID OR SELECT'required>
+                        <datalist id = 'member'>
+                            <?php
+                            $sql = "SELECT user_id, name, email FROM user WHERE role = 1";
+                            $res = mysqli_query($conn, $sql);
+                            if(mysqli_num_rows($res) > 0){
+                                while($row = mysqli_fetch_assoc($res)){
+                                    $user_id = $row['user_id'];
+                                    $name = $row['name'];
+                                    $email = $row['email'];
+                                    ?>
+                                    <option value="<?php echo $user_id?>"><?php echo $name;?> | <?php echo $email;?></option>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </datalist>
                     </td>
                 </tr>
                 <tr>
+                    <td>Due Date</td>
+                    <td><input type="datetime-local" name="duedate" required></td>
+                </tr>
+                <tr>
                     <td colspan="2">
+                        <br>
                         <input type="submit" value="Submit" name="submit" class="btn-primary pad-1">
                     </td>
                 </tr>

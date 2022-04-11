@@ -4,6 +4,7 @@
 if(isset($_GET['id']))
 {
     $class_id = $_GET['id'];
+
     $sql = "SELECT name, user_user_id FROM class where class_id = $class_id";
     $res = mysqli_query($conn,$sql);
 
@@ -25,11 +26,16 @@ else
 ?>
 
 <?php
-    $sql2 = "SELECT name from user where user_id = $trainer_id";
-    $res2 = mysqli_query($conn, $sql2);
+    if($trainer_id != ""){
+        $sql2 = "SELECT name from user where user_id = $trainer_id";
+        $res2 = mysqli_query($conn, $sql2);
+    
+        $row = mysqli_fetch_assoc($res2);
+        $trainer_name = $row['name'];
+    } else {
+        $trainer_name = "None";
+    }
 
-    $row = mysqli_fetch_assoc($res2);
-    $trainer_name = $row['name'];
 ?>
 
 
@@ -60,7 +66,7 @@ else
                 $sql3 = "SELECT user_id, name, email, phone
                         FROM user JOIN registration
                             ON user_user_id = user_id
-                        WHERE class_class_id = $class_id";
+                        WHERE class_class_id = $class_id AND class_status = 1";
                 $res3 = mysqli_query($conn, $sql3);
                 $count = mysqli_num_rows($res3);
 

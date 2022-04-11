@@ -44,19 +44,16 @@
                             <td><?php echo $duration;?> Month</td>
                             <td>$<?php echo $cost;?></td>
                             <td>
-                            <?php if ($id != 1) { ?>
-                                <a href="<?php echo SITEURL;?>crud/update-plan.php?id=<?php echo $id;?>"><button class = "btn-secondary pad-1"><i class="fa-solid fa-pen-to-square"></i></button></a>
-                                <a href="<?php echo SITEURL;?>crud/delete-plan.php?id=<?php echo $id;?>"><button class = "btn-danger pad-1"><i class='fa-solid fa-x'></i></button></a>
-                            <?php
-                            }
-                            else{
-                                echo "No Actions";
-                            }
-                            ?>
+                            <a href="<?php echo SITEURL;?>crud/update-plan.php?id=<?php echo $id;?>"><button class = "btn-secondary pad-1"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                            <a href="<?php echo SITEURL;?>crud/delete-plan.php?id=<?php echo $id;?>"><button class = "btn-danger pad-1"><i class='fa-solid fa-x'></i></button></a>
                             </td>
                         </tr>
                         <?php
                     }
+                } else {
+                    ?>
+                    <td colspan = '5' class = 'txt-red'>No Data Found</td>
+                    <?php
                 }
             ?>
             </tbody>

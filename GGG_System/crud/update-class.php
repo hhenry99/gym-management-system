@@ -99,6 +99,7 @@
                     <td>Trainer</td>
                     <td>
                         <select name="trainer">
+                            <option value="NULL" <?php if($trainer_id == ""){echo "SELECTED";}?>>None</option>
                            <?php
                                 $sql2 = "SELECT user_id, name FROM user WHERE role = 2";
                                 $res2 = mysqli_query($conn, $sql2);

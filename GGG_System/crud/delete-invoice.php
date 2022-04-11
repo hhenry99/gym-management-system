@@ -1,6 +1,7 @@
 <?php 
 include('../config/constant.php');
 include('../partials/login-check.php');
+include('../functions.php');
 
 if(isset($_GET['id']))
 {
@@ -12,6 +13,11 @@ if(isset($_GET['id']))
 
     if($count == 1)
     {
+        if(checkInvoicePay($conn, $id) == true){
+            $_SESSION['Foreign'] = '<br><span style = "color: red; font-weight: bold">Error ... Unable to Delete Invoice</span>';
+            header('location:'.SITEURL.'manage-invoice.php');
+            die();
+        }
         $sql2 = "DELETE FROM invoice WHERE invoice_id = $id";
         
         $res2 = mysqli_query($conn, $sql2);

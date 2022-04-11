@@ -14,19 +14,17 @@ if(isset($_GET['payid']))
         $sql2 = "DELETE FROM payment WHERE payment_id = $payid";
         $res2 = mysqli_query($conn, $sql2);
 
-        $_SESSION['delete-pay'] = "Payment Delete Success!";
+        $_SESSION['delete'] = "<br>Payment Delete Success!";
         header('location:'.SITEURL.'pay-history.php');  
     }
     else
     {
-        $_SESSION['no-id-found'] = "Pay ID Not Found...";
         header('location:'.SITEURL.'pay-history.php');  
     }
 
 }
 else
 {
-    $_SESSION['no-id-found'] = "Pay ID Not Found...";
     header('location:'.SITEURL.'pay-history.php');
 }
 

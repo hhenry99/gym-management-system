@@ -12,10 +12,6 @@
                 }
                 if(isset($_SESSION['user'])) //display name
                 {
-                    // $uid = $_SESSION['user'];
-                    // $sql = "SELECT name from admin WHERE user_user_id = $uid;";
-                    // $res = mysqli_query($conn, $sql);
-                    // $row = mysqli_fetch_assoc($res);
                     echo "Welcome Back ".NAME."!";
                 }
             ?>
@@ -24,7 +20,7 @@
 
     <?php
         //SQL for active/inactive member
-        $sql = "SELECT COUNT(*) as total_member, (SELECT count(*) FROM member WHERE member_status = 'Active') AS active_member, (SELECT count(*) FROM member WHERE member_status = 'Inactive') AS inactive_member FROM member;";
+        $sql = "SELECT COUNT(*) as total_member, (SELECT count(*) FROM user WHERE role = 1 AND status = 1) AS active_member, (SELECT count(*) FROM user WHERE status = 0 AND role = 1) AS inactive_member FROM user WHERE role = 1;";
         $res = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($res);
         $total_member = $row['total_member'];
@@ -39,13 +35,15 @@
         $paid = $row['paid'];
         $notpaid = $revenue-$paid;
 
+        //Registration
+
         //admin
-        // $sql = "SELECT admin_id from admin";
-        // $res = mysqli_query($conn, $sql);
-        // $admin_count = mysqli_num_rows($res);
+        $sql = "SELECT user_id from user where role = 3 OR role = 4";
+        $res = mysqli_query($conn, $sql);
+        $admin_count = mysqli_num_rows($res);
 
         //trainer
-        $sql = "SELECT trainer_id from trainer";
+        $sql = "SELECT user_id from user where role = 2";
         $res = mysqli_query($conn, $sql);
         $trainer_count = mysqli_num_rows($res);
 
@@ -53,7 +51,7 @@
         $sql = "SELECT class_id from class";
         $res = mysqli_query($conn, $sql);
         $class_count = mysqli_num_rows($res);
-        $sql = "SELECT member_member_id FROM member_has_class";
+        $sql = "SELECT user_user_id FROM registration where class_status = 1";
         $res = mysqli_query($conn, $sql);
         $member_count = mysqli_num_rows($res);
 
@@ -82,7 +80,7 @@
             </a>
             <a href="<?php echo SITEURL;?>manage-admin.php">
                 <div class="box color-3">
-                    <h3>Total Admin: <?php //echo $admin_count;?></h3>
+                    <h3>Total Admin: <?php echo $admin_count;?></h3>
                 </div>
             </a>
             <a href="<?php echo SITEURL;?>manage-trainer.php">

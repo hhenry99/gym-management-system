@@ -54,48 +54,50 @@ else
         
         $res3 = mysqli_query($conn, $sql3);
 
-        $_SESSION['add-pay'] = "Payment Added Success!";
+        $_SESSION['add'] = "<br><span class = 'txt-green'>Successfully Paid!</span>";
         header('location:'.SITEURL.'manage-invoice.php');
     }
 ?>
 <div class="main-content">
-    <div class="header">
+    <div class="header txt-center">
         <h1>Pay For Invoice <?php echo "#".$invoice_id;?></h1>
     </div>
 
     <div class="info">
         <form action="" method="post">
-            <table class="tbl-30">
+            <table class="tbl-wrapper">
                 <tr>
                     <td>Invoice ID</td>
                     <td><input type="text" name = "invoiceid" value="<?php echo $invoice_id;?>" placeholder="Enter Invoice ID" required></td>
                 </tr>
                 <tr>
-                    <td>Card Number</td>
+                    <td>Card Number*</td>
                     <td><input type="text" name="cardnum" placeholder="Enter Card Number" maxlength="16" minlength="12" required></td>
                 </tr>
                 <tr>
-                    <td>Card CCV</td>
-                    <td><input type="text" name="ccv" placeholder="Enter Card CCV" required></td>
+                    <td>Card CCV*</td>
+                    <td><input type="text" name="ccv" placeholder="Enter Card CCV" maxlength='3' required></td>
                 </tr>
                 <tr>
-                    <td>Card Expiration</td>
+                    <td>Card Expiration*</td>
                     <td><input type="text" name="expire" placeholder="Enter Card Expiration" maxlength="5" required></td>
                 </tr>
                 <tr>
-                    <td>Payment Amount</td>
+                    <td>Payment Amount*</td>
                     <td><input type="number" step=".01" name ="amount" placeholder = "Enter Amount" max = "<?php echo $invoice_amount-$amount_paid;?>"required></td>
                 </tr>
                 <tr>
-                    <td colspan = "2"><input type="submit" name="submit" class ="btn-primary pad-1"></td>
+                    <br>
+                    <td colspan = "2"><input type="submit" name="submit" class ="btn-primary"></td>
                 </tr>
             </table>
         </form>
 
-        <div>
+        <div class = 'txt-center'>
+            <br>
             <p>Invoice Amount: $<?php echo $invoice_amount;?></p>
             <p>Total Paid: $<?php echo $amount_paid;?></p>
-            <p>Remaining: $<?php echo $invoice_amount - $amount_paid;?></p>
+            <p>Remaining: $<?php echo $invoice_amount - $amount_paid;?>.00</p>
         </div>
     </div>
 </div>

@@ -67,12 +67,11 @@
                     <td>Trainer*</td>
                     <td>
                         <select name="trainer">
+                        <option value="NULL">None</option>
                            <?php
                                 $sql = "SELECT * FROM user where role = 2";
                                 $res = mysqli_query($conn, $sql);
-
-                                $count = mysqli_num_rows($res);
-                                if($count > 0)
+                                if(mysqli_num_rows($res) > 0)
                                 {
                                     while($row = mysqli_fetch_assoc($res))
                                     {
@@ -82,12 +81,6 @@
                                             <option value="<?php echo $id;?>"><?php echo $name;?></option>
                                         <?php
                                     }
-                                }
-                                else
-                                {
-                                ?>
-                                <option value="0">No Trainer</option>
-                                <?php
                                 }
                             ?> 
                         </select>

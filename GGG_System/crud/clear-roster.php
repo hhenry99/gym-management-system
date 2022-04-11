@@ -14,9 +14,11 @@ if(isset($_GET['id']))
 
     if($count == 1)
     {
-        $sql2 = "DELETE FROM registration WHERE class_class_id = $id";
+        $sql2 = "UPDATE registration SET
+                class_status = 0
+                WHERE class_class_id = $id";
         $re2 = mysqli_query($conn, $sql2);
-        $_SESSION['delete'] = "<br><span style = 'color: red; font-weight: bold'>Class Roster Cleared!</span>";
+        $_SESSION['delete'] = "<br><span style = 'color: green; font-weight: bold'>Class Cleared!</span>";
         header("location:".SITEURL."crud/class-roster.php?id={$id}");
     }
     else

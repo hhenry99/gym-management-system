@@ -10,6 +10,7 @@
     <a href="<?php echo SITEURL;?>crud/add-invoice.php"><button class="btn-primary">Create Invoice</button></a>
     <a href="<?php echo SITEURL;?>pay-history.php"><button class="btn-primary">Pay History</button></a>
     <form action="<?php echo SITEURL;?>crud/search-invoice.php" method = "POST">
+        <br>
         <input type="number" name="search" placeholder = "Enter Invoice / Member ID">
         <input type="submit" value="search" name = "submit-search">
     </form>
