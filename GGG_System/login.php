@@ -59,26 +59,28 @@
             $role = $_POST['role'];
 
             if($role == 1){
-                $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password' and role = $role";
-                $res = mysqli_query($conn, $sql);
-                if(mysqli_num_rows($res) == 1){
-                    $_SESSION['login'] = "Login successful .... ";
-                    $_SESSION['user'] = $username;
-                    header('location:'.SITEURL.'index.php');
-                }
-                else
-                {
-                    $_SESSION['login'] = "Incorrect username or password";
-                    header('location:'.SITEURL.'login.php');
-                }
+                // $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password' and role = $role";
+                // $res = mysqli_query($conn, $sql);
+                // if(mysqli_num_rows($res) == 1){
+                //     $_SESSION['login'] = "Login successful .... ";
+                //     $_SESSION['user'] = $username;
+                //     header('location: http://localhost/gym-management-system/member/index.php.');
+                // }
+                // else
+                // {
+                //     $_SESSION['login'] = "Incorrect username or password";
+                //     header('location:'.SITEURL.'login.php');
+                // }
             }
             if($role == 2){
                 $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password' and role = $role";
                 $res = mysqli_query($conn, $sql);
                 if(mysqli_num_rows($res) == 1){
+                    $row = mysqli_fetch_assoc($res);
+                    $id = $row['user_id'];
                     $_SESSION['login'] = "Login successful .... ";
-                    $_SESSION['user'] = $username;
-                    header('location:'.SITEURL.'index.php');
+                    $_SESSION['user'] = $id;
+                    header('location: http://localhost/gym-management-system/trainer/index.php.');
                 }
                 else
                 {
