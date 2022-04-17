@@ -20,9 +20,8 @@
             <h2>GoGoGym</h2>
             <ul>
                 <li><a href="index.php">DashBoard <i class="fa-solid fa-house"></i></a></li>
-                <li><a href="manage-class.php">Class</a></li>
-                <li><a href="registration.php">Registration</a></li>
-                <li><a href="logout.php">Log Out</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="<?php echo SITEURL;?>trainer/logout.php">Log Out</a></li>
             </ul>
         </div>
         

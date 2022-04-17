@@ -12,6 +12,7 @@ include("login-check.php");
     <title>GGG Management System</title>
     <link rel="stylesheet" href="<?php echo SITEURL;?>css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 

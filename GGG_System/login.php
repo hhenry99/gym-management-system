@@ -13,7 +13,7 @@
 <body>
     <div class="wrapper text-center">
         <h1>Login</h1>
-        <p>Don't Have an Account? <a href="signup.php">Sign Up</a></p>
+        <!-- <p>Don't Have an Account? <a href="signup.php">Sign Up</a></p>  -->
         <div class="input-wrapper">
         <?php
         if(isset($_SESSION['login']))
@@ -43,7 +43,7 @@
             <br>
             <br>
             <select name="role">
-                <option value="1">Member</option>
+                <!-- <option value="1">Member</option> -->
                 <option value="2">Trainer</option>
                 <option value="3">Admin</option>
                 <option value="4">HAdmin</option>
@@ -79,11 +79,10 @@
                     $row = mysqli_fetch_assoc($res);
                     $id = $row['user_id'];
                     $_SESSION['login'] = "Login successful .... ";
-                    $_SESSION['user'] = $id;
+                    $_SESSION['user_id'] = $id;
                     header('location: http://localhost/gym-management-system/trainer/index.php.');
                 }
-                else
-                {
+                else{
                     $_SESSION['login'] = "Incorrect username or password";
                     header('location:'.SITEURL.'login.php');
                 }

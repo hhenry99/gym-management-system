@@ -11,11 +11,11 @@
 
     <div class="info">
         <a href="<?php echo SITEURL?>crud/add-member.php"><button class="btn-primary">Add Member</button></a>
-        <form action="<?php echo SITEURL?>crud/search-member.php" method="POST">
-            <input type="text" name="search" placeholder="Enter NAME or ID">
-            <input type="submit" value="search" name = "submit-search">
-        </form>
+        <br>
+        <br>
+        <input type="text" id="search" autocomplete="off" placeholder = "SEARCH">
 
+        <div id="searchresult">
         <table class="content-table">
             <thead>
                 <tr>
@@ -103,7 +103,21 @@
                 }
             ?>
         </table>
+        </div>
     </div>
 </div>
+
+<script type = "text/javascript">
+    $(document).ready(function(){
+        $("#search").keyup(function(){
+            var input = $("#search").val();
+            $.post("crud/live-member-search.php", {
+                input: input
+            }, function(data){
+                $("#searchresult").html(data);
+            });
+        });
+    });
+</script>
 
 <?php require_once("partials/footer.php");?>

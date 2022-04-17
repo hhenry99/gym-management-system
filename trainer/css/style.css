@@ -35,6 +35,14 @@ body{
 }
 
 
+.content-tbl{
+    width: 100%;
+    text-align: left;
+}
+
+.content-tbl thead th{
+    border-bottom: 1px solid black;
+}
 /*Color*/
 .txt-red{
     color: rgb(197, 43, 43);

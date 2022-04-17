@@ -7,6 +7,6 @@
     define('USERNAME', 'root');
     define('PASSWORD', '');
     define('DB_NAME', 'ggg_db');
-    define('SITEURL', 'http://localhost/gym-management-system/trainer/');
+    define('SITEURL', 'http://localhost/gym-management-system/');
     
     $conn = mysqli_connect(LOCALHOST, USERNAME, PASSWORD, DB_NAME); //connecting to the db
