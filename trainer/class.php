@@ -58,7 +58,7 @@ if(isset($_GET['id'])){
                             <td><?php echo $phone;?></td>
                             <td><?php echo $email;?></td>
                             <td>
-                                <a href="<?php echo SITEURL;?>trainer/delete-member.php?memberid=<?php echo $member_id;?>&classid=<?php echo $class_id;?>"><button class="btn-danger"><i class='fa-solid fa-x'></i></button></a>
+                                <a href="<?php echo SITEURL;?>trainer/delete-member.php?memberid=<?php echo $user_id;?>&classid=<?php echo $classid;?>"><button class="btn-danger"><i class='fa-solid fa-x'></i></button></a>
                             </td>   
                         </tr>
                         <?php
