@@ -34,8 +34,31 @@ body{
     align-items: center;
 }
 
+/* BTN */
+.btn-primary{
+    background-color: #e58e26;
+    padding: 0.5%;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
 
+.btn-primary:hover{
+    transition-duration: 0.5s;
+    background-color:#7953d1;
+}
+
+.btn-danger{
+    background-color: rgb(255, 75, 75);
+    color: white;
+    font-weight: bold;
+    padding: 1%;
+    /* font-size: 1.1em; */
+}
+
+/*table css*/
 .content-tbl{
+    margin-top: 10px;
     width: 100%;
     text-align: left;
 }
@@ -43,6 +66,12 @@ body{
 .content-tbl thead th{
     border-bottom: 1px solid black;
 }
+
+.tbl-wrapper{
+    min-width: 25%;
+    margin: 0 40%;
+}
+
 /*Color*/
 .txt-red{
     color: rgb(197, 43, 43);
@@ -58,7 +87,6 @@ body{
 /*Side Navbar*/
 
 .wrapper .sidebar{
-    /* position: fixed; */
     width: 200px; 
     height: 100vh;
     background: #c0392b;
@@ -112,58 +140,36 @@ body{
     line-height: 25px;
 }
 
+.info-wrapper{
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-items: center;
+}
 
+.img-container{
+    width: 50%;
+    text-align: right;
+    margin-right: 40px;
+}
+
+.img-container img{
+    border: 3px solid rgb(55, 50, 50);
+}
+.info-container{
+    width: 50%;
+}
 /* 
 -------------------------------
 MAIN DASHBOARD
 -------------------------------
 */
-
-/* .box-wrapper{
-    display: flex;
-    flex-flow: row wrap;
-}
-
-.box-wrapper a{
-    flex: 1 1 30%;
-}
-
 .box{
-    padding: 20px;
-    margin: 10px;
-    height: 150px;
-    border-radius: 10px;
-    color: white;
-}
-
-.box:hover{
-    color: #c7ecee;
-}
-
-
-.color-1{
-    background-color: #c0392b;
-}
-.color-2{
-    background-color: #16a085;
-}
-.color-3{
-    background-color: #f39c12;
-}
-.color-4{
-    background-color: #30336b;
-}
-.color-5{
-    background-color: #8e44ad;
-}
-.color-6{
-    background-color:#3498db;
-} */
-
-.box{
-    border: 1px solid black;
     margin: 10px auto;
     padding: 10px;
-    background-color: orange;
+    background-color: #7f8c8d;
+    border-radius: 5px;
 }
+
 

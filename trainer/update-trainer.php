@@ -29,7 +29,7 @@ if(isset($_POST['submit']))
     {
         $image = $_FILES['image']['name'];
         $source = $_FILES['image']['tmp_name'];
-        $destination = "../ggg_system/images/trainer/".$image;
+        $destination = "../admin/images/trainer/".$image;
         
         $upload = move_uploaded_file($source, $destination);
 
@@ -37,7 +37,7 @@ if(isset($_POST['submit']))
         {
             if($current_img != "")
             {
-                $path = "../ggg_system/images/trainer/".$current_img;
+                $path = "../admin/images/trainer/".$current_img;
                 $remove = unlink($path);
             }
         }
@@ -82,7 +82,7 @@ if(isset($_POST['cancel'])){
                         <?php 
                         if($current_img != ""){
                             ?>
-                            <img src="<?php echo SITEURL.'ggg_system/images/trainer/'.$current_img;?>" width = "100px">
+                            <img src="<?php echo SITEURL.'admin/images/trainer/'.$current_img;?>" width = "100px">
                             
                             <?php
                         } else {
@@ -117,10 +117,12 @@ if(isset($_POST['cancel'])){
                 </tr>
                 <tr>
                     <td>
-                        <input type="submit" value="Update" name = 'submit'>
+                        <br>
+                        <input type="submit" value="Submit" name = "submit" class = "btn-second">
                     </td>
                     <td>
-                        <input type="submit" value="cancel" name = 'cancel'>
+                        <br>
+                        <input type="button" value="Cancel" class = 'btn-cancel' onClick="document.location.href='<?php echo SITEURL;?>trainer/profile.php';">
                     </td>
                 </tr>
             </table>

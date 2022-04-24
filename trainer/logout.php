@@ -1,8 +1,8 @@
 <?php
 include('config/constant.php'); 
 
-session_destroy();  //destroying all of the sessions
+$_SESSION['logout'] = "Log Out Success!";
 
-header('location:'.SITEURL.'ggg_system/login.php');
+header('location:'.SITEURL.'admin/login.php');
 
-include('config/close-connection.php');
+mysqli_close($conn);

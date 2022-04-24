@@ -1,21 +1,25 @@
-<?php
-include('partials/header.php');
+<?php 
 
-if(isset($_GET['id'])){
-    $classid = $_GET['id'];
-    $sql = "SELECT class_id from class WHERE class_id = $classid";
-    $res = mysqli_query($conn, $sql);
-    if(mysqli_num_rows($res) == 0) {
-        header('location:'.SITEURL.'trainer/class.php');
-    }
-} else {
-    header('location:'.SITEURL.'trainer/class.php');
+include('../partials/crud-header.php');
+include('../functions.php');
+
+?>
+
+<?php 
+if(isset($_GET['id']))
+{
+    $id = $_GET['id'];
+}
+else
+{
+    $id = "";
 }
 ?>
 
+
 <div class="main-content">
     <div class="header txt-center">
-        <h1>Add Member</h1>
+        <h1>Add Member to Class</h1>
         <p>
             <?php 
                 if(isset($_SESSION['member-not-found'])){
@@ -44,8 +48,9 @@ if(isset($_GET['id'])){
                 $memberid = $_POST['member_id'];
 
                 if(checkClass($conn, $classid, $memberid) == true){
+                    // echo "Member is already in the class";
                     $_SESSION['member-in-class'] = "Member already in class";
-                    header("location:".SITEURL."trainer/add-member.php?id={$classid}");
+                    header('location:'.SITEURL.'crud/add-member-class.php');
                     die();
                 }
 
@@ -58,12 +63,12 @@ if(isset($_GET['id'])){
                 
                 //SQL to insert into invoice
                 $sql4 = "INSERT INTO invoice SET
-                        name = 'Invoice for $name Class',
-                        amount = $cost,
-                        date_created = NOW(),
-                        due_date = '$duedate',
-                        user_user_id = $memberid;
-                        ";
+                name = 'Invoice for $name Class',
+                amount = $cost,
+                date_created = NOW(),
+                due_date = '$duedate',
+                user_user_id = $memberid;
+                ";
 
                 $sql5 = "UPDATE user SET 
                         status = 1 
@@ -75,16 +80,16 @@ if(isset($_GET['id'])){
                     $res5 = mysqli_query($conn, $sql5);
 
                     $_SESSION['add'] = "<br><span class = 'txt-green'>Member Added Success!</span>";
-                    header("location:".SITEURL."trainer/class.php?id={$classid}");
+                    header("location:".SITEURL."crud/class-roster.php?id={$classid}");
                 }
                 catch (Exception $exception){
                     $_SESSION['member-not-found'] = "<br><span class = 'txt-red'>Member Not Found</span>";
-                    header("location:".SITEURL."trainer/add-member.php?id={$classid}");
+                    header('location:'.SITEURL.'crud/add-member-class.php');
                     die();
                 }
             }
             ?>
-            </p>
+        </p>
     </div>
 
     <div class="info">
@@ -97,21 +102,35 @@ if(isset($_GET['id'])){
                         <select name="class_id">
                             <?php
                                 //select from class table and display the results in a select list
-                                $sql = "SELECT class_id, name FROM class WHERE class_id = $classid";
+                                $sql = "SELECT * FROM class";
                                 $res = mysqli_query($conn, $sql);
-                                $row = mysqli_fetch_assoc($res);
-                                $class_name = $row['name'];
-                                $class_id = $row['class_id'];
-                                ?>
-                                <option value="<?php echo $class_id;?>">
-                                    <?php echo $class_name;?>
-                                </option>
-                        </select>
+                                $count = mysqli_num_rows($res);
 
+                                if($count > 0)
+                                {
+                                    while($row = mysqli_fetch_assoc($res)){
+                                        $class_name = $row['name'];
+                                        $class_id = $row['class_id'];
+                                        ?>
+                                            <option value="<?php echo $class_id;?>" <?php if($class_id == $id){echo "selected";}?>>
+                                                <?php echo $class_name;?>
+                                            </option>
+                                        <?php
+                                    }
+                                }
+                                else
+                                {
+                                    ?>
+                                        <option value="">Please Add A Class</option>
+                                    <?php
+                                }
+                            ?>
+                            
+                        </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>Member ID*</td>
+                    <td>Member ID</td>
                     <td>
                         <input list = 'member' type = 'text' name = 'member_id' placeholder = 'ENTER ID OR SELECT'required>
                         <datalist id = 'member'>
@@ -133,7 +152,7 @@ if(isset($_GET['id'])){
                     </td>
                 </tr>
                 <tr>
-                    <td>Due Date*</td>
+                    <td>Due Date</td>
                     <td><input type="datetime-local" name="duedate" required></td>
                 </tr>
                 <tr>
@@ -143,10 +162,11 @@ if(isset($_GET['id'])){
                     </td>
                     <td>
                         <br>
-                        <input type="button" value="Cancel" class = 'btn-cancel' onClick="document.location.href='<?php echo SITEURL;?>trainer/class.php?id=<?php echo $classid;?>';">
+                        <input type="button" value="Cancel" class = 'btn-cancel' onClick="document.location.href='<?php echo SITEURL;?>crud/class-roster.php?id=<?php echo $id;?>';">
                     </td>
                 </tr>
             </table>
         </form>
     </div>
 </div>
+<?php include('../partials/crud-footer.php');?>

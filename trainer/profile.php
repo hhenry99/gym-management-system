@@ -27,44 +27,49 @@ $email = $row['email'];
     </div>
 
     <div class="info">
+        <div class="info-wrapper">
             <div class="img-container">
-            <?php 
-            if($image_name != ""){
+                <?php 
+                if($image_name != ""){
+                    ?>
+                    <img src="<?php echo SITEURL.'admin/images/trainer/'.$image_name;?>" width = '100px'>
+                    <?php
+                } else {
+                    echo "No Img Available";
+                }
                 ?>
-                <img src="<?php echo SITEURL.'ggg_system/images/trainer/'.$image_name;?>" width = '100px'>
-                <?php
-            } else {
-                echo "No Img Available";
-            }
-            ?>
             </div>
             <div class="info-container">
-                <div class="info-box">
-                    <p>Name:</p>
-                    <p><?php echo $name;?></p>
-                </div>
-                <div class="info-box">
-                    <p>Phone</p>
-                    <p><?php echo $phone;?></p>
-                </div>
-                <div class="info-box">
-                    <p>Email</p>
-                    <p><?php echo $email;?></p>
-                </div>
-                <div class="info-box">
-                    <p>Emergency Contact</p>
-                    <p><?php echo $emergency;?></p>
-                </div>
-                <div class="info-box">
-                    <p>Username</p>
-                    <p><?php echo $username;?></p>
-                </div>
-                <div class="info-box">
-                    <p>
-                        <button><a href="<?php echo SITEURL;?>trainer/update-trainer.php">Update</a></button>
-                    </p>
-                </div>
+                <table>
+                    <tr>
+                        <td>Username</td>
+                        <td><?php echo $username;?></td>
+                    </tr>
+                    <tr>
+                        <td>Name:</td>
+                        <td><?php echo $name;?></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><?php echo $email;?></td>
+                    </tr>
+                    <tr>
+                        <td>Phone:</td>
+                        <td><?php echo $phone;?></td>
+                    </tr>
+                    <tr>
+                        <td>Emergency Contact:</td>
+                        <td><?php echo $emergency;?></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                        <br>
+                        <a href="<?php echo SITEURL;?>trainer/update-trainer.php"><button>Update</button></a>
+                        </td>
+                    </tr>
+                </table>
             </div>
+        </div>
     </div>
 </div>
 

@@ -10,11 +10,13 @@ $row = mysqli_fetch_assoc($res);
 ?>
 
 <div class="main-content">
-    <div class="header">
-        <h1>Welcome Back <?php echo $row['name'];?>!</h1>
+    <div class="header txt-center">
+        <h1>Dashboard</h1>
+        <p><?php if(isset($_SESSION['login'])){echo $_SESSION['login']; unset($_SESSION['login']);} ?>Welcome Back <?php echo $row['name'];?>!</p>
     </div>
+    
     <div class="info">
-        <p>YOUR CLASSES:</p> 
+        <h5>MY CLASSES:</h5>
         <?php
         $sql = "SELECT class_id, name FROM class where user_user_id = $trainerid;";
         $res = mysqli_query($conn, $sql);
