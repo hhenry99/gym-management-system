@@ -1,6 +1,0 @@
-USE CASE
--Manager - Add/remove/update employee, View Sales, add/update/remove lessons, add/update/remove trainers
--Employee - add / remove members
-
--Members - {Maybe}Cancel Membership, View lessons, View Diet Plans, View Workout Plan, View trainers
-

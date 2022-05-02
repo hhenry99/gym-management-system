@@ -18,7 +18,7 @@ if(isset($_POST['input'])){
         </thead>
         <tbody>
         <?php 
-            $sql = "SELECT * FROM user WHERE role = 3 OR role = 4 AND (user_id LIKE '$input%' OR name LIKE '$input%' OR email LIKE '$input%')";
+            $sql = "SELECT * FROM user WHERE (role = 3 OR role = 4) AND (user_id LIKE '$input%' OR name LIKE '$input%' OR email LIKE '$input%')";
             $res = mysqli_query($conn,$sql);
             $count = mysqli_num_rows($res);
 

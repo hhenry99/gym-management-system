@@ -62,10 +62,10 @@ function checkInvoicePay($conn, $invoiceid){
 }
 
 
-//Check if member has a plan
+//Check if member has a plan (only 1 plan can be active at a time)
 function checkPlan($conn, $member_id, $plan_id){
     $error = false;
-    $sql = "SELECT regist_id FROM registration WHERE user_user_id = $member_id AND plan_plan_id != ''";
+    $sql = "SELECT regist_id FROM registration WHERE user_user_id = $member_id AND plan_expired > NOW();";
     $res = mysqli_query($conn, $sql);
 
     if(mysqli_num_rows($res) > 0){
@@ -74,3 +74,4 @@ function checkPlan($conn, $member_id, $plan_id){
 
     return $error;
 }
+

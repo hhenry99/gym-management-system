@@ -1,6 +1,7 @@
 <?php 
 include("config/constant.php");
 include("login-check.php");
+include("check-member.php");
 ?>
 
 <!DOCTYPE html>

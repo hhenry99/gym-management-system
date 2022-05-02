@@ -61,27 +61,13 @@
                                 <td><?php echo $email?></td>
                                 <td><?php echo $phone?></td>
                                 <td>
-                                    <?php                 
-                                    if($status == 1){
-                                        $active = false;   
-                                        $sql2 = "SELECT regist_id, class_status, plan_expired FROM registration WHERE user_user_id = $id HAVING class_status = 1 OR plan_expired >= NOW();";
-                                        $res2 = mysqli_query($conn, $sql2);
-
-                                        if(mysqli_num_rows($res2) > 0){
-                                            $active = true;
-                                        }
-    
-                                        if($active == true){
-                                            echo "Active";
-                                        } else {
-                                            $sql3 = "UPDATE user SET status = 0 WHERE user_id = $id;";
-                                            $res3 = mysqli_query($conn, $sql3);
-                                            echo "Inactive";
-                                        }
-                                    } else {
-                                        echo "Inactive";
-                                    }
-                                    ?>
+                                <?php          
+                                if($status == 1){
+                                    echo "Active";
+                                } else {
+                                    echo "Inactive";
+                                }
+                                ?>
                                 </td>
                                 <td>
                                     <a href="<?php echo SITEURL?>crud/update-member.php?id=<?php echo $id?>"><button class="btn-secondary"><i class="fa-solid fa-pen-to-square"></i></button></a> 

@@ -1,6 +1,7 @@
 <?php 
-require_once("../config/constant.php");
-require_once("login-check.php");
+include("../config/constant.php");
+include("login-check.php");
+include('check-member.php');
 ?>
 
 <!DOCTYPE html>
@@ -20,8 +21,16 @@ require_once("login-check.php");
         <div class="sidebar">
             <h2>GoGoGym</h2>
             <ul>
+                <li>
+                    <h3>Hello, <?php echo NAME;?></h3>
+                </li>
                 <li><a href="<?php echo SITEURL;?>index.php">Dashboard</a></li>
-                <li><a href="<?php echo SITEURL;?>manage-admin.php">Admin</a></li>
+                <?php 
+                    $site = SITEURL;
+                    if(ROLE == 4){
+                        echo "<li><a href='{$site}manage-admin.php'>Admin</a></li>";
+                    }
+                ?>
                 <li><a href="<?php echo SITEURL;?>manage-plan.php">Plan</a></li>
                 <li><a href="<?php echo SITEURL;?>manage-member.php">Member</a></li>
                 <li><a href="<?php echo SITEURL;?>manage-trainer.php">Trainer</a></li>
