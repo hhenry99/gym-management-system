@@ -33,3 +33,5 @@ Only one user can be logged in per browser. This is because we are using session
 No security has been added to the server such as SQL injection and hashing. I will eventually implement.
 
 If I were to do this project over again, I will use bootstrap and go object orientated approach.
+
+A video I made on the project https://www.youtube.com/watch?v=dx4YF-XaX7E&list=PLQuNlpzB7VQ1qG92FC_SVo2h9ngvmYwyG&index=2
