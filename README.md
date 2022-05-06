@@ -5,10 +5,10 @@ Hello my name is Henry and for this project I built a Gym Management System. The
 Currently there are 3 users within this system, which consists of the headadmin, admin, and trainer. The admin and headadmin are fairly similiar and they are able to manage(CRUD) all sorts of things within the system, including the plans, equipments, and members. However the headadmin is able to add and manage other admins to the system. The trainer is able to manage classes that were assign to them and add members to their class. 
 
 That being said, here are the steps to get the system to work: 
-1) Download source code
-2) Download XAMPP and start Apache Server and MYSQL. (or hosting of your choice)
+1) Download XAMPP and start Apache Server and MYSQL. (or hosting of your choice)
+2) Download source code (make sure to place them in HTDOCS folder)
 3) Run database script. Found under database / GGGscriptsUpdated.sql
-4) Go on browser and type the address in: localhost/gym-management-system/admin/login.php
+4) Go on browser and type the address in: localhost/gym-management-system/admin/login.php 
 5) A login screen will appear and change the role selection to headadmin
 6) Enter in admin as the username and password (This is the first user that was added to the system)
 7) All done! Test and play around with the system!
