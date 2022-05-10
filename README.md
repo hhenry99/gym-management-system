@@ -18,8 +18,11 @@ Folders:
     1) config // Creating constants and database connection
     2) crud // All of the pages regarding adding, updating, and deleting data
     3) css // CSS folder
-    4) images // Folder stores images that are being upload
-    5) partials // folder to store pages that are being reuse over and over again
+    4) images // Folder to stores images
+        1) admin // Folder store images that admin uploads
+        2) trainer // Folder to store image that trainer uploads
+        3) member //Folder to store member images
+    6) partials // folder to store pages that are being reuse over and over again
 
 2) database // database script and model is stored here
 
@@ -30,7 +33,7 @@ I am not an expert - This is my first project using the tools above, there may b
 
 Only one user can be logged in per browser. This is because we are using sessions to check if the user is logged in. Once the user logged off, all sessions are being destroyed. So if you have multiple systems open using chrome, and one logs off, all the other systems would logged off as well. To prevent this, I implemented some code that only one user can be logged in. However you are able to open up two different browsers (Explorer and chrome, etc) and it will work!
 
-No security has been added to the server such as SQL injection and hashing. I will eventually implement.
+No security has been added to the server such as SQL injection and hashing. Will eventually be implemented.
 
 If I were to do this project over again, I will use bootstrap and go object orientated approach.
 
